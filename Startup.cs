@@ -58,6 +58,9 @@ namespace MyApp
             /// [2] Routing 사용 
             app.UseRouting();
 
+            /// https 사용 [ 웹서버가 들어오는 모든 요청에 대해 SSL인증서를 로드하도록 지시 ]
+            //app.UseHttpsRedirection();
+
             /// 리눅스 배포 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
