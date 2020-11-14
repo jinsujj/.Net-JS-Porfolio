@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyApp.Data.Repositorys;
@@ -46,6 +47,14 @@ namespace MyApp.Controllers
             };
             return View(viewModel);
         }
+
+
+        public IActionResult Portfolio()
+        {
+            return Redirect("https://jinsu-seoul.iptime.org/index.html");
+        }
+
+        [Authorize]
         public IActionResult Student()
         {
             var students = _studentRepository.GetAllStudents();

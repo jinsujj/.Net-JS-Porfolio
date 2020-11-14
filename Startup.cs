@@ -1,19 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MyApp.Data;
-using Microsoft.EntityFrameworkCore.Design;
 using MyApp.Data.Repositorys;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.Logging;
 
 namespace MyApp
 {
@@ -33,15 +24,28 @@ namespace MyApp
             /// [4] MVC 서비스 등록
             services.AddControllersWithViews();
 
+            /// [9] 권한 가져오기
+            //services.Configure<UserSetting>(_config.GetSection("AuthSetting"));
+
+            /// [7] 쿠기 인증 기본
+            services.AddAuthentication("Cookies").AddCookie(options =>
+            {
+                options.LoginPath = "/Account/Login/";
+                options.AccessDeniedPath = "/Account/Forbidden/";
+            });
+
+
             /// [6] (Dapper) Query Repository 연동 
             /*
              * Transient  의 Lifetime services  는 매번 인터페이스가 요청될 때마다 새로운 객체를 생성합니다.이는 비유지(stateless)  서비스에 가장 적합합니다.
              * Scoped 의 Lifetime services 경우, 각 HTTP 요청 당 하나의 인스턴스를 생성하며, 동일한 주소의 웹화면내서 여러번 이를 사용할 경우 동일한 인스턴스를 재사용합니다.
              * Singleton Lifetime services 는 딱 한번 처음으로 인스턴스를 생성하고, 모든 호출에서 동일한 오브젝트를 재사용합니다. 따라서 결과값을 전체 모든 호출하는 사람들과 공유하는 효과를 얻습니다. 보통 누적된 방문자 수를 보여줄 때 사용하면 되겠습니다.
              */
-            services.AddSingleton<IConfiguration>(_config);
+            services.AddSingleton<IConfiguration>(_config);  //appsettings.json 파일의 데이터베이스 문자열 사용하도록 설정 
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +62,9 @@ namespace MyApp
             /// [2] Routing 사용 
             app.UseRouting();
 
-            /// https 사용 [ 웹서버가 들어오는 모든 요청에 대해 SSL인증서를 로드하도록 지시 ]
-            //app.UseHttpsRedirection();
+            /// [8] 인증 서비스 활성화
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             /// 리눅스 배포 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
