@@ -32,9 +32,6 @@ namespace MyApp.Controllers
 
             // claimsIdentity 1번 방식    [1번 == 2번] 방식
             var claimsIdentity1 = new ClaimsIdentity(claims, "Cookies");
-            // claimsIdentity 2번 방식
-            var claimsIdentity2 = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
             var clamimsPrincipal1 = new ClaimsPrincipal(claimsIdentity1);
 
             await HttpContext.SignInAsync(clamimsPrincipal1);

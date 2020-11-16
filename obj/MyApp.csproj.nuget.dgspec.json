@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/home/pi/myApp/MyApp/MyApp.csproj": {}
+    "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj": {}
   },
   "projects": {
-    "/home/pi/myApp/MyApp/MyApp.csproj": {
+    "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pi/myApp/MyApp/MyApp.csproj",
+        "projectUniqueName": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj",
         "projectName": "MyApp",
-        "projectPath": "/home/pi/myApp/MyApp/MyApp.csproj",
-        "packagesPath": "/home/pi/.nuget/packages/",
-        "outputPath": "/home/pi/myApp/MyApp/obj/",
+        "projectPath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj",
+        "packagesPath": "C:\\Users\\wlstn\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/pi/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\wlstn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -83,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/pi/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

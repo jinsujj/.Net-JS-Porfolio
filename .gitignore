@@ -4,3 +4,5 @@
 .vs/MyApp/DesignTimeBuild/.dtbcache.v2
 *.dll
 *.pdb
+*.pdb
+*.dll
