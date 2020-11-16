@@ -51,7 +51,7 @@ namespace MyApp.Controllers
 
         public IActionResult Portfolio()
         {
-            return Redirect("http://jinsu-seoul.iptime.org/index.html");
+            return Redirect("/index.html");
         }
 
         [Authorize]
