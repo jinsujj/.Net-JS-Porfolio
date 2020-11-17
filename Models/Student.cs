@@ -15,9 +15,8 @@ namespace MyApp.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required, Range(15,70)]
+        [Required, Range(5,70)]
         public int Age { get; set; }
-        [MinLength(5)]
         public string Country { get; set; }
     }
 }

@@ -43,13 +43,13 @@ namespace MyApp.Data.Repositorys
             }
         }
 
-        public RegisterViewModel GetUserById(string userId)
+        public RegisterViewModel GetUserByEmail(string email)
         {
             _logger.LogInformation("유저 조회(id)");
             try
             {
-                string sql = @"SELECT * FROM user WHERE id = @id";
-                return con.Query<RegisterViewModel>(sql, new { id = userId }, commandType: CommandType.Text).SingleOrDefault();
+                string sql = @"SELECT * FROM user WHERE email = @email";
+                return con.Query<RegisterViewModel>(sql, new { email= email }, commandType: CommandType.Text).SingleOrDefault();
             }
             catch (Exception ex)
             {
@@ -68,8 +68,8 @@ namespace MyApp.Data.Repositorys
                                WHERE email = @email
                                AND password = @password";
 
-                MySqlDataReader dr = con.Query(sql, new { email = email, password = password }, commandType: CommandType.Text).SingleOrDefault();
-                if (dr.Read())
+                var isExist = con.Query(sql, new { email = email, password = password }, commandType: CommandType.Text).SingleOrDefault();
+                if (isExist != null)
                 {
                     result = true;
                 }
@@ -81,6 +81,7 @@ namespace MyApp.Data.Repositorys
                 return result;
             }
         }
+
 
         public void ModifyUser(RegisterViewModel model)
         {
