@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "trXC3skLGrmqMEucjbrR4YOjxfYbIc/b7Jm6ncFn/kk4YgixIjpBGjkwc+VQL6VqxBR030Ab9+oA3NyQ9sqbbQ==",
+  "dgSpecHash": "hn4QZvRKBYT5brmaW8tlhY6Af7e5UCkbAztHL/B5CuxenQVukCZ9mQ5WZNxFsIUjBO14TklDBvT0jod3tCFsEw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\CommonLibrary\\CommonLibrary.csproj",
+  "projectFilePath": "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

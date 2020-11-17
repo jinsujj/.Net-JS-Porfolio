@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj": {}
+    "/home/pi/myApp/MyApp/MyApp/MyApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\CommonLibrary\\CommonLibrary.csproj": {
+    "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\CommonLibrary\\CommonLibrary.csproj",
+        "projectUniqueName": "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj",
         "projectName": "CommonLibrary",
-        "projectPath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\CommonLibrary\\CommonLibrary.csproj",
-        "packagesPath": "C:\\Users\\wlstn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\CommonLibrary\\obj\\",
+        "projectPath": "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj",
+        "packagesPath": "/home/pi/.nuget/packages/",
+        "outputPath": "/home/pi/myApp/MyApp/CommonLibrary/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\wlstn\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/pi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -52,35 +50,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/pi/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj": {
+    "/home/pi/myApp/MyApp/MyApp/MyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj",
+        "projectUniqueName": "/home/pi/myApp/MyApp/MyApp/MyApp.csproj",
         "projectName": "MyApp",
-        "projectPath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\MyApp.csproj",
-        "packagesPath": "C:\\Users\\wlstn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\MyApp\\obj\\",
+        "projectPath": "/home/pi/myApp/MyApp/MyApp/MyApp.csproj",
+        "packagesPath": "/home/pi/.nuget/packages/",
+        "outputPath": "/home/pi/myApp/MyApp/MyApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\wlstn\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/pi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\CommonLibrary\\CommonLibrary.csproj": {
-                "projectPath": "C:\\Users\\wlstn\\Desktop\\JS_WebDev\\CommonLibrary\\CommonLibrary.csproj"
+              "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj": {
+                "projectPath": "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj"
               }
             }
           }
@@ -141,7 +137,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/pi/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
         }
       }
     }
