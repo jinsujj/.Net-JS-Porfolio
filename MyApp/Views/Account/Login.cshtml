@@ -1,7 +1,7 @@
 ﻿@model LoginViewModel
 
 <div class="row">
-    <div class="col-md-2 col-md-offset-5">
+    <div class="col-md-2 col-md-offset-5" style="padding: 0px 30px 0px 30px;">
         <h2 style="text-align:center">로그인</h2>
         <hr />
         <form method="post" class="form-horizontal">
@@ -16,8 +16,16 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-info">로그인</button>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-info">로그인</button>
+                </div>
             </div>
+            @if (ViewBag.WrongPwd == true)
+            {
+                <div class="col-md-8" style="color:red">
+                    비밀번호가 일치하지 않습니다.
+                </div>
+            }
             @if (ViewBag.WrongPwd == true)
             {
                 <div class="col-md-8" style="color:red">

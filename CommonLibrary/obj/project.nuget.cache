@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hn4QZvRKBYT5brmaW8tlhY6Af7e5UCkbAztHL/B5CuxenQVukCZ9mQ5WZNxFsIUjBO14TklDBvT0jod3tCFsEw==",
+  "dgSpecHash": "a1q4m1jAdBj9vUSIsdzUXLPqsvwTg5EqnhYm8F+oM1oQFkDQiDpIiwWFXvmqA1dpOrHVIlxyeqGTubH3PKDS+A==",
   "success": true,
-  "projectFilePath": "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj",
+  "projectFilePath": "C:\\Users\\wlstn\\Desktop\\portFolio\\MyApp\\CommonLibrary\\CommonLibrary.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
