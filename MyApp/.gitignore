@@ -6,3 +6,4 @@
 *.pdb
 *.pdb
 *.dll
+bin/Debug/netcoreapp3.1/MyApp.deps.json

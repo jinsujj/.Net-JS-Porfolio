@@ -181,3 +181,6 @@ C:\Users\wlstn\Desktop\JS_WebDev\MyApp\obj\Debug\netcoreapp3.1\staticwebassets\M
 C:\Users\wlstn\Desktop\JS_WebDev\MyApp\obj\Debug\netcoreapp3.1\MyApp.dll
 C:\Users\wlstn\Desktop\JS_WebDev\MyApp\obj\Debug\netcoreapp3.1\MyApp.pdb
 C:\Users\wlstn\Desktop\JS_WebDev\MyApp\obj\Debug\netcoreapp3.1\MyApp.genruntimeconfig.cache
+C:\Users\wlstn\Desktop\JS_WebDev\MyApp\obj\Debug\netcoreapp3.1\MyApp.csprojAssemblyReference.cache
+C:\Users\wlstn\Desktop\JS_WebDev\MyApp\bin\Debug\netcoreapp3.1\CommonLibrary.dll
+C:\Users\wlstn\Desktop\JS_WebDev\MyApp\bin\Debug\netcoreapp3.1\CommonLibrary.pdb
