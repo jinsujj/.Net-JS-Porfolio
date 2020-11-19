@@ -20,12 +20,11 @@
                     <button type="submit" class="btn btn-info">로그인</button>
                 </div>
             </div>
-            @if (ViewBag.WrongPwd == true)
+            @if (ViewBag.IsLoginFailed != null && Convert.ToBoolean(ViewBag.IsLoginFailed))
             {
-                <div class="col-md-8" style="color:red">
-                    비밀번호가 일치하지 않습니다.
-                </div>
-            }
+                <div class="col-md-8">
+                    5번 로그인 실패, 10분 후에 다시 로그인 해주세요.
+                </div>}
             @if (ViewBag.WrongPwd == true)
             {
                 <div class="col-md-8" style="color:red">
