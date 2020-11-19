@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyApp.Data.Repositorys
+namespace MyApp.Data.Repositorys.Login
 {
     public class LoginFailedRepository : ILoginFailedRepository
     {

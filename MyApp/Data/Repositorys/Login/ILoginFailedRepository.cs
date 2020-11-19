@@ -1,6 +1,6 @@
 ﻿using MyApp.Models;
 
-namespace MyApp.Data.Repositorys
+namespace MyApp.Data.Repositorys.Login
 {
     public interface ILoginFailedRepository
     {

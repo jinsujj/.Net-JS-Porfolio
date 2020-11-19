@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyApp.Data.Repositorys;
+using MyApp.Data.Repositorys.Login;
 using MyApp.Models;
 using MyApp.ViewModels;
 using System;

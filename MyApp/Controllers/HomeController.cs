@@ -136,11 +136,5 @@ namespace MyApp.Controllers
             }
             return RedirectToAction("Student");
         }
-
-        //[HttpPost]
-        //public IActionResult Student([Bind("Name,Age")] Student model)
-        //{
-        //    return View();
-        //}
     }
 }

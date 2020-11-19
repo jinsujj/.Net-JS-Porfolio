@@ -10,7 +10,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyApp.Data.Repositorys
+namespace MyApp.Data.Repositorys.Login
 {
     public class UserRepository : IUserRepository
     {

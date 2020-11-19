@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyApp.Data.Repositorys;
 using Microsoft.AspNetCore.HttpOverrides;
+using MyApp.Data.Repositorys.Login;
+using MyApp.Data.Repositorys.DotNetNote;
 
 namespace MyApp
 {
@@ -25,7 +27,14 @@ namespace MyApp
             services.AddControllersWithViews();
 
             /// [9] 권한 가져오기
-            //services.Configure<UserSetting>(_config.GetSection("AuthSetting"));
+            services.AddAuthorization(options =>
+            {
+                // User Role 이 있으면 Users Policy 부여
+                options.AddPolicy("Users", policy => policy.RequireRole("Users"));
+
+                // User Role 이 있고 UserId 가 DotNetNoteSetting:SiteAdmin 에 지정된 값(예를 들어 "Admin")이면 "Admin" 부여
+                options.AddPolicy("Admin", policy => policy.RequireRole("UsersInfo").RequireClaim("UserId", _config.GetSection("DotNetNoteSettings").GetSection("SiteAdmin").Value));
+            });
 
             /// [7] 쿠기 인증 기본
             services.AddAuthentication("Cookies").AddCookie(options =>
@@ -46,6 +55,11 @@ namespace MyApp
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginFailedRepository, LoginFailedRepository>();
+            services.AddScoped<INoteRepository, NoteRepository>();
+            services.AddSingleton<INoteCommentRepository>(
+                new NoteCommentRepository(
+                    _config["ConnectionStrings:DefaultConnection"]));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
