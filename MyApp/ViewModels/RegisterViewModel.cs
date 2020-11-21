@@ -21,6 +21,7 @@ namespace MyApp.ViewModels
 
 
         [Required]
+        [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "비밀번호가 서로 일치하지 않습니다.")]
         public string ConfirmPassword { get; set; }
     }

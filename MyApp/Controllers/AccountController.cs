@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MyApp.Controllers
@@ -111,6 +112,11 @@ namespace MyApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (phoneNumberCheck(model) == false)
+                {
+                    ModelState.AddModelError("", "핸드폰에 '-' 하이픈을 넣어 입력해주세요");
+                    return View(model);
+                }
                 if (_userRepository.GetUserByEmail(model.Email) != null)
                 {
                     ModelState.AddModelError("", "이미 가입된 사용자입니다.");
@@ -126,9 +132,27 @@ namespace MyApp.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "잘못된 가입 시도!!!");
+                ModelState.AddModelError("", "잘못된 가입 시도입니다.");
                 return View(model);
             }
+        }
+
+        [Authorize("Admin")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize("Admin")]
+        public IActionResult NoteManager()
+        {
+            return View();
+        }
+
+        [Authorize("Admin")]
+        public IActionResult UserManager()
+        {
+            return View();
         }
 
         public void ClearLoginFailed(string userName)
@@ -169,6 +193,21 @@ namespace MyApp.Controllers
                 _loginFailedRepository.AddLogin(new UserLog() { Email = email });
                 return false; // 로그인 성공
             }
+        }
+
+
+        private bool phoneNumberCheck(RegisterViewModel model)
+        {
+            string phone = model.PhoneNumber;
+            if (phone.Length == 12 || phone.Length == 13)
+            {
+                Regex regex = new Regex(@"01{1}[016789]{1}-[0-9]{3,4}-[0-9]{4}");
+                Match m = regex.Match(phone);
+                if (m.Success) return true;
+                else return false;
+            }
+            else
+                return false;
         }
     }
 }

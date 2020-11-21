@@ -7,6 +7,7 @@ using MyApp.Data.Repositorys;
 using Microsoft.AspNetCore.HttpOverrides;
 using MyApp.Data.Repositorys.Login;
 using MyApp.Data.Repositorys.DotNetNote;
+using System.Security.Claims;
 
 namespace MyApp
 {
@@ -33,7 +34,7 @@ namespace MyApp
                 options.AddPolicy("Users", policy => policy.RequireRole("Users"));
 
                 // User Role 이 있고 UserId 가 DotNetNoteSetting:SiteAdmin 에 지정된 값(예를 들어 "Admin")이면 "Admin" 부여
-                options.AddPolicy("Admin", policy => policy.RequireRole("UsersInfo").RequireClaim("UserId", _config.GetSection("DotNetNoteSettings").GetSection("SiteAdmin").Value));
+                //options.AddPolicy("Admin", policy => policy.RequireRole("UsersInfo").RequireClaim("Email", _config.GetSection("DotNetNoteSettings").GetSection("SiteAdmin").Value));
             });
 
             /// [7] 쿠기 인증 기본

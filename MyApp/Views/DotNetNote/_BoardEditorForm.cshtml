@@ -1,0 +1,95 @@
+﻿@model Note
+<div class="form-horizontal">
+    @if (ViewBag.FormType == BoardWriteFormType.Modify)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" style="border:0; width:auto;" maxlength="10" readonly />
+                <input type="hidden" name="Id" value="@Model.Id" />
+            </div>
+        </div>
+    }
+
+    <div>
+        <div class="col-md-10">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" style="width:auto;" maxlength="10" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" style="width: auto;" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label asp-for="Content" class="control-label"></label>
+            <textarea asp-for="Content" class="form-control" style="border-color:#ddd; width:auto; height:auto;" rows="5" cols="80" >
+            </textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label asp-for="FileName" class="control-label"></label>
+            <br/>
+            <input type="file" name="file" value="" style="width:auto; display:inline-block;" />
+            <span style="color:#aaaaaa; font-style:italic">(Optional)</span>
+            <span asp-validation-for="FileName" class="text-danger"></span>
+            @if (ViewBag.FileSize > 0)
+            {
+                <br />
+                @ViewBag.FileNamePrevious
+            }
+            <input type="hidden" name="previousFileName" value="@ViewBag.FileName" />
+            <input type="hidden" name="previousFileSize" value="@ViewBag.FileSize" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <label asp-for="Password" class="control-label"></label>
+            <br/>
+            <input asp-for="Password" type="password" class="form-control" style="width:150px; display:inline-block;" maxlength="20" />
+            <span style="color:#aaaaaa;">(수정/삭제시에 필요)</span>
+            <div>
+                암호는 단방향으로 암호화 되어 관리자도 알 수 없습니다.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <br />
+        <input type="button" value="@ViewBag.SaveButtonText" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-default">리스트</a>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+    </div>
+</div>
+
+@*Category 기본값은 Free(자유 게시판)로 설정*@
+<input type="hidden" asp-for="Category" value="Free" />
+<script>
+    $('#Content').summernote({
+        height: 500,
+        tabsize: 3,
+        toolbar: [
+            ['highlight', ['highlight']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            ['color', ['forecolor', 'color']],
+            ['table', ['table']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['picture', 'link', 'video']],
+            ['view', ['fullscreen', 'help']]
+        ],
+        focus: true,
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
+        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+    });
+</script>
+

@@ -1,0 +1,37 @@
+﻿@inject Microsoft.Extensions.Options.IOptions<MyApp.Settings.DotNetNoteSettings> option
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-controller="Account" asp-action="Logout" method="post"
+          id="logoutForm" class="navbar-nav">
+        <ul class="nav navbar-nav">
+            @if (User.IsInRole("UsersInfo") && User.FindFirst("Email").Value == option.Value.SiteAdmin)
+            {
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Account" asp-action="Index">
+                        <i class="fade"></i> DashBoard
+                    </a>
+                </li>
+            }
+            <li>
+                <a class="nav-link text-dark" asp-controller="Account" asp-action="UserManager" title="Manage">
+                    @User.FindFirst("Email").Value
+                </a>
+            </li>
+            <li>
+                <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">
+                    <i class="fade"></i> Logout
+                </a>
+            </li>
+        </ul>
+
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a></li>
+        <li>  </li>
+        <li><a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a></li>
+    </ul>
+}
