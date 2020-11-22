@@ -200,7 +200,7 @@ namespace MyApp.Controllers
                 _repository.UpdateDownCountById(id);
 
                 byte[] fileBytes = System.IO.File.ReadAllBytes(Path.Combine(
-                    _environment.WebRootPath, "files") + "\\" + fileName);
+                    _environment.WebRootPath, "files") + "//" + fileName);
 
                 return File(fileBytes, "application/octet-stream", fileName);
             }
