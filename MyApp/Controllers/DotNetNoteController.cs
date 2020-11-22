@@ -137,7 +137,6 @@ namespace MyApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Note model, ICollection<IFormFile> files)
         {
             string fileName = string.Empty;
@@ -246,6 +245,10 @@ namespace MyApp.Controllers
 
             if (note.FileName.Length > 1)
             {
+                if (note.FileName.Length > 10)
+                {
+                    note.FileName = note.FileName.Substring(0, 10);
+                }
                 ViewBag.FileName = String.Format(
                     "<a href='/DotNetNote/BoardDown?Id={0}'>"
                     + "{1}{2} / 전송수 {3}</a>", note.Id
