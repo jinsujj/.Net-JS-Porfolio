@@ -58,7 +58,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
 
         public int DeleteNoteComment(int boardid, int id, string password)
         {
-            return con.Execute(@"DELETE notecomments
+            return con.Execute(@"DELETE FROM notecomments 
                 WHERE BoardId = @BoardId
                 AND Id = @Id
                 AND Password = @Password;

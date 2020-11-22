@@ -1,0 +1,17 @@
+﻿
+<h2 style="text-align:center;">
+    Projects Blog
+</h2>
+<hr />
+
+<div class="row">
+    <div style="width:100%">
+        <form asp-controller="DotNetNote" asp-action="Reply" enctype="multipart/form-data" method="post">
+            @await Html.PartialAsync("_BoardEditorForm")
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

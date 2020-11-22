@@ -222,8 +222,8 @@ namespace MyApp.Data.Repositorys.DotNetNote
                 int Ref = results.Ref;
                 int parentNum = results.parentnum;
 
-                if (results.answernum == 0)
-                {
+                //if (results.answernum == 0)
+                //{
                     sql = @"DELETE FROM notes WHERE id = @id";
                     con.Execute(sql, new { id = id });
 
@@ -233,15 +233,15 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                 AND AnswerNum = 0";
 
                     con.Execute(sql, new { id = parentNum });
-                }
-                else
-                {
-                    sql = @"UPDATE notes
-                                SET reforder = reforder -1
-                                WHERE Ref  = @Ref
-                                AND reforder > @reforder";
-                    con.Execute(sql, new { Ref = Ref, reforder = refOrder });
-                }
+                //}
+                //else
+                //{
+                //    sql = @"UPDATE notes
+                //                SET reforder = reforder -1
+                //                WHERE Ref  = @Ref
+                //                AND reforder > @reforder";
+                //    con.Execute(sql, new { Ref = Ref, reforder = refOrder });
+                //}
             }
             catch (Exception ex)
             {

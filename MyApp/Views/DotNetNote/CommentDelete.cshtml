@@ -1,0 +1,24 @@
+﻿
+<h2 style="text-align:center;">게시판</h2>
+<span>
+    글 삭제 - 글을 삭제하려면 글 작성시에 기록하였던 비밀번호가 필요합니다.
+</span>
+<hr />
+<div style="text-align:center;">
+    <form id="frmDeleteForm" asp-action="CommentDelete"
+          method="post">
+        <span class="text-danger">@ViewBag.Id</span>번 글을 지우시겠습니까?
+        <input type="hidden" name="boardId" id="boardId" value="@ViewBag.BoardId" />
+        <input type="hidden" name="id" id="id" value="@ViewBag.Id" />
+        <br />
+        비밀번호 :
+        <input type="password" name="txtPassword" id="txtPassword"
+               style="width:120px; display:inline-block" ; class="form-control" />
+        <input type="submit" value="지우기" class="btn btn-danger"
+               style="display:inline-block;" />
+        <a asp-action="Details" asp-route-id="@ViewBag.Id" class="btn btn-default">취소</a>
+        <br />
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+        <br />
+    </form>
+</div>

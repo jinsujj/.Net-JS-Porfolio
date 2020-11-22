@@ -136,6 +136,8 @@ namespace MyApp.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Note model, ICollection<IFormFile> files)
         {
             string fileName = string.Empty;
@@ -281,6 +283,7 @@ namespace MyApp.Controllers
 
         //게시판 삭제 처리
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, string password)
         {
             if (_repository.DeleteNote(id, password) > 0)
@@ -332,6 +335,7 @@ namespace MyApp.Controllers
 
         // 게시판 수정 처리 + 파일 업로드 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Note model, ICollection<IFormFile> files,
             int id, string previousFileName = "", int previousFileSize = 0)
         {
@@ -417,6 +421,7 @@ namespace MyApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reply(
             Note model, ICollection<IFormFile> files, int id)
         {
@@ -517,6 +522,7 @@ namespace MyApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CommentAdd(
             int BoardId, string txtName, string txtPassword, string txtOpinion)
         {
@@ -542,6 +548,7 @@ namespace MyApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CommentDelete(string boardId, string id, string txtPassword)
         {
             if (_commentRepository.GetCountBy(Convert.ToInt32(boardId), Convert.ToInt32(id), txtPassword) > 0)
@@ -553,8 +560,8 @@ namespace MyApp.Controllers
 
             ViewBag.BoardId = boardId;
             ViewBag.Id = id;
+            ViewBag.Password = txtPassword;
             ViewBag.ErrorMessage = "암호가 틀립니다. 다시 입력해주세요";
-
             return View();
         }
 

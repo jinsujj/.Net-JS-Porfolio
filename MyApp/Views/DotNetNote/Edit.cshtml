@@ -1,0 +1,13 @@
+﻿
+<h2 style="text-align:center;">Projects Blog</h2>
+@ViewBag.TitleDescription
+<hr />
+
+<div class="row">
+    <div style="width:100%">
+        <form asp-controller="DotNetNote" asp-action="Edit" enctype="multipart/form-data" method="post">
+            @await Html.PartialAsync("_BoardEditorForm")
+        </form>
+    </div>
+</div>
+
