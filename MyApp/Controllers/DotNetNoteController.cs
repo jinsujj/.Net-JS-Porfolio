@@ -141,7 +141,7 @@ namespace MyApp.Controllers
         {
             string fileName = string.Empty;
             int fileSize = 0;
-
+            string Email = User.FindFirst("Email").Value;
             var uploadFolder = Path.Combine(_environment.WebRootPath, "files");
 
             foreach (var file in files)
@@ -163,7 +163,7 @@ namespace MyApp.Controllers
             }
             Note note = new Note();
             note.Name = model.Name;
-            note.Email = CommonLibrary.HtmlUtility.Encode(model.Email);
+            note.Email = CommonLibrary.HtmlUtility.Encode(Email);
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
             note.Content = model.Content;
