@@ -1,4 +1,4 @@
-﻿@inject Microsoft.Extensions.Options.IOptions<MyApp.Settings.DotNetNoteSettings> option
+﻿@inject Microsoft.Extensions.Options.IOptions<MyApp.Settings.DotNetNoteSetting> option
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -8,13 +8,13 @@
             @if (User.IsInRole("UsersInfo") && User.FindFirst("Email").Value == option.Value.SiteAdmin)
             {
                 <li>
-                    <a class="nav-link text-dark" asp-controller="Account" asp-action="Index">
+                    <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">
                         <i class="fade"></i> DashBoard
                     </a>
                 </li>
             }
             <li>
-                <a class="nav-link text-dark" asp-controller="Account" asp-action="UserManager" title="Manage">
+                <a class="nav-link text-dark" asp-controller="Admin" asp-action="UserManager" title="Manage">
                     @User.FindFirst("Email").Value
                 </a>
             </li>

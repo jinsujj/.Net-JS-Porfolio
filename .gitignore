@@ -5,3 +5,4 @@ CommonLibrary/obj/Debug/netcoreapp3.1/CommonLibrary.csprojAssemblyReference.cach
 *.dll
 *.pdb
 *.cache
+MyApp/bin/Debug/netcoreapp3.1/Settings/DotNetNoteSettings.json

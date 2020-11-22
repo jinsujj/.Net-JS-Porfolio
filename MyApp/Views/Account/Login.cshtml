@@ -1,23 +1,28 @@
 ﻿@model LoginViewModel
 
+@{
+    ViewData["Title"] = "로그인";
+}
+<h2>@ViewData["Title"]</h2>
 <div class="row">
-    <div class="col-md-2 col-md-offset-5" style="padding: 0px 30px 0px 30px;">
-        <h2 style="text-align:center">로그인</h2>
+    <div class="col-md-8">
         <hr />
         <form method="post" class="form-horizontal">
             <div class="form-group">
-                <label asp-for="Email">이메일</label>
+                <label asp-for="Email">E-mail</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password">비밀번호</label>
+                <label asp-for="Password">Password</label>
                 <input asp-for="Password" class="form-control">
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="col-md-3">
-                    <button type="submit" class="btn btn-info">로그인</button>
+                <div class="col-md-offset-2 col-md-6">
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]"
+                       class="btn btn-default btn-sm">회원가입</a>
                 </div>
             </div>
             @if (ViewBag.IsLoginFailed != null && Convert.ToBoolean(ViewBag.IsLoginFailed))

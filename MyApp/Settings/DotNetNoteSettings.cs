@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyApp.Settings
 {
-    public class DotNetNoteSettings
+    public class DotNetNoteSetting
     {
         public string SiteName { get; set; } = "DotNetNote";
         public string SiteUrl { get; set; } = "http://www.js-portfolio.com";

@@ -71,10 +71,8 @@ namespace MyApp.Controllers
                     {
                         // 로그인 아이디 지정   userid 만 따진다
                         new Claim("Email", model.Email),
-                        new Claim(ClaimTypes.NameIdentifier, model.Email),
-                        new Claim(ClaimTypes.Name, model.Email), 
-                        // 기본 역할 지정, "Role" 기능에 "Users" 값 부여
                         new Claim(ClaimTypes.Role, "UsersInfo") // 추가 정보 기록
+                        // 기본 역할 지정, "Role" 기능에 "Users" 값 부여
                     };
 
                     var ci = new ClaimsIdentity(claims, "Cookies");
@@ -137,23 +135,6 @@ namespace MyApp.Controllers
             }
         }
 
-        [Authorize("Admin")]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [Authorize("Admin")]
-        public IActionResult NoteManager()
-        {
-            return View();
-        }
-
-        [Authorize("Admin")]
-        public IActionResult UserManager()
-        {
-            return View();
-        }
 
         public void ClearLoginFailed(string userName)
         {

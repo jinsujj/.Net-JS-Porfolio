@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using MyApp.Data.Repositorys.Login;
 using MyApp.Data.Repositorys.DotNetNote;
 using System.Security.Claims;
+using MyApp.Settings;
 
 namespace MyApp
 {
@@ -27,14 +28,18 @@ namespace MyApp
             /// [4] MVC 서비스 등록
             services.AddControllersWithViews();
 
-            /// [9] 권한 가져오기
+            /// [9-1] // DotNetNoteSettings.json 파일의 데이터를 POCO 클래스에 주입
+            services.Configure<DotNetNoteSetting>(_config.GetSection("DotNetNoteSetting"));
+
+            /// [9-2] DotNetNoteSettings.json 읽어 권한 가져오기
             services.AddAuthorization(options =>
             {
                 // User Role 이 있으면 Users Policy 부여
                 options.AddPolicy("Users", policy => policy.RequireRole("Users"));
 
                 // User Role 이 있고 UserId 가 DotNetNoteSetting:SiteAdmin 에 지정된 값(예를 들어 "Admin")이면 "Admin" 부여
-                //options.AddPolicy("Admin", policy => policy.RequireRole("UsersInfo").RequireClaim("Email", _config.GetSection("DotNetNoteSettings").GetSection("SiteAdmin").Value));
+                //options.AddPolicy("Admin", policy => policy.RequireRole("UsersInfo").RequireClaim("Email", _config.GetSection("DotNetNoteSetting").GetSection("SiteAdmin").Value));
+                options.AddPolicy("Admin", policy => policy.RequireRole("UsersInfo").RequireClaim("Email", "wlstncjs1234@naver.com"));
             });
 
             /// [7] 쿠기 인증 기본
@@ -43,7 +48,6 @@ namespace MyApp
                 options.LoginPath = "/Account/Login/";
                 options.AccessDeniedPath = "/Account/Forbidden/";
             });
-
 
             /// [6] (Dapper) Query Repository 연동 
             /*
