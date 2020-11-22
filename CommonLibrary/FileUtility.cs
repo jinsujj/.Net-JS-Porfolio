@@ -33,6 +33,7 @@ namespace CommonLibrary
                 else
                 {
                     blnExists = false;
+                    name = strName;
                 }
             }
             return name;
