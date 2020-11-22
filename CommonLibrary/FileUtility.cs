@@ -18,9 +18,10 @@ namespace CommonLibrary
         {
             // 순수파일명 : Test
             string strName = Path.GetFileNameWithoutExtension(name);
-            strName = strName.Substring(1);
-            // 확장자 : .txt
             string strExt = Path.GetExtension(name);
+            strName = strName.Substring(1);
+            strExt = strExt.Substring(0, 4);
+
             bool blnExists = true;
             int i = 0;
             while (blnExists)
@@ -33,7 +34,7 @@ namespace CommonLibrary
                 else
                 {
                     blnExists = false;
-                    name = strName;
+                    name = strName + strExt;
                 }
             }
             return name;
