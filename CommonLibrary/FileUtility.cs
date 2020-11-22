@@ -18,6 +18,7 @@ namespace CommonLibrary
         {
             // 순수파일명 : Test
             string strName = Path.GetFileNameWithoutExtension(name);
+            strName = strName.Substring(1);
             // 확장자 : .txt
             string strExt = Path.GetExtension(name);
             bool blnExists = true;
