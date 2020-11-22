@@ -1,4 +1,5 @@
 ﻿@model Note
+@inject Microsoft.Extensions.Options.IOptions<MyApp.Settings.DotNetNoteSetting> option
 
 <h2 style="text-align:center;">Projects Blog</h2>
 <span style="color: #ff0000">
@@ -80,21 +81,24 @@
 </table>
 
 <div style="text-align:center;">
-    @if (User.Identity.IsAuthenticated)
+    @if (User.IsInRole("UsersInfo") && User.FindFirst("Email").Value == option.Value.SiteAdmin)
     {
         <a asp-action="Pinned" asp-route-id="@Model.Id" class="btn btn-danger">
             공지로 올리기
         </a>
     }
-    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">
-        삭제
-    </a>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
-        수정
-    </a>
-    <a asp-action="Reply" asp-route-id="@Model.Id" class="btn btn-primary">
-        답변
-    </a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">
+            삭제
+        </a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+            수정
+        </a>
+        <a asp-action="Reply" asp-route-id="@Model.Id" class="btn btn-primary">
+            답변
+        </a>
+    }
     <a asp-action="Index" class="btn btn-primary">리스트</a>
 </div>
 <br />

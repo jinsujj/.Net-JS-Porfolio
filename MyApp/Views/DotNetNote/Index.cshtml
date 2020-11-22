@@ -141,9 +141,12 @@
         </td>
     </tr>
     <tr>
-        <td style="text-align:right;">
-            <a asp-action="Create" class="btn btn-primary">글쓰기</a>
-        </td>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <td style="text-align:right;">
+                <a asp-action="Create" class="btn btn-primary">글쓰기</a>
+            </td>
+        }
     </tr>
     <tr>
         <td style="text-align:center;">
