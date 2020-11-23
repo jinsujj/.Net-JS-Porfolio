@@ -4,13 +4,13 @@
     @foreach (var comment in Model.NoteCommentList)
     {
         <tr style="border-bottom: 1px dotted silver;">
-            <td style="width: auto;">
+            <td style="width: 80px;">
                 @comment.Name
             </td>
-            <td style="width: auto;">
+            <td style="width: 350px;">
                 @Html.Raw(comment.Opinion.Replace("\r\n", "<br />"))
             </td>
-            <td style="width: auto;">
+            <td style="width: 180px;">
                 @comment.PostDate
             </td>
             <td style="width: 10px;text-align:center;">
@@ -40,31 +40,31 @@
 <form asp-controller="DotNetNote" asp-action="CommentAdd" method="post"
       onsubmit="return CheckCommentForm();">
     <input type="hidden" name="BoardId" value="@Model.BoardId" />
-    <table style="width: auto; margin-left: auto;">
+    <table style="width: 500px; margin-left: auto;">
         <tr>
-            <td style="width: auto; text-align:right;">
+            <td style="width: 64px; text-align:right;">
                 이 름 :
             </td>
-            <td style="width: auto;">
+            <td style="width: 128px;">
                 <input type="text" name="txtName" id="txtName"
                        class="form-control"
-                       style="width:auto;display:inline-block;" />
+                       style="width:128px;display:inline-block;" />
             </td>
-            <td style="width: auto; text-align:right;">
+            <td style="width: 64px; text-align:right;">
                 암 호 :
             </td>
-            <td style="width: auto;">
+            <td style="width: 128px;">
                 <input type="password" name="txtPassword" id="txtPassword"
                        class="form-control"
-                       style="width:auto;display:inline-block;" />
+                       style="width:128px;display:inline-block;" />
             </td>
-            <td style="width: auto; text-align:right;">
+            <td style="width: 128px; text-align:right;">
 
                 @if (User.Identity.IsAuthenticated)
                 {
                     <input type="submit" value="댓글 저장"
                            class="form-control btn btn-primary"
-                           style="width:auto;display:inline-block;" />
+                           style="width:96px;display:inline-block;" />
                 }
                 else
                 {
@@ -75,13 +75,13 @@
             </td>
         </tr>
         <tr>
-            <td style="width: auto; text-align:right;">
+            <td style="width: 64px; text-align:right;">
                 의 견 :
             </td>
-            <td colspan="4" style="width: auto;">
+            <td colspan="4" style="width: 448px;">
                 <textarea rows="3" cols="70" name="txtOpinion" id="txtOpinion"
                           class="form-control"
-                          style="width:auto; display:inline-block;"></textarea>
+                          style="width:448px; display:inline-block;"></textarea>
             </td>
         </tr>
     </table>
