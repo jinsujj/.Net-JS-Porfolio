@@ -18,6 +18,7 @@ namespace MyApp.Models.DotNetNote
         public string Title { get; set; }
         [Display(Name = "작성일")]
         public DateTime PostDate { get; set; }
+        public string PostDates { get; set; }
         public string PostIp { get; set; }
         [Display(Name = "내용")]
         [Required(ErrorMessage = "* 내용을 작성해 주세요")]

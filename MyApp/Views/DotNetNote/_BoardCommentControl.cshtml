@@ -40,31 +40,31 @@
 <form asp-controller="DotNetNote" asp-action="CommentAdd" method="post"
       onsubmit="return CheckCommentForm();">
     <input type="hidden" name="BoardId" value="@Model.BoardId" />
-    <table style="width: 450px; margin-left: auto; margin-right:auto;">
+    <table style="width: auto; margin-left: auto;">
         <tr>
             <td style="width: 64px; text-align:right;">
                 이 름 :
             </td>
-            <td style="width: 128px;">
+            <td style="width: 100px;">
                 <input type="text" name="txtName" id="txtName"
                        class="form-control"
-                       style="width:128px;display:inline-block;" />
+                       style="width:100px;display:inline-block;" />
             </td>
             <td style="width: 64px; text-align:right;">
                 암 호 :
             </td>
-            <td style="width: 128px;">
+            <td style="width: 100px;">
                 <input type="password" name="txtPassword" id="txtPassword"
                        class="form-control"
-                       style="width:128px;display:inline-block;" />
+                       style="width:100px;display:inline-block;" />
             </td>
-            <td style="width: 128px; text-align:right;">
+            <td style="width: 85px; text-align:right;">
 
                 @if (User.Identity.IsAuthenticated)
                 {
                     <input type="submit" value="댓글 저장"
                            class="form-control btn btn-primary"
-                           style="width:96px;display:inline-block;" />
+                           style="width:85px; text-align:center;  inline-block;" />
                 }
                 else
                 {
@@ -78,10 +78,10 @@
             <td style="width: 64px; text-align:right;">
                 의 견 :
             </td>
-            <td colspan="4" style="width: 448px;">
+            <td colspan="4" style="width: 350px;">
                 <textarea rows="3" cols="70" name="txtOpinion" id="txtOpinion"
                           class="form-control"
-                          style="width:448px; display:inline-block;"></textarea>
+                          style="width:350px; display:inline-block;"></textarea>
             </td>
         </tr>
     </table>

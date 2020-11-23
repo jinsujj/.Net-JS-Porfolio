@@ -215,6 +215,8 @@ namespace MyApp.Controllers
         {
             var note = _repository.GetNoteById(id);
 
+            note.PostDates = note.PostDate.ToString("yyyy-MM-dd HH:mm:ss");
+
             if (note == null)
             {
                 return RedirectToAction("DeleteCompleted");
