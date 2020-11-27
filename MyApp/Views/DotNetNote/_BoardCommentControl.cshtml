@@ -37,10 +37,10 @@
         return true;
     }
 </script>
-<form asp-controller="DotNetNote" asp-action="CommentAdd" method="post"
+<form asp-controller="DotNetNote" asp-action="CommentAdd" style="width:95%;" method="post"
       onsubmit="return CheckCommentForm();">
     <input type="hidden" name="BoardId" value="@Model.BoardId" />
-    <table style="width: 95%; margin-left: auto;">
+    <table margin-left: auto;">
         <tr>
             <td style="min-width: 55px; text-align:right;">
                 이 름 :
@@ -62,14 +62,14 @@
 
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <input type="submit" value="댓글"
-                           class="form-control btn btn-primary"
-                           style="width:auto; text-align:center;  inline-block;" />
+                <input type="submit" value="댓글"
+                       class="form-control btn btn-primary"
+                       style="width:auto; text-align:center;  inline-block;" />
                 }
                 else
                 {
-                    <input type="button" name="btnDisabled"
-                           value="로그인" disabled class="btn btn-default disabled" />
+                <input type="button" name="btnDisabled"
+                       value="로그인" disabled class="btn btn-default disabled" />
                 }
 
             </td>
