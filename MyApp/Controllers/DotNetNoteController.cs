@@ -215,7 +215,7 @@ namespace MyApp.Controllers
         {
             var note = _repository.GetNoteById(id);
 
-            note.PostDates = note.PostDate.ToString("yyyy-MM-dd HH:mm:ss");
+            note.PostDates = note.PostDate.ToString();
 
             if (note == null)
             {
