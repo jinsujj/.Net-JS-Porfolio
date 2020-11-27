@@ -42,21 +42,21 @@
     <input type="hidden" name="BoardId" value="@Model.BoardId" />
     <table style="width: auto; margin-left: auto;">
         <tr>
-            <td style="width: 55px; text-align:right;">
+            <td style="min-width: 55px; text-align:right;">
                 이 름 :
             </td>
-            <td style="width: 90px;">
+            <td style="width: auto;">
                 <input type="text" name="txtName" id="txtName"
                        class="form-control"
-                       style="width:90px;display:inline-block;" />
+                       style="max-width:200px;display:inline-block;" />
             </td>
-            <td style="width: 55px; text-align:right;">
+            <td style="min-width: 55px; text-align:right;">
                 암 호 :
             </td>
-            <td style="width: 90px;">
+            <td style="width: auto;">
                 <input type="password" name="txtPassword" id="txtPassword"
                        class="form-control"
-                       style="width:90px;display:inline-block;" />
+                       style="max-width:200px;display:inline-block;" />
             </td>
             <td style="width: auto; text-align:right;">
 
@@ -75,13 +75,13 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 64px; text-align:right;">
+            <td style="min-width: 55px; text-align:right;">
                 의 견 :
             </td>
-            <td colspan="4" style="width: 300px;">
+            <td colspan="4" style="width: auto;">
                 <textarea rows="3" cols="70" name="txtOpinion" id="txtOpinion"
                           class="form-control"
-                          style="width:300px; display:inline-block;"></textarea>
+                          style="width:auto; display:inline-block;"></textarea>
             </td>
         </tr>
     </table>
