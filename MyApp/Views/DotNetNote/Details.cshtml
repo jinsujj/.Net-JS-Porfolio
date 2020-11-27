@@ -19,13 +19,13 @@
             </td>
         </tr>
         <tr style="background-color: #efefef;">
-            <td style="text-align:left;">
+            <td style="text-align:left; min-width:58px;">
                 번 호 :
             </td>
             <td>
                 <span>@Model.Id</span>
             </td>
-            <td style="text-align:left;">
+            <td style="text-align:left; min-width:65px;">
                 E-mail :
             </td>
             <td>
@@ -75,7 +75,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="width: auto;">
+            <td colspan="4" style="max-width: 100%;">
                 @await Html.PartialAsync("_BoardCommentControl", (NoteCommentViewModel)ViewBag.CommentListAndId)
             </td>
         </tr>
