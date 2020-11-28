@@ -179,6 +179,9 @@ namespace MyApp.Controllers
 
         private bool phoneNumberCheck(RegisterViewModel model)
         {
+            if (model.PhoneNumber == null)
+                return false;
+
             string phone = model.PhoneNumber;
             if (phone.Length == 12 || phone.Length == 13)
             {
