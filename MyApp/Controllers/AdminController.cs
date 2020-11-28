@@ -23,6 +23,11 @@ namespace MyApp.Controllers
             return View();
         }
 
+        public IActionResult RaspServer()
+        {
+            return Redirect("https://jinsu-seoul.iptime.org:4200/");
+        }
+
         /// <summary>
         /// TODO: 사용자 관리자 페이지
         /// </summary>

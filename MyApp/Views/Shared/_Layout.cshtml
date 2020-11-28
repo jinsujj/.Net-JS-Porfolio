@@ -44,10 +44,10 @@
                 <partial name="_LoginPartial" />
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" asp-controller="DotNetNote" asp-action="Index">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" asp-controller="DotNetNote" asp-action="Index">Projects Blog</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a></li>
+                        @*<li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a></li>*@
                         @*<li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Student">Student</a></li>*@
                     }
                 </ul>

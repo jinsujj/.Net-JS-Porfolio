@@ -12,12 +12,20 @@
                         <i class="fade"></i> DashBoard
                     </a>
                 </li>
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Admin" asp-action="UserManager" title="Manage">
+                        @User.FindFirst("Email").Value
+                    </a>
+                </li>
             }
-            <li>
-                <a class="nav-link text-dark" asp-controller="Admin" asp-action="UserManager" title="Manage">
-                    @User.FindFirst("Email").Value
-                </a>
-            </li>
+            else
+            {
+                <li>
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Index" title="Manage">
+                        @User.FindFirst("Email").Value
+                    </a>
+                </li>
+            }
             <li>
                 <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">
                     <i class="fade"></i> Logout
