@@ -73,7 +73,6 @@
 </table>
 <div class="row">
     <div style="width:100%; padding:10px;">
-        <label asp-for="Content" class="control-label"></label>
         <textarea asp-for="Content" class="form-control" readonly="readonly"; disabled;></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
@@ -107,7 +106,26 @@
     $('#Content').summernote({
         tabsize: 3,
         toolbar: [],
+        onImageUpload: function (files, editor, welEditable) {
+            sendFile(files[0], editor, welEditable);
+        },
     });
     $('#Content').summernote('disable');
     $('#Content').height($(window).height() * 1.0);
+
+    function sendFile(file, editor, welEditable) {
+        data = new FormData();
+        data.append("uploadFile", file);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: "/files",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                editor.insertImage(welEditable, data.url);
+            }
+        });
+    }
 </script>
