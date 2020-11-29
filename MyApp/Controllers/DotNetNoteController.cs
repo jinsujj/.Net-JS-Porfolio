@@ -395,6 +395,18 @@ namespace MyApp.Controllers
             note.Email = CommonLibrary.HtmlUtility.Encode(model.Email);
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
+
+            var imgData = model.Content.Split(" ");
+            string imgsrc = imgData[1] + " " + imgData[2].Substring(0, imgData[2].Length - 1);
+            if (model.Content.Contains(imgsrc))
+            {
+                model.Content = model.Content.Replace(imgsrc, "");
+            }
+
+            var imgNameTemp = imgData[2].Split('=')[1];
+            string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
+
+            model.Content = model.Content.Replace("img", "img src=" + "/files/" + imgName);
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
@@ -471,6 +483,19 @@ namespace MyApp.Controllers
             note.Email = CommonLibrary.HtmlUtility.Encode(model.Email);
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
+
+            var imgData = model.Content.Split(" ");
+            string imgsrc = imgData[1] + " " + imgData[2].Substring(0, imgData[2].Length - 1);
+            if (model.Content.Contains(imgsrc))
+            {
+                model.Content = model.Content.Replace(imgsrc, "");
+            }
+
+            var imgNameTemp = imgData[2].Split('=')[1];
+            string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
+
+            model.Content = model.Content.Replace("img", "img src=" + "/files/" + imgName);
+            note.Content = model.Content;
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
