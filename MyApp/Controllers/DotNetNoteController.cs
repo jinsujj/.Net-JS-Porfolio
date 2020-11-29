@@ -167,6 +167,12 @@ namespace MyApp.Controllers
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
 
+            if (model.Name == null || model.Title == null || model.Content == "")
+            {
+                ModelState.AddModelError("", "내용을 기입해주세요");
+                return View(model);
+            }
+
             if (model.Content.Split("img src").Length >1)
             {
                 var imgData = model.Content.Split("img src")[1].Split(" ");
@@ -404,6 +410,12 @@ namespace MyApp.Controllers
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
 
+            if (model.Name == null || model.Title == null || model.Content == "")
+            {
+                ModelState.AddModelError("", "내용을 기입해주세요");
+                return View(model);
+            }
+
             if (model.Content.Split("img src").Length > 1)
             {
                 var imgData = model.Content.Split("img src")[1].Split(" ");
@@ -498,6 +510,12 @@ namespace MyApp.Controllers
             note.Email = CommonLibrary.HtmlUtility.Encode(model.Email);
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
+
+            if (model.Name == null || model.Title == null || model.Content == "")
+            {
+                ModelState.AddModelError("", "내용을 기입해주세요");
+                return View(model);
+            }
 
             if (model.Content.Split("img src").Length > 1)
             {

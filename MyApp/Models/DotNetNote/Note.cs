@@ -10,12 +10,18 @@ namespace MyApp.Models.DotNetNote
     {
         [Display(Name = "번호")]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "* 내용을 작성해 주세요")]
         [Display(Name = "작성자")]
         public string Name { get; set; }
+
         [EmailAddress(ErrorMessage = "이메일을 양식에 맞춰 입력해주세요")]
         public string Email { get; set; } = "";
+
+        [Required(ErrorMessage = "* 내용을 작성해 주세요")]
         [Display(Name = "제목")]
         public string Title { get; set; }
+
         [Display(Name = "작성일")]
         public DateTime PostDate { get; set; }
         public string PostDates { get; set; }
