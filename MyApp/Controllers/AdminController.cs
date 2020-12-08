@@ -25,7 +25,7 @@ namespace MyApp.Controllers
 
         public IActionResult RaspServer()
         {
-            return Redirect("https://jinsu-seoul.iptime.org:4200/");
+            return Redirect("https://jinsu-blog.iptime.org:4200/");
         }
 
         /// <summary>
