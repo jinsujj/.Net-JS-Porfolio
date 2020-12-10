@@ -3,14 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MyApp.Data.Repositorys.DotNetNote;
 using MyApp.Models.DotNetNote;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
@@ -41,6 +39,32 @@ namespace MyApp.Controllers
 
         public int PageIndex { get; set; } = 0;
         public int TotalRecordCount { get; set; } = 0;
+
+        [HttpPost]
+        public async Task<string> SaveImage(IFormFile file)
+        {
+            string fileName = string.Empty;
+            int fileSize = 0;
+            string Email = User.FindFirst("Email").Value;
+            var uploadFolder = Path.Combine(_environment.WebRootPath, "files");
+
+            if (file.Length > 0)
+            {
+                fileSize = Convert.ToInt32(file.Length);
+                fileName = CommonLibrary.FileUtility.GetFileNameWithNumbering(
+                        uploadFolder, Path.GetFileName(
+                            ContentDispositionHeaderValue.Parse(
+                                file.ContentDisposition).FileName.ToString()));
+
+                using (var fileStream = new FileStream(
+                       Path.Combine(uploadFolder, fileName), FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+            }
+            string result = @"/files/" + fileName ;
+            return result;
+        }
 
         public IActionResult Index()
         {
@@ -172,64 +196,7 @@ namespace MyApp.Controllers
                 ModelState.AddModelError("", "내용을 기입해주세요");
                 return View(model);
             }
-
-            if (model.Content.Split("<img").Length >1)
-            {
-                int cnt = model.Content.Split("<img").Length;
-
-                for(int i=1; i <= cnt-1; i++)
-                {
-                    var imgData = model.Content.Split("<img")[i].Split(" ");
-                    if (imgData != null && imgData[1].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[0] + " " + imgData[1];
-
-                        var imgNameTemp = imgData[1].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData[2].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[1] + " " + imgData[2];
-
-                        var imgNameTemp = imgData[2].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData[3].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[2] + " " + imgData[3];
-
-                        var imgNameTemp = imgData[3].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData[4].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[3] + " " + imgData[4];
-
-                        var imgNameTemp = imgData[4].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                }
-            }
+            
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
@@ -445,7 +412,7 @@ namespace MyApp.Controllers
 
             note.Id = id;
             note.Name = model.Name;
-            note.Email = CommonLibrary.HtmlUtility.Encode(model.Email);
+            note.Email = User.FindFirst("Email").Value;
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
 
@@ -455,63 +422,6 @@ namespace MyApp.Controllers
                 return View(model);
             }
 
-            if (model.Content.Split("<img").Length > 1)
-            {
-                int cnt = model.Content.Split("<img").Length;
-
-                for (int i = 1; i <= cnt - 1; i++)
-                {
-                    var imgData = model.Content.Split("<img")[i].Split(" ");
-                    if (imgData != null && imgData[1].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[0] + " " + imgData[1];
-
-                        var imgNameTemp = imgData[1].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData[2].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[1] + " " + imgData[2];
-
-                        var imgNameTemp = imgData[2].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData[3].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[2] + " " + imgData[3];
-
-                        var imgNameTemp = imgData[3].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData.Length >4 && imgData[4].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[3] + " " + imgData[4];
-
-                        var imgNameTemp = imgData[4].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                }
-            }
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
@@ -585,7 +495,7 @@ namespace MyApp.Controllers
 
             note.Id = note.ParentNum = Convert.ToInt32(id);
             note.Name = model.Name;
-            note.Email = CommonLibrary.HtmlUtility.Encode(model.Email);
+            note.Email = User.FindFirst("Email").Value;
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
 
@@ -594,64 +504,7 @@ namespace MyApp.Controllers
                 ModelState.AddModelError("", "내용을 기입해주세요");
                 return View(model);
             }
-
-            if (model.Content.Split("<img").Length > 1)
-            {
-                int cnt = model.Content.Split("<img").Length;
-
-                for (int i = 1; i <= cnt - 1; i++)
-                {
-                    var imgData = model.Content.Split("<img")[i].Split(" ");
-                    if (imgData != null && imgData[1].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[0] + " " + imgData[1];
-
-                        var imgNameTemp = imgData[1].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData[2].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[1] + " " + imgData[2];
-
-                        var imgNameTemp = imgData[2].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData[3].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[2] + " " + imgData[3];
-
-                        var imgNameTemp = imgData[3].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                    else if (imgData != null && imgData.Length > 4 && imgData[4].Contains("data-filename"))
-                    {
-                        string imgsrc = imgData[3] + " " + imgData[4];
-
-                        var imgNameTemp = imgData[4].Split('=')[1];
-                        string imgName = imgNameTemp.Substring(1, imgNameTemp.Length - 2);
-
-                        if (model.Content.Contains(imgsrc))
-                        {
-                            model.Content = model.Content.Replace(imgsrc, "src=" + "/files/" + imgName);
-                        }
-                    }
-                }
-            }
+            
             note.Content = model.Content;
             note.Content = model.Content;
             note.FileName = fileName;
