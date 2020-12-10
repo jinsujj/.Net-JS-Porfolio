@@ -28,7 +28,7 @@
     <div class="form-group">
         <div class="col-md-10">
             <label asp-for="Content" class="control-label"></label>
-            <textarea asp-for="Content" class="form-control" style="border-color:#ddd; width:auto; height:auto;" rows="5" cols="80" >
+            <textarea asp-for="Content" class="form-control" style="border-color:#ddd; width:auto; height:auto;" rows="5" cols="80">
             </textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
@@ -36,7 +36,7 @@
     <div class="form-group">
         <div class="col-md-10">
             <label asp-for="FileName" class="control-label"></label>
-            <br/>
+            <br />
             <input type="file" name="file" value="" style="width:auto; display:inline-block;" />
             <span style="color:#aaaaaa; font-style:italic">(Optional)</span>
             <span asp-validation-for="FileName" class="text-danger"></span>
@@ -52,7 +52,7 @@
     <div class="form-group">
         <div class="col-md-10">
             <label asp-for="Password" class="control-label"></label>
-            <br/>
+            <br />
             <input asp-for="Password" type="password" class="form-control" style="width:150px; display:inline-block;" maxlength="20" />
             <span style="color:#aaaaaa;">(수정/삭제시에 필요)</span>
             <div>
@@ -91,6 +91,29 @@
         focus: true,
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],
         fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+        callbacks: {
+            onImageUpload: function (files) {
+                that = $(this);
+                sendFile(files[0], that);
+            }
+        },
     });
+
+    function sendFile(file, editor) {
+        var data = new FormData();
+        data.append("file", file);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: '/DotNetNote/SaveImage',
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (url) {
+                $(that).summernote('insertImage', location.origin + '/' + url , '');
+            }
+        });
+    }
 </script>
 
