@@ -274,6 +274,21 @@ namespace MyApp.Data.Repositorys.DotNetNote
             }
         }
 
+        public List<Note> GetCardAll()
+        {
+            _logger.LogInformation("카드 목록 조회");
+            try
+            {
+                string sql = @"SELECT * FROM notes";
+                return con.Query<Note>(sql, commandType: CommandType.Text).ToList();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("노트 카드 출력 에러 " + ex);
+                return null;
+            }
+        }
+
         public int GetCountAll()
         {
             _logger.LogInformation("전체 게시글 조회");

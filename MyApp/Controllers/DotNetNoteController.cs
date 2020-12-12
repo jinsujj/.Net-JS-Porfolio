@@ -62,8 +62,28 @@ namespace MyApp.Controllers
                     await file.CopyToAsync(fileStream);
                 }
             }
-            string result = @"/files/" + fileName ;
+            string result = @"/files/" + fileName;
             return result;
+        }
+
+        public IActionResult IndexCard()
+        {
+            _logger.LogInformation("게시판 리스트 Card 로딩");
+
+            // 게시판 리스트 정보 가져오기
+            //IEnumerable<Note> notes;
+            List<Note> notes = new List<Note>();
+            TotalRecordCount = _repository.GetCountAll();
+            notes = _repository.GetCardAll();
+
+            // 주요 정보를 뷰 페이지로 전송
+            ViewBag.TotalRecord = TotalRecordCount;
+            ViewBag.SearchMode = SearchMode;
+            ViewBag.SearchField = SearchField;
+            ViewBag.SearchQuery = SearchQuery;
+            ViewBag.Cnt = 0;
+
+            return View(notes);
         }
 
         public IActionResult Index()
@@ -196,7 +216,7 @@ namespace MyApp.Controllers
                 ModelState.AddModelError("", "내용을 기입해주세요");
                 return View(model);
             }
-            
+
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
@@ -504,7 +524,7 @@ namespace MyApp.Controllers
                 ModelState.AddModelError("", "내용을 기입해주세요");
                 return View(model);
             }
-            
+
             note.Content = model.Content;
             note.Content = model.Content;
             note.FileName = fileName;
