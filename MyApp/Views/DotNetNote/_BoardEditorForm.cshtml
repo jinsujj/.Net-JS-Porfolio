@@ -1,6 +1,6 @@
 ﻿@model Note
 <div class="form-horizontal">
-    @if (ViewBag.FormType == BoardWriteFormType.Modify)
+    @*@if (ViewBag.FormType == BoardWriteFormType.Modify)
     {
         <div class="form-group">
             <div class="col-md-10">
@@ -9,24 +9,23 @@
                 <input type="hidden" name="Id" value="@Model.Id" />
             </div>
         </div>
-    }
-
+    }*@
     <div>
-        <div class="col-md-10">
+        <div class="col-md-4">
             <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" style="width:auto;" maxlength="10" />
+            <input asp-for="Name" class="form-control"  maxlength="10" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-10">
+        <div class="col-md-4">
             <label asp-for="Title" class="control-label"></label>
-            <input asp-for="Title" class="form-control" style="width: auto;" />
+            <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <label asp-for="Content" class="control-label"></label>
             <textarea asp-for="Content" class="form-control" style="border-color:#ddd; width:auto; height:auto;" rows="5" cols="80">
             </textarea>
@@ -34,7 +33,7 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <label asp-for="FileName" class="control-label"></label>
             <br />
             <input type="file" name="file" value="" style="width:auto; display:inline-block;" />
@@ -50,7 +49,7 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <label asp-for="Password" class="control-label"></label>
             <br />
             <input asp-for="Password" type="password" class="form-control" style="width:150px; display:inline-block;" maxlength="20" />
@@ -60,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-11">
         <br />
         <input type="submit" value="@ViewBag.SaveButtonText" class="btn btn-primary" />
         <a asp-action="Index" class="btn btn-default">리스트</a>
