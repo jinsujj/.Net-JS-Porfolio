@@ -18,8 +18,9 @@
  3. 댓글 작성 CRUD
  4. 공지글 기능
  5. Navigation Bar 기능
- 6. 게시글 검색 기능 
+ 6. 게시글 Grid, Card 조희 기능 
  7. 파일 업로드 및 다운로드 기능
+
                     
 ### Register, Login 탭 
  1. Projects Blog 관련 게시 권한 부여 
@@ -28,14 +29,14 @@
 
 ## 향후 개선 
 - SSL 인증 자동화 봇 구현 
-- SummerNote 에디터에서 이미지 다중 업로드 처리시 base64 -> file 형태 저장
+- SummerNote 에디터에서 이미지 다중 업로드 처리시 base64 -> file 형태 저장(완료)
 
 ## Contributing
 *(프로젝트 기여자가 있을 경우 적습니다)*
 - Thanks to @기여자이름
 
 ## Reference
-https://blog.naver.com/wlstncjs1234/222055539899
+
 
 ## Links
 
