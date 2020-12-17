@@ -477,7 +477,7 @@ namespace MyApp.Controllers
 
             newNote.Title = $"Re: {note.Title}";
             newNote.Content =
-                $"\r\nOn {note.PostDate}, '{note.Name}' wrote:\n----------\n>"
+                $"\r\n <----------'{note.Name}',\n'{note.PostDate}'\n----------\n>"
                 + $"{note.Content.Replace("\n", "\n>")}\n----------";
 
             return View(newNote);

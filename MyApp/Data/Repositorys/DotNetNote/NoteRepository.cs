@@ -279,7 +279,10 @@ namespace MyApp.Data.Repositorys.DotNetNote
             _logger.LogInformation("카드 목록 조회");
             try
             {
-                string sql = @"SELECT * FROM notes";
+                string sql = @"SELECT *
+                               FROM notes 
+                               WHERE parentnum = 0
+                               ORDER BY postdate DESC";
                 return con.Query<Note>(sql, commandType: CommandType.Text).ToList();
             }
             catch(Exception ex)
@@ -366,7 +369,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         public List<Note> GetNoteSummaryByCategory(string category)
         {
             string sql =
-                @"SELECT Id, Title, Name, PostDate, FileName, FileSize
+                @"SELECT Id, Title, Name, PostDate, FileName, 
                          ReadCount, CommentCount, Step
                   FROM notes
                   WHERE category = @category 
