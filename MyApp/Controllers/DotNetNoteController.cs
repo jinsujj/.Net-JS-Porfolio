@@ -220,7 +220,7 @@ namespace MyApp.Controllers
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
-            note.Password = model.Password;
+            note.Password = new CommonLibrary.Security().EncryptPassword(model.Password);
             note.PostIp = HttpContext.Connection.RemoteIpAddress.ToString();
             note.Encoding = model.Encoding;
 
@@ -342,6 +342,7 @@ namespace MyApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, string password)
         {
+            password = new CommonLibrary.Security().EncryptPassword(password);
             if (_repository.DeleteNote(id, password) > 0)
             {
                 TempData["Message"] = "데이터가 삭제되었습니다";
@@ -445,7 +446,7 @@ namespace MyApp.Controllers
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
-            note.Password = model.Password;
+            note.Password = new CommonLibrary.Security().EncryptPassword(model.Password);
             note.ModifyIp = HttpContext.Connection.RemoteIpAddress.ToString();
             note.Encoding = model.Encoding;
 
@@ -529,7 +530,7 @@ namespace MyApp.Controllers
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;
-            note.Password = model.Password;
+            note.Password = new CommonLibrary.Security().EncryptPassword(model.Password);
             note.PostIp = HttpContext.Connection.RemoteIpAddress.ToString();
             note.Encoding = model.Encoding;
 
@@ -600,7 +601,7 @@ namespace MyApp.Controllers
             NoteComment comment = new NoteComment();
             comment.BoardId = BoardId;
             comment.Name = txtName;
-            comment.Password = txtPassword;
+            comment.Password = new CommonLibrary.Security().EncryptPassword(txtPassword);
             comment.Opinion = txtOpinion;
 
 
@@ -622,6 +623,7 @@ namespace MyApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CommentDelete(string boardId, string id, string txtPassword)
         {
+            txtPassword = new CommonLibrary.Security().EncryptPassword(txtPassword);
             if (_commentRepository.GetCountBy(Convert.ToInt32(boardId), Convert.ToInt32(id), txtPassword) > 0)
             {
                 _commentRepository.DeleteNoteComment(Convert.ToInt32(boardId), Convert.ToInt32(id), txtPassword);
