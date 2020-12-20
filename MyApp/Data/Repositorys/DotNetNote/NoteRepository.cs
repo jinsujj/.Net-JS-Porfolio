@@ -410,6 +410,12 @@ namespace MyApp.Data.Repositorys.DotNetNote
             return con.Query<Note>(sql, parameters).ToList();
         }
 
+        public void Log(string page, string ip)
+        {
+            con.Execute(@"INSERT INTO log SET page = @page, ip = @ip, date = NOW()"
+            , new { page= page, ip = ip });
+        }
+
         public void Pinned(int id)
         {
             con.Execute(

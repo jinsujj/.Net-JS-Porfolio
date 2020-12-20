@@ -40,6 +40,8 @@ namespace MyApp.Controllers
 
         public IActionResult Register()
         {
+            _logger.LogInformation("Register 페이지 로딩");
+            _userRepository.Log("Register", HttpContext.Connection.RemoteIpAddress.ToString());
             return View();
         }
 
@@ -48,6 +50,8 @@ namespace MyApp.Controllers
         [AllowAnonymous] // 인증되지 않은 사용자도 접근 가능
         public IActionResult Login(string returnUrl = null)
         {
+            _logger.LogInformation("Login 페이지 로딩");
+            _userRepository.Log("Login", HttpContext.Connection.RemoteIpAddress.ToString());
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -100,6 +104,8 @@ namespace MyApp.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            _logger.LogInformation("Logout 페이지 로딩");
+            _userRepository.Log("Logout", HttpContext.Connection.RemoteIpAddress.ToString());
             await HttpContext.SignOutAsync("Cookies");
             return Redirect("/Home/Index");
         }

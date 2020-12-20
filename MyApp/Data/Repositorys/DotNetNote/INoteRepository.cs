@@ -23,5 +23,6 @@ namespace MyApp.Data.Repositorys.DotNetNote
         void UpdateDownCountById(int id);
         int UpdateNote(Note model);
         void Add(Note note);
+        void Log(string page, string ip);
     }
 }

@@ -7,5 +7,6 @@ namespace MyApp.Data.Repositorys
     {
         IEnumerable<Teacher> GetAllTeachers();
         Teacher GetTeacher(int id);
+        void Log(string page, string ip);
     }
 }

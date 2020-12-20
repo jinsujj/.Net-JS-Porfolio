@@ -55,5 +55,11 @@ namespace MyApp.Data.Repositorys
                 return null;
             }
         }
+
+        public void Log(string page, string ip)
+        {
+            con.Execute(@"INSERT INTO log SET page = @page, ip = @ip, date = NOW()"
+            , new { page = page, ip = ip });
+        }
     }
 }

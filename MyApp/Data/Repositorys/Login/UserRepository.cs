@@ -101,5 +101,11 @@ namespace MyApp.Data.Repositorys.Login
                 _logger.LogError("유저 정보 변경 에러: +" + ex);
             }
         }
+
+        public void Log(string page, string ip)
+        {
+            con.Execute(@"INSERT INTO log SET page = @page, ip = @ip, date = NOW()"
+            , new { page = page, ip = ip });
+        }
     }
 }

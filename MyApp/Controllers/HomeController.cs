@@ -45,7 +45,7 @@ namespace MyApp.Controllers
         /// 
 
         [HttpPost]
-        public async Task<string> SendMessage(string name, string email, string subject, string message)
+        public string SendMessage(string name, string email, string subject, string message)
         {
             string bot_mail = _config.GetSection("Email").GetSection("mail").Value;
             string bot_password = _config.GetSection("Email").GetSection("password").Value;
@@ -57,7 +57,7 @@ namespace MyApp.Controllers
                 mail.To.Add(new MailAddress("wlstncjs1234@naver.com"));
 
                 mail.Subject = name + ", " + subject;
-                mail.Body = "["+email+"]" + "\n" + message;
+                mail.Body = "[" + email + "]" + "\n" + message;
 
                 mail.SubjectEncoding = System.Text.Encoding.UTF8;
                 mail.BodyEncoding = System.Text.Encoding.UTF8;
@@ -74,27 +74,20 @@ namespace MyApp.Controllers
             {
                 Console.WriteLine(ex);
             }
-            finally
-            {
-                
-            }
             return "Your message has been sent. Thank you!";
         }
         public IActionResult Index()
         {
-            var teachers = _teacherRepository.GetAllTeachers();
-
-            var viewModel = new StudentTeacherViewModel()
-            {
-                Student = new Student(),
-                Teachers = teachers
-            };
-            return View(viewModel);
+            _logger.LogInformation("Home 페이지 로딩");
+            _teacherRepository.Log("Home", HttpContext.Connection.RemoteIpAddress.ToString());
+            return View();
         }
 
 
         public IActionResult Portfolio()
         {
+            _logger.LogInformation("portfolio 페이지 로딩");
+            _teacherRepository.Log("portfolio", HttpContext.Connection.RemoteIpAddress.ToString());
             return Redirect("/index.html");
         }
 

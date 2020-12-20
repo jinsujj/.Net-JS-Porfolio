@@ -69,9 +69,9 @@ namespace MyApp.Controllers
         public IActionResult IndexCard()
         {
             _logger.LogInformation("게시판 리스트 Card 로딩");
+            _repository.Log("IndexCard", HttpContext.Connection.RemoteIpAddress.ToString());
 
             // 게시판 리스트 정보 가져오기
-            //IEnumerable<Note> notes;
             List<Note> notes = new List<Note>();
             TotalRecordCount = _repository.GetCountAll();
             notes = _repository.GetCardAll();
@@ -91,6 +91,7 @@ namespace MyApp.Controllers
 
             // 로깅
             _logger.LogInformation("게시판 리스트 페이지 로딩");
+            _repository.Log("IndexGrid", HttpContext.Connection.RemoteIpAddress.ToString());
 
             // 검색 모드 결정: ?SearchField=Name&SearchQuery=닷넷코리아 
             SearchMode = (
@@ -264,6 +265,10 @@ namespace MyApp.Controllers
         /// <returns></returns>
         public IActionResult Details(int id)
         {
+            // 로깅
+            _logger.LogInformation("Detail 페이지 로딩");
+            _repository.Log("Detail : " + id, HttpContext.Connection.RemoteIpAddress.ToString());
+
             var note = _repository.GetNoteById(id);
 
             note.PostDates = note.PostDate.ToString();
@@ -342,6 +347,10 @@ namespace MyApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id, string password)
         {
+            // 로깅
+            _logger.LogInformation("Delete 페이지 로딩");
+            _repository.Log("Delete : " + id, HttpContext.Connection.RemoteIpAddress.ToString());
+
             password = new CommonLibrary.Security().EncryptPassword(password);
             if (_repository.DeleteNote(id, password) > 0)
             {
@@ -355,6 +364,7 @@ namespace MyApp.Controllers
             }
 
             ViewBag.Id = id;
+
             return View();
         }
 
@@ -362,6 +372,9 @@ namespace MyApp.Controllers
         // 게시판 삭제 완료 후 추가적인 처리할 때 페이지
         public IActionResult DeleteCompleted()
         {
+            // 로깅
+            _logger.LogInformation("Delete 페이지 로딩");
+            _repository.Log("Deleted", HttpContext.Connection.RemoteIpAddress.ToString());
             return View();
         }
 
@@ -548,6 +561,9 @@ namespace MyApp.Controllers
         /// <returns></returns>
         public IActionResult ImageDown(int id)
         {
+            // 로깅
+            _logger.LogInformation("ImageDown 로딩");
+            _repository.Log("ImageDown", HttpContext.Connection.RemoteIpAddress.ToString());
             string fileName = "";
 
             fileName = _repository.GetFileNameById(id);

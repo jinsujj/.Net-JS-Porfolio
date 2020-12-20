@@ -116,5 +116,11 @@ namespace MyApp.Data.Repositorys
                 _logger.LogError("데이터 삭제 에러 : " + ex);
             }
         }
+
+        public void Log(string page, string ip)
+        {
+            con.Execute(@"INSERT INTO log SET page = @page, ip = @ip, date = NOW()"
+            , new { page = page, ip = ip });
+        }
     }
 }

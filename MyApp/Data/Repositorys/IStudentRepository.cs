@@ -10,5 +10,6 @@ namespace MyApp.Data.Repositorys
         Student GetStudent(int id);
         void Edit(Student student);
         void Delte(Student student);
+        void Log(string page, string ip);
     }
 }

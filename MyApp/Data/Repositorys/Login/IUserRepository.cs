@@ -8,5 +8,6 @@ namespace MyApp.Data.Repositorys.Login
         RegisterViewModel GetUserByEmail(string userId);
         bool IsCorrectUser(string email, string password);
         void ModifyUser(RegisterViewModel model);
+        void Log(string page, string ip);
     }
 }
