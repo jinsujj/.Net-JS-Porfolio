@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MyApp.Data.Repositorys;
 using MyApp.Models;
@@ -9,24 +10,30 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace MyApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfiguration _config;
         private readonly IWebHostEnvironment _enviorment;
         private readonly ITeacherRepository _teacherRepository;
         private readonly IStudentRepository _studentRepository;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(
+            IConfiguration config,
             IWebHostEnvironment enviorment, 
             ITeacherRepository teacherRepository, 
             IStudentRepository studentRepository,
             ILogger<HomeController> logger
             )
         {
+            _config = config;
             _enviorment = enviorment;
             _teacherRepository = teacherRepository;
             _studentRepository = studentRepository;
@@ -36,6 +43,43 @@ namespace MyApp.Controllers
         /// Display 역할
         /// </summary>
         /// 
+
+        [HttpPost]
+        public async Task<string> SendMessage(string name, string email, string subject, string message)
+        {
+            string bot_mail = _config.GetSection("Email").GetSection("mail").Value;
+            string bot_password = _config.GetSection("Email").GetSection("password").Value;
+            try
+            {
+                MailMessage mail = new MailMessage();
+
+                mail.From = new MailAddress(email);
+                mail.To.Add(new MailAddress("wlstncjs1234@naver.com"));
+
+                mail.Subject = name + ", " + subject;
+                mail.Body = "["+email+"]" + "\n" + message;
+
+                mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new System.Net.NetworkCredential(bot_mail, bot_password);
+                client.Send(mail);
+
+                mail.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                
+            }
+            return "Your message has been sent. Thank you!";
+        }
         public IActionResult Index()
         {
             var teachers = _teacherRepository.GetAllTeachers();
