@@ -11,6 +11,7 @@
  
 ### Portfolio 탭
  1. BootStrap Teme 통한 html 기반의 포트폴리오 
+ 2. SMPT 메일 전송 
 
 ### Projets Blog 탭  
  1. Summer Note Editor Tool 활용
