@@ -9,3 +9,4 @@ MyApp/bin/Debug/netcoreapp3.1/Settings/DotNetNoteSettings.json
 *.json
 *.props
 *.jpg
+MyApp/appsettings.json
