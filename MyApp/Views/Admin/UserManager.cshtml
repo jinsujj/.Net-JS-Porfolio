@@ -1,3 +1,37 @@
-﻿
-<h2>사용자 관리지 페이지 들어오는 곳</h2>
+﻿@model IEnumerable<Log>
+@inject IDashBoardRepository repo
 
+@{
+    ViewData["Title"] = "Dash Board";
+}
+
+<h2>사용자 관리지 페이지 들어오는 곳</h2>
+<hr />
+
+<table style="font-family: 'Open Sans', sans-serif; width: auto;  margin-left: auto; margin-right: auto;">
+    <tr style="background-color:rgb(222, 222, 222)">
+        <th style="width:100px; text-align:center;">
+            IP
+        </th>
+        <th style="width:150px; text-align:center;">
+            Page
+        </th>
+        <th style="width:auto; text-align:center;">
+            Time
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center;">
+                @Html.Raw(item.ip)
+            </td>
+            <td>
+                @Html.Raw(item.page)
+            </td>
+            <td>
+                @Html.Raw(item.date)
+            </td>
+        </tr>
+    }
+</table>

@@ -9,6 +9,7 @@ using MyApp.Data.Repositorys.Login;
 using MyApp.Data.Repositorys.DotNetNote;
 using System.Security.Claims;
 using MyApp.Settings;
+using MyApp.Data.Repositorys.DashBoard;
 
 namespace MyApp
 {
@@ -61,6 +62,7 @@ namespace MyApp
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginFailedRepository, LoginFailedRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
+            services.AddScoped<IDashBoardRepository, DashBoardRepository>();
             services.AddSingleton<INoteCommentRepository>(
                 new NoteCommentRepository(
                     _config["ConnectionStrings:DefaultConnection"]));
