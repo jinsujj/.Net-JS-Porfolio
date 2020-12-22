@@ -30,7 +30,7 @@ namespace MyApp.Data.Repositorys.DashBoard
             {
                 string sql = @"SELECT ip, page, date 
                                FROM log
-                               ORDER BY ip, date DESC";
+                               ORDER BY date DESC";
                 var result = con.Query<Log>(sql).ToList();
                 return result;
             }
