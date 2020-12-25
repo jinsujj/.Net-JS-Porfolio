@@ -1,6 +1,6 @@
 > 프로젝트 간략 소개 한 문장 
 - 웹사이트 url : Sasim-blog.me
-- Asp.net Core 3.1 버전으로 포트폴리오 웹 사이트를 구현
+- Asp.net Core 5.0 버전으로 포트폴리오 웹 사이트를 구현
 - C#, Asp.Net Core, Nginx, MySQL, Linux
 
 ## 핵심 기능  Key Feature
