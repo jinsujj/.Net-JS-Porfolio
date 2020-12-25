@@ -1,5 +1,5 @@
 > 프로젝트 간략 소개 한 문장 
-- 웹사이트 url : https://jinsu-blog.iptime.org
+- 웹사이트 url : Sasim-blog.me
 - Asp.net Core 3.1 버전으로 포트폴리오 웹 사이트를 구현
 - C#, Asp.Net Core, Nginx, MySQL, Linux
 
@@ -21,12 +21,21 @@
  5. Navigation Bar 기능
  6. 게시글 Grid, Card 조희 기능 
  7. 파일 업로드 및 다운로드 기능
-
-                    
+              
 ### Register, Login 탭 
  1. Projects Blog 관련 게시 권한 부여 
  2. .net core 3.1 인증,쿠키 기능 
  3. mysql 연동 및 암호와 저장
+ 
+### DashBoard 탭
+ 1. 관리자 Log 관리 
+ 2. Toast Grid, Toast DatePicker 툴 사용.
+ 
+### Common 기능
+ 1. SSL 인증 적용
+ 2. Meta 데이터 삽입 (for Kakao 공유링크)
+ 3. SHA256 암호화
+ 
 
 ## 향후 개선 
 - SSL 인증 자동화 봇 구현 
