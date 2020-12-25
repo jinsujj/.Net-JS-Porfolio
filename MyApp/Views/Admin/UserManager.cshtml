@@ -46,10 +46,11 @@
 <script>
     var datepickerFrom;
     var datepickerTo;
+    var defaultDate = new Date();
     $(document).ready(function () {
         datepickerFrom = new tui.DatePicker('#wrapper', {
             language: 'ko',
-            date: new Date(),
+            date: defaultDate.setDate(defaultDate.getDate()-7),
             input: {
                 element: '#datepicker-from',
                 format: 'yyyy-MM-dd'
