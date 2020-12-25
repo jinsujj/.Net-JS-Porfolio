@@ -55,7 +55,24 @@ namespace MyApp.Controllers
         {
             _logger.LogInformation("사용자 DashBoard 로딩");
             List<Log> logs = _repository.GetAllLog();
+
+            string json = JsonSerializer.Serialize(logs);
             return View(logs);
+        }
+
+        [HttpPost]
+        public Object getLog(string from, string to )
+        {
+            //List<Log> logs = _repository.GetAllLog();
+
+            List<Log> logs = _repository.GetLog(from, to);
+            string json = JsonSerializer.Serialize(logs);
+            //json = json.Replace("\"ip\"", "ip");
+            //json = json.Replace("\"page\"", "page");
+            //json = json.Replace("\"date\"", "date");
+            //json = json.Replace('\"', '"=');
+            return json;
+
         }
     }
 }

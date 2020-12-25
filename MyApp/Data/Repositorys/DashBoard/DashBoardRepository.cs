@@ -41,15 +41,15 @@ namespace MyApp.Data.Repositorys.DashBoard
             }
         }
 
-        public List<Log> GetLog(DateTime from, DateTime to)
+        public List<Log> GetLog(string from, string to)
         {
             _logger.LogInformation("Log 조회");
             try
             {
                 string sql = @"SELECT *
                                FROM log
-                               WHERE date > @from
-                               AND date < @to";
+                               WHERE date > STR_TO_DATE(@from, '%Y-%m-%d')
+                               AND date < STR_TO_DATE(@to, '%Y-%m-%d')";
                 var result = con.Query<Log>(sql, new { from, to }).ToList();
                 return result;
             }

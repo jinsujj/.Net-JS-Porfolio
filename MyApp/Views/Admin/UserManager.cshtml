@@ -5,33 +5,141 @@
     ViewData["Title"] = "Dash Board";
 }
 
-<h2>사용자 관리지 페이지 들어오는 곳</h2>
-<hr />
+<!--Toast Date Picker-->
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
+<!--Toast Grid-->
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 
-<table style="font-family: 'Open Sans', sans-serif; width: auto;  margin-left: auto; margin-right: auto;">
-    <tr style="background-color:rgb(222, 222, 222)">
-        <th style="width:100px; text-align:center;">
-            IP
-        </th>
-        <th style="width:150px; text-align:center;">
-            Page
-        </th>
-        <th style="width:250px; text-align:center;">
-            Time
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td style="text-align:center;">
-                @Html.Raw(item.ip)
-            </td>
-            <td>
-                @Html.Raw(item.page)
-            </td>
-            <td>
-                @Html.Raw(item.date)
-            </td>
-        </tr>
+<div class="container" style="min-height:500px;">
+    <h2>Dash Board - IP Log</h2>
+    <hr />
+    <div id="grid">
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary btn-sm">조회</button>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">
+                <dt style="text-align:right">From</dt>
+            </div>
+            <div class="tui-datepicker-input tui-datetime-input tui-has-focus col-md-2">
+                <input type="text" id="datepicker-from" aria-label="Date-Time" />
+                <span class="tui-ico-date"></span>
+            </div>
+            <div id="wrapper" style="margin-top:-1px; z-index:9999"></div>
+            <div class="col-md-1">
+                <dt style="text-align:right">To</dt>
+            </div>
+            <br/><hr/>
+            <div class="tui-datepicker-input tui-datetime-input tui-has-focus col-md-2">
+                <input type="text" id="datepicker-to" aria-label="Date-Time" />
+                <span class="tui-ico-date"></span>
+            </div>
+            <div id="wrapper2" style="margin-top:-1px; z-index:9999"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var datepickerFrom;
+    var datepickerTo;
+    $(document).ready(function () {
+        datepickerFrom = new tui.DatePicker('#wrapper', {
+            language: 'ko',
+            date: new Date(),
+            input: {
+                element: '#datepicker-from',
+                format: 'yyyy-MM-dd'
+            }
+        });
+    });
+
+    $(document).ready(function () {
+            datepickerTo = new tui.DatePicker('#wrapper2', {
+            language: 'ko',
+            date: new Date(),
+            input: {
+                element: '#datepicker-to',
+                format: 'yyyy-MM-dd'
+            }
+        });
+    });
+    let logData;
+
+    window.onload = function () {
+        var grid = new tui.Grid({
+            el: document.getElementById('grid'),
+            rowHeaders:["rowNum"],
+            columns: [{
+                header: 'ip',
+                name: 'ip',
+                filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
+            },
+            {
+                header: 'page',
+                name: 'page',
+                filter: 'select'
+            },
+            {
+                header: 'date',
+                name: 'date',
+                filter: 'select'
+            }],
+            data: logData
+        });
+        $('button').click(function () {
+            var from = datepickerFrom.getDate();
+            var to = datepickerTo.getDate();
+            from = formatDate(from);
+            to = formatDate(to);
+
+            $.ajax({
+                type: "POST",
+                url: "/admin/getlog",
+                data: { 'from': from, 'to': to },
+                success: function (result) {
+                    grid.resetData(eval(result));
+                    //alert(result);
+                }
+            })
+        })
+        tui.Grid.applyTheme('normal', {
+            cell: {
+                normal: {
+                    background: "#fff",
+                    border: '#e0e0e0',
+                    showVerticalBorder: false,
+                    showHorizontalBorder : true
+                },
+                header: {
+                    background: "#eaeaea",
+                    border: "#e0e0e0",
+                    showHorizontalBorder : true
+                },
+                rowHeader: {
+                    background: "#eaeaea",
+                    border: "#e0e0e0",
+                    showHorizontalBorder: true
+                }
+            }
+        });
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
     }
-</table>
+
+</script>

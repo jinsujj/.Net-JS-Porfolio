@@ -7,6 +7,6 @@ namespace MyApp.Data.Repositorys.DashBoard
     public interface IDashBoardRepository
     {
         List<Log> GetAllLog();
-        List<Log> GetLog(DateTime from, DateTime to);
+        List<Log> GetLog(string from, string to);
     }
 }
