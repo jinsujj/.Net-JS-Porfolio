@@ -77,7 +77,7 @@
             columns: [{
                 header: 'ip',
                 name: 'ip',
-                filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
+                filter: 'select'
             },
             {
                 header: 'page',
@@ -87,7 +87,7 @@
             {
                 header: 'date',
                 name: 'date',
-                filter: 'select'
+                filter: { type: 'text', showApplyBtn: true, showClearBtn: true }
             }],
             data: logData
         });
