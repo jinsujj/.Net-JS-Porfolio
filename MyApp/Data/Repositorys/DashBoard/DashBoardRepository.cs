@@ -43,13 +43,14 @@ namespace MyApp.Data.Repositorys.DashBoard
 
         public List<Log> GetLog(string from, string to)
         {
+            to = String.Format(to + " 23:59:59");
             _logger.LogInformation("Log 조회");
             try
             {
                 string sql = @"SELECT *
                                FROM log
                                WHERE date >= STR_TO_DATE(@from, '%Y-%m-%d')
-                               AND date <= STR_TO_DATE(@to, '%Y-%m-%d')+ 1
+                               AND date <= STR_TO_DATE(@to, '%Y-%m-%d')
                                ORDER BY date DESC";
                 var result = con.Query<Log>(sql, new { from, to }).ToList();
                 return result;
