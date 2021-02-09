@@ -10,5 +10,7 @@ namespace MyApp.Models
         public string ip { get; set; }
         public string page { get; set; }
         public DateTime date { get; set; }
+
+        public string query { get; set; }
     }
 }

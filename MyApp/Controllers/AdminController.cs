@@ -43,6 +43,11 @@ namespace MyApp.Controllers
             return View();
         }
 
+        public IActionResult Custom()
+        {
+            return View();
+        }
+
         public IActionResult RaspServer()
         {
             return Redirect("https://jinsu-blog.iptime.org:4200/");
@@ -58,6 +63,14 @@ namespace MyApp.Controllers
 
             string json = JsonSerializer.Serialize(logs);
             return View(logs);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void CustomQuery(string query)
+        {
+            var result = _repository.Custom(query);
+
         }
 
         [HttpPost]

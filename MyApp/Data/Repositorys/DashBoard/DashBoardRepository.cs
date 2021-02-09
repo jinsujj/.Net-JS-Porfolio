@@ -23,6 +23,21 @@ namespace MyApp.Data.Repositorys.DashBoard
             con = new MySqlConnection(_config.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value);
         }
 
+        public List<object> Custom(string query)
+        {
+            _logger.LogInformation("Custom Query");
+            try
+            {
+                var result = con.Query<object>(query).ToList();
+                return result;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("Custom Log Error" + ex);
+                return null;
+            }
+        }
+
         public List<Log> GetAllLog()
         {
             _logger.LogInformation("Log 조회");
@@ -61,5 +76,13 @@ namespace MyApp.Data.Repositorys.DashBoard
                 return null;
             }
         }
+
+        public void Log(string page, string ip)
+        {
+            con.Execute(@"INSERT INTO log SET page = @page, ip = @ip, date = NOW()"
+            , new { page = page, ip = ip });
+        }
+
+        
     }
 }

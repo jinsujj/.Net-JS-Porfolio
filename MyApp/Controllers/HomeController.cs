@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MyApp.Data.Repositorys;
+using MyApp.Data.Repositorys.DashBoard;
 using MyApp.Models;
 using MyApp.ViewModels;
 using System;
@@ -21,22 +22,19 @@ namespace MyApp.Controllers
     {
         private readonly IConfiguration _config;
         private readonly IWebHostEnvironment _enviorment;
-        private readonly ITeacherRepository _teacherRepository;
-        private readonly IStudentRepository _studentRepository;
+        private readonly IDashBoardRepository _repository;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(
             IConfiguration config,
-            IWebHostEnvironment enviorment, 
-            ITeacherRepository teacherRepository, 
-            IStudentRepository studentRepository,
+            IWebHostEnvironment enviorment,
+            IDashBoardRepository repository,
             ILogger<HomeController> logger
             )
         {
             _config = config;
             _enviorment = enviorment;
-            _teacherRepository = teacherRepository;
-            _studentRepository = studentRepository;
+            _repository = repository;
             _logger = logger;
         }
         /// <summary>
@@ -79,7 +77,7 @@ namespace MyApp.Controllers
         public IActionResult Index()
         {
             _logger.LogInformation("Home 페이지 로딩");
-            _teacherRepository.Log("Home", HttpContext.Connection.RemoteIpAddress.ToString());
+            _repository.Log("Home", HttpContext.Connection.RemoteIpAddress.ToString());
             return View();
         }
 
@@ -87,91 +85,38 @@ namespace MyApp.Controllers
         public IActionResult Portfolio()
         {
             _logger.LogInformation("portfolio 페이지 로딩");
-            _teacherRepository.Log("portfolio", HttpContext.Connection.RemoteIpAddress.ToString());
+            _repository.Log("portfolio", HttpContext.Connection.RemoteIpAddress.ToString());
             return Redirect("/index.html");
         }
 
-        [Authorize]
-        public IActionResult Student()
-        {
-            var students = _studentRepository.GetAllStudents();
-
-            var viewModel = new StudentTeacherViewModel()
-            {
-                Student = new Student(),
-                Students = students
-            };
-
-            return View(viewModel);
-        }
 
         /// <summary>
         /// View 에서 넘어온 값을 받는 역할
         /// </summary>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Student(StudentTeacherViewModel model)
-        {
-            //[ValidateAntiForgeryToken] 교차 사이트 요청 위조 (XSRF/CSRF) 공격 방지
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Student(StudentTeacherViewModel model)
+        //{
+        //    //[ValidateAntiForgeryToken] 교차 사이트 요청 위조 (XSRF/CSRF) 공격 방지
 
-            if (ModelState.IsValid)
-            {
-                _studentRepository.AddStudent(model.Student);
+        //    if (ModelState.IsValid)
+        //    {
+        //        _studentRepository.AddStudent(model.Student);
 
-                ModelState.Clear();
-            }
-            else
-            {
-                // 에러 팝업 출력
-            }
-            var students= _studentRepository.GetAllStudents();
-            var viewModel = new StudentTeacherViewModel()
-            {
-                Student = new Student(),
-                Students = students
-            };
-            return View(viewModel);
-        }
+        //        ModelState.Clear();
+        //    }
+        //    else
+        //    {
+        //        // 에러 팝업 출력
+        //    }
+        //    var students= _studentRepository.GetAllStudents();
+        //    var viewModel = new StudentTeacherViewModel()
+        //    {
+        //        Student = new Student(),
+        //        Students = students
+        //    };
+        //    return View(viewModel);
+        //}
 
-
-        public IActionResult Detail(int id)
-        {
-            Student student = _studentRepository.GetStudent(id);
-            return View(student);
-        }
-
-        public IActionResult Edit(int id)
-        {
-            Student student = _studentRepository.GetStudent(id);
-            return View(student);
-        }
-
-        /// <summary>
-        /// View 에서 넘어온 값을 받는 역할
-        /// </summary>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Student model)
-        {
-            //[ValidateAntiForgeryToken] 교차 사이트 요청 위조 (XSRF/CSRF) 공격 방지
-
-            if (ModelState.IsValid)
-            {
-                _studentRepository.Edit(model);
-
-                return RedirectToAction("Student");
-            }
-            return View(model);
-        }
-
-        public IActionResult Delete(int id)
-        {
-            Student student = _studentRepository.GetStudent(id);
-            if(student != null)
-            {
-                _studentRepository.Delte(student);
-            }
-            return RedirectToAction("Student");
-        }
     }
 }

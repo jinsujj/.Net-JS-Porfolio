@@ -1,0 +1,32 @@
+﻿<div id="container" class="popup-container">
+    <div class="popup">
+        <h3>Custom Query</h3>
+        <form asp-controller="Admin" asp-action="CustomQuery" enctype="multipart/form-data" method="post">
+            <div>
+                <textarea rows="5" name="form" id="query" asp-action="CustomForm"
+                          class="form-control" style="display:inline-block;"></textarea>
+            </div>
+        </form>
+        <br />
+        <button type="button" class="btn btn-primary btn-sm">조회</button>
+    </div>
+</div>
+
+<script>
+    $('button').click(function () {
+        var from = datepickerFrom.getDate();
+        var to = datepickerTo.getDate();
+        from = formatDate(from);
+        to = formatDate(to);
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/getlog",
+            data: { 'from': from, 'to': to },
+            success: function (result) {
+                grid.resetData(eval(result));
+                //alert(result);
+            }
+        })
+    })
+</script>

@@ -57,8 +57,6 @@ namespace MyApp
              * Singleton Lifetime services 는 딱 한번 처음으로 인스턴스를 생성하고, 모든 호출에서 동일한 오브젝트를 재사용합니다. 따라서 결과값을 전체 모든 호출하는 사람들과 공유하는 효과를 얻습니다. 보통 누적된 방문자 수를 보여줄 때 사용하면 되겠습니다.
              */
             services.AddSingleton<IConfiguration>(_config);  //appsettings.json 파일의 데이터베이스 문자열 사용하도록 설정 
-            services.AddScoped<ITeacherRepository, TeacherRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginFailedRepository, LoginFailedRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
