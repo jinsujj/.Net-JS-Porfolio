@@ -1,0 +1,12 @@
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\bin\Debug\net5.0\CommonLibrary.deps.json
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\bin\Debug\net5.0\CommonLibrary.dll
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\bin\Debug\net5.0\ref\CommonLibrary.dll
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\bin\Debug\net5.0\CommonLibrary.pdb
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.csprojAssemblyReference.cache
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.AssemblyInfoInputs.cache
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.AssemblyInfo.cs
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.csproj.CoreCompileInputs.cache
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.dll
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\ref\CommonLibrary.dll
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.pdb

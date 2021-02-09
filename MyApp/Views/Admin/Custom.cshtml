@@ -14,15 +14,10 @@
 
 <script>
     $('button').click(function () {
-        var from = datepickerFrom.getDate();
-        var to = datepickerTo.getDate();
-        from = formatDate(from);
-        to = formatDate(to);
-
         $.ajax({
             type: "POST",
-            url: "/admin/getlog",
-            data: { 'from': from, 'to': to },
+            url: "/admin/CustomQuery",
+            data: { },
             success: function (result) {
                 grid.resetData(eval(result));
                 //alert(result);
