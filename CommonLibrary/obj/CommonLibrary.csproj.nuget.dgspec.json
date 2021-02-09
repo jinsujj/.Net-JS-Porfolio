@@ -1,29 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj": {}
+    "C:\\Users\\wlstn\\Desktop\\GitHub\\JS-Porfolio\\CommonLibrary\\CommonLibrary.csproj": {}
   },
   "projects": {
-    "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj": {
+    "C:\\Users\\wlstn\\Desktop\\GitHub\\JS-Porfolio\\CommonLibrary\\CommonLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\wlstn\\Desktop\\GitHub\\JS-Porfolio\\CommonLibrary\\CommonLibrary.csproj",
         "projectName": "CommonLibrary",
-        "projectPath": "/home/pi/myApp/MyApp/CommonLibrary/CommonLibrary.csproj",
-        "packagesPath": "/home/pi/.nuget/packages/",
-        "outputPath": "/home/pi/myApp/MyApp/CommonLibrary/obj/",
+        "projectPath": "C:\\Users\\wlstn\\Desktop\\GitHub\\JS-Porfolio\\CommonLibrary\\CommonLibrary.csproj",
+        "packagesPath": "C:\\Users\\wlstn\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wlstn\\Desktop\\GitHub\\JS-Porfolio\\CommonLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/pi/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\wlstn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -34,7 +37,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "imports": [
             "net461",
             "net462",
@@ -50,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/pi/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
