@@ -30,6 +30,7 @@
 ### DashBoard 탭
  1. 관리자 Log 관리 
  2. Toast Grid, Toast DatePicker 툴 사용.
+ 3. Custom Query Page 
  
 ### Common 기능
  1. SSL 인증 적용
