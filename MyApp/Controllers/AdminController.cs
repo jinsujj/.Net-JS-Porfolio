@@ -121,7 +121,6 @@ namespace MyApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public Object getLog(string from, string to)
         {
             //List<Log> logs = _repository.GetAllLog();
