@@ -1,46 +1,27 @@
-﻿@model Custom
-<div id="container" class="popup-container">
+﻿<div id="container" class="popup-container">
     <div class="popup">
         <h3>Custom Query</h3>
-        <form asp-controller="Admin" method="post">
-            <button type="submit" asp-action="Custom" class="btn btn-primary btn-sm" value="조회" style="float:right">조회</button>
-            <br />
-            <textarea rows="5" name="query" id="TextArea" asp-action="CustomForm"
-                      class="form-control" style="display:inline-block;"></textarea>
-            <br />
-            @ViewBag.Status
-            <table class="table table-bordered table-hover table-striped table-sm table-responsive-sm">
-                @if (Model != null)
-                {
-                    <tr>
-                        @foreach (var item in Model.getColumnList())
-                        {
-                            <td>
-                                @Html.Raw(item.ToUpper())
-                            </td>
-                        }
-                    </tr>
-
-                    @foreach (var raw in Model.getRaw())
-                    {
-                        <tr>
-                            @for (int i = 0; i < raw.Count; i++)
-                            {
-                                <td>
-                                    @Html.Raw(raw[i])
-                                </td>
-                            }
-                        </tr>
-                    }
-                }
-            </table>
+        <form asp-controller="Admin" asp-action="CustomQuery" enctype="multipart/form-data" method="post">
+            <div>
+                <textarea rows="5" name="form" id="query" asp-action="CustomForm"
+                          class="form-control" style="display:inline-block;"></textarea>
+            </div>
         </form>
         <br />
+        <button type="button" class="btn btn-primary btn-sm">조회</button>
     </div>
 </div>
 
 <script>
-    var query = "@ViewBag.sql"
-    query = query.replaceAll("&#xD;&#xA;", "\n");   //개행문자를 \n로 치환
-    $("#TextArea").val(query);
+    $('button').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/admin/CustomQuery",
+            data: { },
+            success: function (result) {
+                grid.resetData(eval(result));
+                //alert(result);
+            }
+        })
+    })
 </script>
