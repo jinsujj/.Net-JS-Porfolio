@@ -34,7 +34,11 @@ namespace MyApp.Data.Repositorys.DashBoard
             catch(Exception ex)
             {
                 _logger.LogError("Custom Log Error" + ex);
-                return null;
+
+                List<object> err = new List<object>();
+                err.Add("Error");
+                err.Add(ex);
+                return err;
             }
         }
 
