@@ -80,7 +80,7 @@ namespace MyApp.Controllers
             if (result.Contains("Error") || result.Count == 0)
             {
                 if(result.Count == 0)
-                    ViewBag.Status = "No data selected";
+                    ViewBag.Status = "0 data selected";
                 else
                     ViewBag.Status = result[1].ToString();
 

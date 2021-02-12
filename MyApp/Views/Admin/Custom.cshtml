@@ -41,6 +41,15 @@
 
 <script>
     var query = "@ViewBag.sql"
-    query = query.replaceAll("&#xD;&#xA;", "\n");   //개행문자를 \n로 치환
+    query = chageString(query);
     $("#TextArea").val(query);
+
+
+    function chageString(query) {
+        query = query.replaceAll("&#xD;&#xA;", "\n");   
+        query = query.replaceAll("&#x27;", "'");
+        query = query.replaceAll("&gt;", ">");
+        query = query.replaceAll("&lt;", "<");
+        return query;
+    }
 </script>
