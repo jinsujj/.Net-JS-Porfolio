@@ -73,7 +73,8 @@ namespace MyApp.Controllers
             List<string> dataList = new List<string>();
 
             dataRaw.setQuery(str.query);
-            
+            ViewBag.sql = dataRaw.getQuery();
+
             var result = _repository.Custom(str.query);
 
             // Query result check
@@ -116,7 +117,6 @@ namespace MyApp.Controllers
                 dataList.Clear();
             }
 
-            ViewBag.sql = dataRaw.getQuery();
             return View(dataRaw);
         }
 
