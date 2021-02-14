@@ -22,7 +22,7 @@ namespace MyApp.Controllers
         public IActionResult Index()
         {
             _logger.LogInformation("Blog -> Home 페이지 로딩");
-            return Redirect("Home");
+            return Redirect("../DotNetNote/IndexCard");
         }
 
     }
