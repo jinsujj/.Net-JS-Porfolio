@@ -74,6 +74,8 @@
 
     function chageString(query) {
         query = query.replaceAll("&#xD;&#xA;", "\n");
+        query = query.replaceAll("&amp;", " ");
+        query = query.replaceAll("&#x9;", " ");
         query = query.replaceAll("&#xA;", "\n");
         query = query.replaceAll("&#x27;", "'");
         query = query.replaceAll("&gt;", ">");
