@@ -64,7 +64,7 @@ namespace MyApp.Data.Repositorys.DashBoard
             }
             catch(Exception ex)
             {
-                _logger.LogError("저장된 query 개수 조회 에러");
+                _logger.LogError("저장된 query 개수 조회 에러" + ex);
                 return -1;
             }
         }
@@ -79,7 +79,7 @@ namespace MyApp.Data.Repositorys.DashBoard
             }
             catch (Exception ex)
             {
-                _logger.LogError("저장된 query 조회 에러");
+                _logger.LogError("저장된 query 조회 에러"+ ex);
                 return null;
             }
         }
@@ -97,7 +97,7 @@ namespace MyApp.Data.Repositorys.DashBoard
             }
             catch(Exception ex)
             {
-                _logger.LogError("저장된 query by id 조회 에러");
+                _logger.LogError("저장된 query by id 조회 에러"+ ex);
                 return "";
             }
         }
