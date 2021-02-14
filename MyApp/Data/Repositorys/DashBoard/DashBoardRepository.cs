@@ -41,6 +41,66 @@ namespace MyApp.Data.Repositorys.DashBoard
                 return err;
             }
         }
+        public void SaveQuery(string title, string query)
+        {
+            con.Execute(@"INSERT INTO mysql (title, content) VALUES (@title, @content)"
+                , new { title = title, content = query });
+        }
+
+        public void DeleteSqlById(int id)
+        {
+            con.Execute(@"DELETE FROM mysql WHERE id =@id",
+                new { id = @id });
+        }
+
+        public int getSavedQueryCnt()
+        {
+            _logger.LogInformation("저장된 query 개수 조회");
+            try
+            {
+                string sql = @"SELECT COUNT(*) FROM mysql";
+                var result = con.Query<int>(sql).SingleOrDefault();
+                return result;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("저장된 query 개수 조회 에러");
+                return -1;
+            }
+        }
+        public List<MyQuery> getStoredSql()
+        {
+            _logger.LogInformation("저장된 query 조회");
+            try
+            {
+                string sql = @"SELECT id, title, content FROM mysql";
+                var result = con.Query<MyQuery>(sql).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("저장된 query 조회 에러");
+                return null;
+            }
+        }
+
+        public string getStoredSqlByid(int id)
+        {
+            _logger.LogInformation("저장된 query by id 조회");
+            try
+            {
+                string sql = @"SELECT content 
+                              FROM mysql
+                              WHERE id = @id";
+                var result = con.Query<string>(sql, new { id = id }).SingleOrDefault();
+                return result;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("저장된 query by id 조회 에러");
+                return "";
+            }
+        }
 
         public List<Log> GetAllLog()
         {
@@ -87,6 +147,6 @@ namespace MyApp.Data.Repositorys.DashBoard
             , new { page = page, ip = ip });
         }
 
-        
+
     }
 }

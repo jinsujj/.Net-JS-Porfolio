@@ -65,6 +65,14 @@ namespace MyApp.Controllers
             return View(logs);
         }
 
+        public IActionResult ShowSql(int id )
+        {
+            _logger.LogInformation("저장 쿼리 조회");
+            string result = _repository.getStoredSqlByid(id);
+            ViewBag.sql = result;
+            return View("Custom");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Custom(Log str)
@@ -121,16 +129,31 @@ namespace MyApp.Controllers
         }
 
         [HttpPost]
+        public IActionResult SaveQuery(string title, string sql)
+        {
+            //저장 쿼리 10개 제한
+            int cnt = _repository.getSavedQueryCnt();
+            if(cnt > 12)
+            {
+                ViewBag.status = "최대 저장 가능 개수는 12개 입니다";
+                return View("Custom");
+            }
+
+            _repository.SaveQuery(title, sql);
+            return View("Custom");
+        }
+
+        public IActionResult DeleteSql(int id)
+        {
+            _repository.DeleteSqlById(id);
+            return View("Custom");
+        }
+
+        [HttpPost]
         public Object getLog(string from, string to)
         {
-            //List<Log> logs = _repository.GetAllLog();
-
             List<Log> logs = _repository.GetLog(from, to);
             string json = JsonSerializer.Serialize(logs);
-            //json = json.Replace("\"ip\"", "ip");
-            //json = json.Replace("\"page\"", "page");
-            //json = json.Replace("\"date\"", "date");
-            //json = json.Replace('\"', '"=');
             return json;
 
         }

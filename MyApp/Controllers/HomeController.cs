@@ -81,7 +81,6 @@ namespace MyApp.Controllers
             return View();
         }
 
-
         public IActionResult Portfolio()
         {
             _logger.LogInformation("portfolio 페이지 로딩");
