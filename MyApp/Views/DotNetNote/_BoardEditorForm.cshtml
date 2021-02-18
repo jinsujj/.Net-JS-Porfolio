@@ -1,19 +1,19 @@
 ﻿@model Note
 <div class="form-horizontal">
     @*@if (ViewBag.FormType == BoardWriteFormType.Modify)
-    {
-        <div class="form-group">
-            <div class="col-md-10">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" style="border:0; width:auto;" maxlength="10" readonly />
-                <input type="hidden" name="Id" value="@Model.Id" />
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" style="border:0; width:auto;" maxlength="10" readonly />
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                </div>
             </div>
-        </div>
-    }*@
+        }*@
     <div>
         <div class="col-md-4">
             <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control"  maxlength="10" />
+            <input asp-for="Name" class="form-control"maxlength="10" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
@@ -110,7 +110,7 @@
             enctype: 'multipart/form-data',
             processData: false,
             success: function (url) {
-                $(that).summernote('insertImage', location.origin + '/' + url , '');
+                $(that).summernote('insertImage', location.origin + '/' + url, '');
             }
         });
     }
