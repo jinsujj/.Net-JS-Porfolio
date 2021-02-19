@@ -262,6 +262,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                         ,AnswerNum, ParentNum, CommentCount, FileName, FileSize, DownCount
                                         , ROW_NUMBER() OVER (ORDER BY Ref DESC, RefOrder ASC) AS RowNumber
                                     FROM notes
+                                    WHERE category = 'Project'
                                )
                                SELECT * FROM DotNetNoteOrderedLists
                                WHERE RowNumber BETWEEN @Page *10 + 1 AND (@Page +1) * 10";
@@ -282,6 +283,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                 string sql = @"SELECT *
                                FROM notes 
                                WHERE parentnum = 0
+                               AND category = 'Project'
                                ORDER BY postdate DESC";
                 return con.Query<Note>(sql, commandType: CommandType.Text).ToList();
             }
@@ -297,7 +299,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
             _logger.LogInformation("전체 게시글 조회");
             try
             {
-                return con.Query<int>(@"SELECT COUNT(*) FROM notes").SingleOrDefault();
+                return con.Query<int>(@"SELECT COUNT(*) FROM notes WHERE category = 'Project'").SingleOrDefault();
             }
             catch (Exception ex)
             {
@@ -317,6 +319,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                    WHEN 'Title' THEN Title
                                    WHEN 'Content' THEN Content
                                    ELSE @searchQuery END)
+                           AND category = 'Project';
                            LIKE CONCAT('%', @searchQuery, '%')";
                 return con.Query<int>(sql, new { SearchQuery = searchQuery, SearchField = searchField }).SingleOrDefault();
 
@@ -331,7 +334,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         public string GetFileNameById(int id)
         {
             return con.Query<string>(
-               @"SELECT filename FROM notes WHERE Id = @id",
+               @"SELECT filename FROM notes WHERE Id = @id AND category = 'Project';",
                new { Id = id }).SingleOrDefault();
         }
 
@@ -404,6 +407,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                             WHEN 'Content' THEN Content
                                             ELSE @SearchQuery   END
                                       ) LIKE CONCAT('%', @SearchQuery, '%')
+                                AND category = 'Project';
                              ) a
                              WHERE RowNumber BETWEEN @Page *10 +1 AND (@Page +1 ) * 10
                              ORDER BY Id DESC";
