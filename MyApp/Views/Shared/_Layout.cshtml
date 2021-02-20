@@ -33,6 +33,7 @@
     <!-- Google AdSense-->
     <script data-ad-client="ca-pub-2309486098831986" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
+    <link href="~/assets/css/index.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -48,15 +49,7 @@
                 <partial name="_LoginPartial" />
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Portfolio">Portfolio</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                            Blog
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" asp-controller="DotNetNote" asp-action="Index">Projects Blog</a></li>
-                            <li><a class="dropdown-item" asp-controller="DotNetNote" asp-action="Index">IT Blog</a></li>
-                        </ul>
-                    </li>
+                    <li class="nav-item"><a class="nav-link text-dark" asp-controller="DotNetNote" asp-action="Index">Blog</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         @*<li class="nav-item"><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a></li>*@

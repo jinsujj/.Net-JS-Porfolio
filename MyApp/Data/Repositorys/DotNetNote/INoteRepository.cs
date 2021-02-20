@@ -6,8 +6,8 @@ namespace MyApp.Data.Repositorys.DotNetNote
     public interface INoteRepository
     {
         int DeleteNote(int id, string password);
-        List<Note> GetAll(int page);
-        List<Note> GetCardAll();
+        List<Note> GetAll(int page, string category);
+        List<Note> GetCardAll(string category);
         int GetCountAll();
         int GetCountBySearch(string searchField, string searchQuery);
         string GetFileNameById(int id);

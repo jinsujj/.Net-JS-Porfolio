@@ -66,15 +66,20 @@ namespace MyApp.Controllers
             return result;
         }
 
-        public IActionResult IndexCard()
+        public IActionResult IndexCard(string category)
         {
+            if(category == null || category.Trim() == "")
+            {
+                category = "%%";
+            }
+
             _logger.LogInformation("게시판 리스트 Card 로딩");
             _repository.Log("IndexCard", HttpContext.Connection.RemoteIpAddress.ToString());
 
             // 게시판 리스트 정보 가져오기
             List<Note> notes = new List<Note>();
             TotalRecordCount = _repository.GetCountAll();
-            notes = _repository.GetCardAll();
+            notes = _repository.GetCardAll(category);
 
             // 주요 정보를 뷰 페이지로 전송
             ViewBag.TotalRecord = TotalRecordCount;
@@ -86,9 +91,12 @@ namespace MyApp.Controllers
             return View(notes);
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string category)
         {
-
+            if (category == null || category.Trim() == "")
+            {
+                category = "%%";
+            }
             // 로깅
             _logger.LogInformation("게시판 리스트 페이지 로딩");
             _repository.Log("IndexGrid", HttpContext.Connection.RemoteIpAddress.ToString());
@@ -135,7 +143,7 @@ namespace MyApp.Controllers
             if (!SearchMode)
             {
                 TotalRecordCount = _repository.GetCountAll();
-                notes = _repository.GetAll(PageIndex);
+                notes = _repository.GetAll(PageIndex, category);
             }
             else
             {
@@ -224,6 +232,7 @@ namespace MyApp.Controllers
             note.Password = new CommonLibrary.Security().EncryptPassword(model.Password);
             note.PostIp = HttpContext.Connection.RemoteIpAddress.ToString();
             note.Encoding = model.Encoding;
+            note.Category = model.Category;
 
             _repository.Add(note); // 데이터 저장
 

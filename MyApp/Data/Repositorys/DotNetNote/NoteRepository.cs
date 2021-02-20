@@ -79,6 +79,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
             p.Add("@Encoding", value: n.Encoding, dbType: DbType.String);
             p.Add("@FileName", value: n.FileName, dbType: DbType.String);
             p.Add("@FileSize", value: n.FileSize, dbType: DbType.Int32);
+            p.Add("@Category", value: n.Category, dbType: DbType.String);
             switch (formType)
             {
                 case BoardWriteFormType.Write:
@@ -90,8 +91,8 @@ namespace MyApp.Data.Repositorys.DotNetNote
                     else
                         p.Add("@maxRef", value: Convert.ToInt32(Ref) + 1, dbType: DbType.Int32);
 
-                    string Write_S001 = @"INSERT INTO notes (Name, Email, Title, PostIp, Content, Password, Encoding, HomePage ,Ref ,FileName , FileSize)
-                                       VALUES(@Name, @Email, @Title, @PostIp, @Content, @Password, @Encoding, @HomePage, @maxRef, @FileName, @FileSize )";
+                    string Write_S001 = @"INSERT INTO notes (Name, Email, Title, PostIp, Content, Password, Encoding, HomePage ,Ref ,FileName , FileSize, Category)
+                                       VALUES(@Name, @Email, @Title, @PostIp, @Content, @Password, @Encoding, @HomePage, @maxRef, @FileName, @FileSize, @Category )";
                     r = con.Execute(Write_S001, p, commandType: CommandType.Text);
                     break;
 
@@ -250,19 +251,19 @@ namespace MyApp.Data.Repositorys.DotNetNote
             return 1;
         }
 
-        public List<Note> GetAll(int page)
+        public List<Note> GetAll(int page, string category)
         {
             _logger.LogInformation("노트 데이터 조회");
             try
             {
-                var parameters = new DynamicParameters(new { Page = page });
+                var parameters = new DynamicParameters(new { Page = page , category = category});
                 string sql = @"WITH DotNetNoteOrderedLists 
                                AS(  
                                     SELECT Id, Name, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder
                                         ,AnswerNum, ParentNum, CommentCount, FileName, FileSize, DownCount
                                         , ROW_NUMBER() OVER (ORDER BY Ref DESC, RefOrder ASC) AS RowNumber
                                     FROM notes
-                                    WHERE category = 'Project'
+                                    WHERE category LIKE @category
                                )
                                SELECT * FROM DotNetNoteOrderedLists
                                WHERE RowNumber BETWEEN @Page *10 + 1 AND (@Page +1) * 10";
@@ -275,7 +276,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
             }
         }
 
-        public List<Note> GetCardAll()
+        public List<Note> GetCardAll(string category)
         {
             _logger.LogInformation("카드 목록 조회");
             try
@@ -283,9 +284,9 @@ namespace MyApp.Data.Repositorys.DotNetNote
                 string sql = @"SELECT *
                                FROM notes 
                                WHERE parentnum = 0
-                               AND category = 'Project'
+                               AND category LIKE @category
                                ORDER BY postdate DESC";
-                return con.Query<Note>(sql, commandType: CommandType.Text).ToList();
+                return con.Query<Note>(sql, new { category = category }, commandType: CommandType.Text).ToList();
             }
             catch(Exception ex)
             {
@@ -299,7 +300,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
             _logger.LogInformation("전체 게시글 조회");
             try
             {
-                return con.Query<int>(@"SELECT COUNT(*) FROM notes WHERE category = 'Project'").SingleOrDefault();
+                return con.Query<int>(@"SELECT COUNT(*) FROM notes").SingleOrDefault();
             }
             catch (Exception ex)
             {
@@ -319,7 +320,6 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                    WHEN 'Title' THEN Title
                                    WHEN 'Content' THEN Content
                                    ELSE @searchQuery END)
-                           AND category = 'Project';
                            LIKE CONCAT('%', @searchQuery, '%')";
                 return con.Query<int>(sql, new { SearchQuery = searchQuery, SearchField = searchField }).SingleOrDefault();
 
@@ -334,7 +334,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         public string GetFileNameById(int id)
         {
             return con.Query<string>(
-               @"SELECT filename FROM notes WHERE Id = @id AND category = 'Project';",
+               @"SELECT filename FROM notes WHERE Id = @id ;",
                new { Id = id }).SingleOrDefault();
         }
 
@@ -375,7 +375,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                 @"SELECT Id, Title, Name, PostDate, FileName, 
                          ReadCount, CommentCount, Step
                   FROM notes
-                  WHERE category = @category 
+                  WHERE category LIKE @category 
                   ORDER BY Id DESC
                   LIMIT 3";
             return con.Query<Note>(sql, new { category = category }).ToList();
@@ -407,7 +407,6 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                             WHEN 'Content' THEN Content
                                             ELSE @SearchQuery   END
                                       ) LIKE CONCAT('%', @SearchQuery, '%')
-                                AND category = 'Project';
                              ) a
                              WHERE RowNumber BETWEEN @Page *10 +1 AND (@Page +1 ) * 10
                              ORDER BY Id DESC";
