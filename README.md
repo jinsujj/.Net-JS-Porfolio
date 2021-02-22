@@ -36,6 +36,7 @@
  1. SSL 인증 적용
  2. Meta 데이터 삽입 (for Kakao 공유링크)
  3. SHA256 암호화
+ 4. Prism Syntax Hyperlighting 기능 추가 
  
 
 ## 향후 개선 
