@@ -85,9 +85,11 @@
 <input type="hidden" asp-for="Category" value="Free" />
 <script>
     $('#Content').summernote({
+        lang: 'ko-KR', // default: 'en-US'
         height: 500,
         tabsize: 3,
         toolbar: [
+            ['style', ['style']],
             ['highlight', ['highlight']],
             ['insert', ['gxcode']],
             ['fontname', ['fontname']],
@@ -98,7 +100,8 @@
             ['para', ['ul', 'ol', 'paragraph']],
             ['height', ['height']],
             ['insert', ['picture', 'link', 'video']],
-            ['view', ['fullscreen', 'help']]
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']]
         ],
         focus: true,
         fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋음체', '바탕체'],

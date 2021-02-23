@@ -282,20 +282,25 @@
 
                 $box.append($textGroup.append($label));
                 $box.append($textGroup.append($textarea));
-
                 return $box.html();
             };
 
             this.createCodeNode = function (code, select) {
+
                 var $code = $('<code>');
                 $code.html(code.replace(/</g, "&lt;").replace(/>/g, "&gt;"));
                 $code.addClass('language-' + select);
 
                 var $pre = $('<pre>');
                 $pre.html($code)
-                $pre.addClass('line-numbers');
+                $pre.addClass('line-numbers' +' language-'+select);
 
-                return $pre[0];
+                var $code_toolbar = $('<div>');
+                $code_toolbar.html($pre)
+                $code_toolbar.addClass('code-toolbar');
+
+                console.log("Tested");
+                return $code_toolbar[0];
             };
 
             this.showHighlightDialog = function (codeInfo) {
