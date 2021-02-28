@@ -91,15 +91,15 @@ namespace MyApp.Controllers
             return View(notes);
         }
 
-        public IActionResult Index(string category)
+        public IActionResult Index(string category , int noteId)
         {
             if (category == null || category.Trim() == "")
-            {
                 category = "%%";
-            }
+
             // 로깅
             _logger.LogInformation("게시판 리스트 페이지 로딩");
             _repository.Log("IndexGrid", HttpContext.Connection.RemoteIpAddress.ToString());
+
 
             // 검색 모드 결정: ?SearchField=Name&SearchQuery=닷넷코리아 
             SearchMode = (
@@ -122,7 +122,6 @@ namespace MyApp.Controllers
             }
 
             //[2] 쿠키를 사용한 리스트 페이지 번호 유지 적용(Optional): 
-            //    100번째 페이지 보고 있다가 다시 리스트 왔을 때 100번째 페이지 표시
             if (!string.IsNullOrEmpty(Request.Cookies["DotNetNotePageNum"]))
             {
                 if (!String.IsNullOrEmpty(
@@ -138,8 +137,21 @@ namespace MyApp.Controllers
             }
 
             // 게시판 리스트 정보 가져오기
-            //IEnumerable<Note> notes;
             List<Note> notes = new List<Note>();
+            Note note;
+            //노트
+            if (noteId == 0)
+            {
+                string LatestId = _repository.GetLatestId(category);
+                note = _repository.GetNoteById(Int32.Parse(LatestId));
+            }
+            else
+                note = _repository.GetNoteById(noteId);
+            if(note != null)
+                ViewBag.Content = note.Content;
+
+
+            
             if (!SearchMode)
             {
                 TotalRecordCount = _repository.GetCountAll();
@@ -164,7 +176,7 @@ namespace MyApp.Controllers
             {
                 Url = "DotNetNote/Index",
                 RecordCount = TotalRecordCount,
-                PageSize = 10,
+                PageSize = 5,
                 PageNumber = PageIndex + 1,
 
                 SearchMode = SearchMode,

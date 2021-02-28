@@ -1,51 +1,236 @@
-﻿body {
-    font-family: "Lato", sans-serif;
+﻿
+/* For SummerNote Style */
+body.page blockquote {
+    border-left: 5px solid #f86466;
+    background: white;
 }
 
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-left: 5px solid #f86466;
+}
+
+/* For Category */
+.collapsible{
+    border-top:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-left : 1px solid #ddd;
+    margin : 0.5rem 0 1rem 0;
+}
+
+.collapsible-header{
+    display:block;
+    cursor:pointer;
+    min-height: 3rem;
+    line-height: 3rem;
+    padding: 0 1rem;
+    background-color:#fff;
+    border-bottom:1px solid #ddd;
+}
+
+.collapsible-body{
+    display:none;
+    border-bottom:1px solid #ddd;
+    box-sizing : border-box;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
     z-index: 1;
+    will-change: opacity, transform;
+    transition: all .3s ease-out
+}
+
+.waves-effect .waves-ripple {
+    position: absolute;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    opacity: 0;
+    background: rgba(0,0,0,0.2);
+    transition: all 0.7s ease-out;
+    transition-property: opacity, -webkit-transform;
+    transition-property: transform, opacity;
+    transition-property: transform, opacity, -webkit-transform;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    pointer-events: none
+}
+
+.waves-effect.waves-light .waves-ripple {
+    background-color: rgba(255,255,255,0.45)
+}
+
+.waves-effect.waves-red .waves-ripple {
+    background-color: rgba(244,67,54,0.7)
+}
+
+.waves-effect.waves-yellow .waves-ripple {
+    background-color: rgba(255,235,59,0.7)
+}
+
+.waves-effect.waves-orange .waves-ripple {
+    background-color: rgba(255,152,0,0.7)
+}
+
+.waves-effect.waves-purple .waves-ripple {
+    background-color: rgba(156,39,176,0.7)
+}
+
+.waves-effect.waves-green .waves-ripple {
+    background-color: rgba(76,175,80,0.7)
+}
+
+.waves-effect.waves-teal .waves-ripple {
+    background-color: rgba(0,150,136,0.7)
+}
+
+.waves-effect input[type="button"], .waves-effect input[type="reset"], .waves-effect input[type="submit"] {
+    border: 0;
+    font-style: normal;
+    font-size: inherit;
+    text-transform: inherit;
+    background: none
+}
+
+.waves-notransition {
+    transition: none !important
+}
+
+.waves-input-wrapper {
+    border-radius: 0.2em;
+    vertical-align: bottom
+}
+
+.waves-input-wrapper .waves-button-input {
+    position: relative;
     top: 0;
     left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+    z-index: 1
 }
 
-    .sidenav a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-    }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-    .sidenav .closebtn {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-    }
-
-@media screen and (max-height: 450px) {
-
-    
-    .sidenav {
-        padding-top: 15px;
-        width:100%;
-    }
-
-        .sidenav a {
-            font-size: 18px;
-        }
+.waves-block {
+    display: block
 }
+
+a.waves-effect
+
+a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wave-btn {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}
+
+/* For SummerNote Page */
+.DotNetNote {
+    height: 100%;
+    background: #f7f7f7;
+    margin: 0;
+}
+
+td, th {
+    padding: 0;
+}
+
+.pagination li {
+    padding: 0;
+}
+
+.Myheader {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background: white;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+    float: left;
+    width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+    float: right;
+    width: 25%;
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.collapsible-header a {
+    text-decoration: none;
+    color: black;
+}
+
+.collapsible-body a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.MyCard {
+    background-color: white;
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 995px) {
+    .leftcolumn {
+        width: 100%;
+        padding: 0;
+    }
+
+    .rightcolumn {
+        width: 0;
+        display: none;
+        padding: 0;
+    }
+}
+
 

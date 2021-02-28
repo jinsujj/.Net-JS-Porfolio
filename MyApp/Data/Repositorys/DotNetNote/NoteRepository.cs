@@ -266,7 +266,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                     WHERE category LIKE @category
                                )
                                SELECT * FROM DotNetNoteOrderedLists
-                               WHERE RowNumber BETWEEN @Page *10 + 1 AND (@Page +1) * 10";
+                               WHERE RowNumber BETWEEN @Page *5 + 1 AND (@Page +1) * 5";
                 return con.Query<Note>(sql, parameters, commandType: CommandType.Text).ToList();
             }
             catch (Exception ex)
@@ -350,6 +350,23 @@ namespace MyApp.Data.Repositorys.DotNetNote
             return con.Query<Note>(sql).ToList();
         }
 
+        public string GetLatestId(string category)
+        {
+            try
+            {
+                string sql = @"SELECT id 
+                            FROM notes 
+                            WHERE category LIKE @category
+                            ORDER BY id desc";
+
+                return con.Query<string>(sql, new { category = category }).First();
+            }
+            catch (Exception ex)
+            {
+                return "1";
+            }
+        }
+
         public Note GetNoteById(int id)
         {
             var parameters = new DynamicParameters(new { Id = id });
@@ -408,7 +425,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                             ELSE @SearchQuery   END
                                       ) LIKE CONCAT('%', @SearchQuery, '%')
                              ) a
-                             WHERE RowNumber BETWEEN @Page *10 +1 AND (@Page +1 ) * 10
+                             WHERE RowNumber BETWEEN @Page *5 +1 AND (@Page +1 ) * 5
                              ORDER BY Id DESC";
             return con.Query<Note>(sql, parameters).ToList();
         }

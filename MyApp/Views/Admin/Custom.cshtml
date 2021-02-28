@@ -7,7 +7,7 @@
             <button type="button" class="btn btn-success btn-sm" id="SaveQuery" value="저장" style="float:right">저장</button>
             <button type="submit" asp-action="Custom" class="btn btn-primary btn-sm" value="조회" style="float:right;">조회</button>
             <br />
-            <textarea rows="5" name="query" id="TextArea" asp-action="CustomForm" onchange="changeBack()"
+            <textarea rows="10" name="query" id="TextArea" asp-action="CustomForm" onchange="changeBack()"
                       class="form-control" style="display:inline-block;"></textarea>
             <br />
             @ViewBag.Status
@@ -75,6 +75,7 @@
     function chageString(query) {
         query = query.replaceAll("&#xD;&#xA;", "\n");
         query = query.replaceAll("&amp;", " ");
+        query = query.replaceAll("&nbsp;", " ");
         query = query.replaceAll("&#x9;", " ");
         query = query.replaceAll("&#xA;", "\n");
         query = query.replaceAll("&#x27;", "'");
