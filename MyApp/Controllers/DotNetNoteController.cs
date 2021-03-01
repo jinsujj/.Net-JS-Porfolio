@@ -91,7 +91,7 @@ namespace MyApp.Controllers
             return View(notes);
         }
 
-        public IActionResult Index(string category , int noteId)
+        public IActionResult Index(string category , int noteId, int page)
        {
             if (category == null) category = "%%";
             _logger.LogInformation("게시판 리스트 페이지 로딩");
@@ -132,15 +132,14 @@ namespace MyApp.Controllers
                 }
             }
 
+            //if (page != PageIndex)
+            //    PageIndex = page + 1;
+
             //[3] 게시판 리스트 정보 가져오기 
             List<Note> notes = new List<Note>();
             string LatestId ="0";
-            if (noteId == 0)
-            {
-                // InitPageId Or SelectedPageId
-                LatestId = _repository.GetLatestId(category);
-            }
 
+            // 게시판 글 Get 
             if (!SearchMode)
             {
                 TotalRecordCount = _repository.GetCountAll();
@@ -154,7 +153,14 @@ namespace MyApp.Controllers
                     PageIndex, SearchField, SearchQuery);
             }
 
-            foreach(Note list in notes)
+            // 페이지 변환에 따른 최근 게시글
+            if (noteId == 0)
+            {
+                LatestId = _repository.GetLatestId(PageIndex, category);
+            }
+
+
+            foreach (Note list in notes)
             {
                 if(list.Id == noteId || list.Id == Int32.Parse(LatestId))
                 {
@@ -168,6 +174,7 @@ namespace MyApp.Controllers
             ViewBag.SearchMode = SearchMode;
             ViewBag.SearchField = SearchField;
             ViewBag.SearchQuery = SearchQuery;
+            ViewBag.PageIndex = PageIndex;
 
             // 페이저 컨트롤 적용
             ViewBag.PageModel = new PagerBase

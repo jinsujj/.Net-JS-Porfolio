@@ -50,7 +50,7 @@
                                 @*<cache expires-after="@TimeSpan.FromMinutes(10)">*@
                                 @*최근 공지 글 2개 출력: 캐싱 적용*@
                                 @foreach (var item in
-                               DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
+                            DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                                 {
                                     <tr>
                                         <td style="text-align:center;">
@@ -101,9 +101,8 @@
                                                     <text>&nbsp;</text>}
                                             </td>
                                             <td>
-                                                @Html.Raw(BoardLibrary.FuncStep(item.Step))
                                                 <a asp-controller="DotNetNote" asp-action="Index"
-                                                   asp-route-noteId="@item.Id">
+                                                   asp-route-noteId="@item.Id" asp-route-Page="@(ViewBag.PageIndex +1)">
                                                     @StringLibrary.CutStringUnicode(item.Title, 30)
                                                 </a>
                                                 <small>

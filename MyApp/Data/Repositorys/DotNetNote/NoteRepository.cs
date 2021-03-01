@@ -351,16 +351,30 @@ namespace MyApp.Data.Repositorys.DotNetNote
             return con.Query<Note>(sql).ToList();
         }
 
-        public string GetLatestId(string category)
+        public string GetLatestId(int page, string category)
         {
+            string sql = "";
             try
             {
-                string sql = @"SELECT id 
+                if (page == 0)
+                {
+                     sql = @"SELECT id 
                             FROM notes 
                             WHERE category LIKE @category
                             ORDER BY id desc";
-
-                return con.Query<string>(sql, new { category = category }).First();
+                    return con.Query<string>(sql, new { category = category }).First();
+                }
+                else
+                {
+                    sql = @"SELECT id
+                            FROM (
+	                            SELECT id, ROW_NUMBER() OVER( ORDER BY ref DESC, reforder ASC ) AS ROWNUMBER
+	                            FROM notes
+                            ) A
+                            WHERE A.ROWNUMBER BETWEEN @Page * 5 +1  AND (@Page + 1) *5
+                            ORDER BY ID DESC";
+                    return con.Query<string>(sql, new { category = category, page = page }).First();
+                }
             }
             catch (Exception ex)
             {

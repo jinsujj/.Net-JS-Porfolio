@@ -12,7 +12,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         int GetCountBySearch(string searchField, string searchQuery);
         string GetFileNameById(int id);
         List<Note> GetNewPhotos();
-        string GetLatestId(string category);
+        string GetLatestId(int pageindex,string category);
         Note GetNoteById(int id);
         List<Note> GetNoteSummaryByCategory(string category);
         List<Note> GetRecentPosts(int numberOfNotes);
