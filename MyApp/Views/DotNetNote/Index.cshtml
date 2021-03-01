@@ -7,12 +7,11 @@
 }
 <div class="DotNetNote">
     <div class="Myheader">
-        <h2>Full Stack Runner Blog.</h2>
+        <h1>Full Stack Runner Blog.</h1>
+        <div style="color: #002c9b; text-align:center; font-size:18px;">
+            <b>쌓여간 블로그 입니다.</b>
+        </div>
     </div>
-    <span style="color: #ff0000">
-        쌓여간 Projects 블로그 입니다.
-    </span>
-    <hr />
     <div class="row">
         <div class="letfcolumn col-lg-9" style="padding-right:0;">
             <div class="MyCard" style="padding-bottom:0;">
@@ -27,137 +26,132 @@
                                 Total Record: @ViewBag.TotalRecord
                             </div>
                             <table class="table table-bordered table-hover table-striped table-sm">
-                                <thead class="thead-dark">
-                                    <tr style="background-color:rgb(222, 222, 222)">
-                                        <th style="width:50px; text-align:center;">
-                                            @Html.DisplayNameFor(model => model.Id)
-                                        </th>
-                                        <th style="width:350px; text-align:center;">
-                                            @Html.DisplayNameFor(model => model.Title)
-                                        </th>
-                                        @*<th style="width:60px; text-align:center">
-                                                @Html.DisplayNameFor(model => model.FileName)
-                                            </th>*@
-                                        @*<th style="width:80px; text-align:center;">
-                                                @Html.DisplayNameFor(model => model.Name)
-                                            </th>*@
-                                        <th style="width:100px; text-align:center;">
-                                            @Html.DisplayNameFor(model => model.PostDate)
-                                        </th>
-                                        <th style="width:80px; text-align:center;">
-                                            @Html.DisplayNameFor(model => model.ReadCount)
-                                        </th>
-                                </thead>
-                    </tr>
+                                <tr class="thead-dark">
+                                    <th style="width:50px; text-align:center;">
+                                        @Html.DisplayNameFor(model => model.Id)
+                                    </th>
+                                    <th style="width:350px; text-align:center;">
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    @*<th style="width:60px; text-align:center">
+                                            @Html.DisplayNameFor(model => model.FileName)
+                                        </th>*@
+                                    @*<th style="width:80px; text-align:center;">
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>*@
+                                    <th style="width:100px; text-align:center;">
+                                        @Html.DisplayNameFor(model => model.PostDate)
+                                    </th>
+                                    <th style="width:80px; text-align:center;">
+                                        @Html.DisplayNameFor(model => model.ReadCount)
+                                    </th>
+                                </tr>
 
-                    @*<cache expires-after="@TimeSpan.FromMinutes(10)">*@
-                    @*최근 공지 글 2개 출력: 캐싱 적용*@
-                    @foreach (var item in
-DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
-                    {
-                        <tr>
-                            <td style="text-align:center;">
-                                <span class="label label-success"
-                                      style="font-size:xx-small">NOTICE</span>
-                            </td>
-                            <td>
-                                @Html.Raw(BoardLibrary.FuncStep(item.Step))
-                                <a asp-controller="DotNetNote"
-                                   asp-action="Details"
-                                   asp-route-id="@item.Id">
-                                    <strong>
-                                        @StringLibrary.CutStringUnicode(
-                                           item.Title, 30)
-                                    </strong>
-                                </a>
-                                <small>
-                                    @Html.Raw(BoardLibrary.ShowCommentCount(
-                                        item.CommentCount))
-                                </small>
-                                @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
-                            </td>
-                            @*<td style="text-align:center;">
-                                    @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                </td>*@
-                            @*<td style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>*@
-                            <td style="text-align:center;">
-                                @BoardLibrary.FuncShowTime(item.PostDate)
-                            </td>
-                            <td style="text-align:right;">
-                                @Html.DisplayFor(modelItem => item.ReadCount)
-                            </td>
-                        </tr>
-                    }
-                    @*</cache>*@
+                                @*<cache expires-after="@TimeSpan.FromMinutes(10)">*@
+                                @*최근 공지 글 2개 출력: 캐싱 적용*@
+                                @foreach (var item in
+                               DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
+                                {
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <span class="label label-success"
+                                                  style="font-size:xx-small">NOTICE</span>
+                                        </td>
+                                        <td>
+                                            @Html.Raw(BoardLibrary.FuncStep(item.Step))
+                                            <a asp-controller="DotNetNote"
+                                               asp-action="Details"
+                                               asp-route-id="@item.Id">
+                                                <strong>
+                                                    @StringLibrary.CutStringUnicode(
+                                                       item.Title, 30)
+                                                </strong>
+                                            </a>
+                                            <small>
+                                                @Html.Raw(BoardLibrary.ShowCommentCount(
+                                                    item.CommentCount))
+                                            </small>
+                                            @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
+                                        </td>
+                                        @*<td style="text-align:center;">
+                                                @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                            </td>*@
+                                        <td style="text-align:center;">
+                                            @BoardLibrary.FuncShowTime(item.PostDate)
+                                        </td>
+                                        <td style="text-align:right;">
+                                            @Html.DisplayFor(modelItem => item.ReadCount)
+                                        </td>
+                                    </tr>
+                                }
+                                @*</cache>*@
 
-                    @*게시글 출력*@
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="text-align:center;">
-                                    @if (item.Step == 0)
+                                @*게시글 출력*@
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model)
                                     {
-                                        @Html.DisplayFor(modelItem => item.Id) }
-                                    else
-                                    {
-                                        <text>&nbsp;</text>}
-                                </td>
-                                <td>
-                                    @Html.Raw(BoardLibrary.FuncStep(item.Step))
-                                    <a asp-controller="DotNetNote" asp-action="Index"
-                                       asp-route-noteId="@item.Id">
-                                        @StringLibrary.CutStringUnicode(item.Title, 30)
-                                    </a>
-                                    <small>
-                                        @Html.Raw(BoardLibrary.ShowCommentCount(
-                                            item.CommentCount))
-                                    </small>
-                                    @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
-                                </td>
-                                @*<td style="text-align:center;">
-                                        @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                    </td>*@
-                                @*<td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>*@
-                                <td style="text-align:center;">
-                                    @BoardLibrary.FuncShowTime(item.PostDate)
-                                </td>
-                                <td style="text-align:right;">
-                                    @Html.DisplayFor(modelItem => item.ReadCount)
-                                </td>
-                            </tr>
-                        }}
-                </table>
-                </td>
-                </tr>
-                <tr style="display:flex; flex-wrap:wrap; justify-content:center">
-                    <td class="text-center">
-                        @await Html.PartialAsync("_AdvancedPagingWithCss", ViewBag.PageModel as PagerBase)
-                    </td>
-                </tr>
-                <tr>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <td style="text-align:right;">
-                            <a asp-action="Create" class="btn btn-primary">글쓰기</a>
+                                        <tr>
+                                            <td style="text-align:center;">
+                                                @if (item.Step == 0)
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.Id) }
+                                                else
+                                                {
+                                                    <text>&nbsp;</text>}
+                                            </td>
+                                            <td>
+                                                @Html.Raw(BoardLibrary.FuncStep(item.Step))
+                                                <a asp-controller="DotNetNote" asp-action="Index"
+                                                   asp-route-noteId="@item.Id">
+                                                    @StringLibrary.CutStringUnicode(item.Title, 30)
+                                                </a>
+                                                <small>
+                                                    @Html.Raw(BoardLibrary.ShowCommentCount(
+                                                        item.CommentCount))
+                                                </small>
+                                                @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
+                                            </td>
+                                            @*<td style="text-align:center;">
+                                                    @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                                </td>*@
+                                            @*<td style="text-align:center;">
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>*@
+                                            <td style="text-align:center;">
+                                                @BoardLibrary.FuncShowTime(item.PostDate)
+                                            </td>
+                                            <td style="text-align:right;">
+                                                @Html.DisplayFor(modelItem => item.ReadCount)
+                                            </td>
+                                        </tr>
+                                    }}
+                            </table>
                         </td>
-                    }
-                </tr>
-                <tr>
-                    <td style="text-align:center;">
-                        @await Html.PartialAsync("_SearchForm")
-                        <br />
-                        @if (ViewBag.SearchMode)
+                    </tr>
+                    <tr style="display:flex; flex-wrap:wrap; justify-content:center">
+                        <td class="text-center">
+                            @await Html.PartialAsync("_AdvancedPagingWithCss", ViewBag.PageModel as PagerBase)
+                        </td>
+                    </tr>
+                    <tr>
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <a asp-controller="DotNetNote" asp-action="Index" class="btn btn-success">검색 완료</a>
+                            <td style="text-align:right;">
+                                <a asp-action="Create" class="btn btn-primary">글쓰기</a>
+                            </td>
                         }
-                    </td>
-                </tr>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;">
+                            @await Html.PartialAsync("_SearchForm")
+                            <br />
+                            @if (ViewBag.SearchMode)
+                            {
+                                <a asp-controller="DotNetNote" asp-action="Index" class="btn btn-success">검색 완료</a>
+                            }
+                        </td>
+                    </tr>
                 </table>
             </div>
             @if (Model != null)
@@ -168,6 +162,7 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                     {
                         var data = item.Content;
                         <div class="MyCard" style="padding:0;">
+                            <div class="title"><p>&nbsp;Title: @item.Title</p></div>
                             <textarea name="Content" id="Content" asp-for=@data class="form-control" readonly="readonly" ; disabled;></textarea>
                         </div>
                         break;
@@ -179,8 +174,8 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
             <div class="MyCard">
                 <h4>Category</h4>
                 <br />
-                <a class="btn wave-btn waves-effect waves-green" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expand</a> &nbsp;
-                <a class="btn wave-btn waves-effect waves-green" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>colaps</a>
+                <a class="btn wave-btn waves-effect waves-purple" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expand</a> &nbsp;
+                <a class="btn wave-btn waves-effect waves-purple" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>colaps</a>
                 <br />
                 <ul class="collapsible" data-collapsible="expandable">
                     <li>
