@@ -50,5 +50,6 @@ namespace MyApp.Models.DotNetNote
         public int ParentNum { get; set; }
         public int CommentCount { get; set; }
         public string Category { get; set; } = "Free";
+        public bool isMain { get; set; } = false;
     }
 }

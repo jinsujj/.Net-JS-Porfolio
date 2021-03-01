@@ -92,22 +92,18 @@ namespace MyApp.Controllers
         }
 
         public IActionResult Index(string category , int noteId)
-        {
-            if (category == null || category.Trim() == "")
-                category = "%%";
-
-            // 로깅
+       {
+            if (category == null) category = "%%";
             _logger.LogInformation("게시판 리스트 페이지 로딩");
             _repository.Log("IndexGrid", HttpContext.Connection.RemoteIpAddress.ToString());
 
 
-            // 검색 모드 결정: ?SearchField=Name&SearchQuery=닷넷코리아 
+            /* [0] 검색창 로직 
+               검색 모드 결정: ?SearchField=Name&SearchQuery=닷넷코리아 */
             SearchMode = (
                 !string.IsNullOrEmpty(Request.Query["SearchField"]) &&
                 !string.IsNullOrEmpty(Request.Query["SearchQuery"])
             );
-
-            // 검색 환경이면 속성에 저장
             if (SearchMode)
             {
                 SearchField = Request.Query["SearchField"].ToString();
@@ -136,22 +132,15 @@ namespace MyApp.Controllers
                 }
             }
 
-            // 게시판 리스트 정보 가져오기
+            //[3] 게시판 리스트 정보 가져오기 
             List<Note> notes = new List<Note>();
-            Note note;
-            //노트
+            string LatestId ="0";
             if (noteId == 0)
             {
-                string LatestId = _repository.GetLatestId(category);
-                note = _repository.GetNoteById(Int32.Parse(LatestId));
+                // InitPageId Or SelectedPageId
+                LatestId = _repository.GetLatestId(category);
             }
-            else
-                note = _repository.GetNoteById(noteId);
-            if(note != null)
-                ViewBag.Content = note.Content;
 
-
-            
             if (!SearchMode)
             {
                 TotalRecordCount = _repository.GetCountAll();
@@ -163,6 +152,15 @@ namespace MyApp.Controllers
                     SearchField, SearchQuery);
                 notes = _repository.GetSearchAll(
                     PageIndex, SearchField, SearchQuery);
+            }
+
+            foreach(Note list in notes)
+            {
+                if(list.Id == noteId || list.Id == Int32.Parse(LatestId))
+                {
+                    list.isMain = true;
+                    break;
+                }
             }
 
             // 주요 정보를 뷰 페이지로 전송

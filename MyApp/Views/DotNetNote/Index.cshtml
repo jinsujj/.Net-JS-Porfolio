@@ -53,7 +53,7 @@
                     @*<cache expires-after="@TimeSpan.FromMinutes(10)">*@
                     @*최근 공지 글 2개 출력: 캐싱 적용*@
                     @foreach (var item in
-         DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
+DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                     {
                         <tr>
                             <td style="text-align:center;">
@@ -135,18 +135,6 @@
                 </table>
                 </td>
                 </tr>
-                @*<tr style="display:flex; flex-wrap:wrap; justify-content:center">
-                        <td style="text-align:center;">
-                            <dnn-paging-helper url="@Context.Request.Path"
-                                               page-index='Convert.ToInt32(Context.Request.Query["Page"])'
-                                               page-size="10"
-                                               record-count="@ViewBag.TotalRecord"
-                                               search-mode='Convert.ToBoolean(@ViewBag.SearchMode)'
-                                               search-field="@ViewBag.SearchField"
-                                               search-query="@ViewBag.SearchQuery">
-                            </dnn-paging-helper>
-                        </td>
-                    </tr>*@
                 <tr style="display:flex; flex-wrap:wrap; justify-content:center">
                     <td class="text-center">
                         @await Html.PartialAsync("_AdvancedPagingWithCss", ViewBag.PageModel as PagerBase)
@@ -172,9 +160,20 @@
                 </tr>
                 </table>
             </div>
-            <div class="MyCard" style="padding:0;">
-                <textarea id="Content" name="Content" class="form-control" readonly="readonly" ; disabled;></textarea>
-            </div>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    if (item.isMain)
+                    {
+                        var data = item.Content;
+                        <div class="MyCard" style="padding:0;">
+                            <textarea name="Content" id="Content" asp-for=@data class="form-control" readonly="readonly" ; disabled;></textarea>
+                        </div>
+                        break;
+                    }
+                }
+            }
         </div>
         <div class="rightcolumn">
             <div class="MyCard">
@@ -195,9 +194,6 @@
                                     <i class="material-icons tiny">fiber_manual_record</i>
                                     <a asp-action="Index" asp-route-category="Project">ALL</a>
                                 </li>
-                                @*<li>
-                                    <i class="material-icons tiny">fiber_manual_record</i>
-                                </li>*@
                             </ul>
                         </div>
                     </li>
@@ -251,29 +247,12 @@
     </div>
 </div>
 <script>
-    var txt = '@ViewBag.Content';
-    txt = chageString(txt);
     $('#Content').summernote({
         tabsize: 3,
         toolbar: []
     });
     $('#Content').summernote('disable');
-    $('#Content').summernote('code', txt.toString());
     $('#Content').height($(window).height() * 1.0);
-
-    function chageString(query) {
-        query = query.replaceAll("&#xD;&#xA;", "\n");
-        query = query.replaceAll("&amp;", " ");
-        query = query.replaceAll("&nbsp;", " ");
-        query = query.replaceAll("&#x9;", " ");
-        query = query.replaceAll("&#xA;", "\n");
-        query = query.replaceAll("&#x27;", "'");
-        query = query.replaceAll("&gt;", ">");
-        query = query.replaceAll("&lt;", "<");
-        query = query.replaceAll("&quot;", "");
-        query = query.replaceAll("nbsp;", " ");
-        return query;
-    }
 
 
     function expandAll() {

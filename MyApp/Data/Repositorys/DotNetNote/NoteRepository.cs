@@ -261,6 +261,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                                AS(  
                                     SELECT Id, Name, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder
                                         ,AnswerNum, ParentNum, CommentCount, FileName, FileSize, DownCount
+                                        , Content
                                         , ROW_NUMBER() OVER (ORDER BY Ref DESC, RefOrder ASC) AS RowNumber
                                     FROM notes
                                     WHERE category LIKE @category
