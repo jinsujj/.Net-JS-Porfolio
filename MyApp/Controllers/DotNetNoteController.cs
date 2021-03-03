@@ -132,12 +132,11 @@ namespace MyApp.Controllers
                 }
             }
 
-            //if (page != PageIndex)
-            //    PageIndex = page + 1;
 
             //[3] 게시판 리스트 정보 가져오기 
             List<Note> notes = new List<Note>();
-            string LatestId ="0";
+            bool isSelected = false;
+            int LatestId = 0;
 
             // 게시판 글 Get 
             if (!SearchMode)
@@ -153,21 +152,23 @@ namespace MyApp.Controllers
                     PageIndex, SearchField, SearchQuery);
             }
 
-            // 페이지 변환에 따른 최근 게시글
-            if (noteId == 0)
-            {
-                LatestId = _repository.GetLatestId(PageIndex, category);
-            }
 
-
+            //[4] 사용자 선택 글 or 최신글 Get 
             foreach (Note list in notes)
             {
-                if(list.Id == noteId || list.Id == Int32.Parse(LatestId))
+                if (LatestId == 0) LatestId = list.Id;
+
+                if(list.Id == noteId)
                 {
                     list.isMain = true;
+                    isSelected = true;
                     break;
                 }
             }
+            if (!isSelected)
+                if(notes.Count !=0)
+                    notes[0].isMain = true;
+
 
             // 주요 정보를 뷰 페이지로 전송
             ViewBag.TotalRecord = TotalRecordCount;

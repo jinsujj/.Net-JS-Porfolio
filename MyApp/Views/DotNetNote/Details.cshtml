@@ -74,13 +74,13 @@
     }
     @if (User.Identity.IsAuthenticated)
     {
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary" style="z-index:99">
             삭제
         </a>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary" style="z-index:99">
             수정
         </a>
-        <a asp-action="Reply" asp-route-id="@Model.Id" class="btn btn-primary">
+        <a asp-action="Reply" asp-route-id="@Model.Id" class="btn btn-primary" style="z-index:99">
             답변
         </a>
     }
