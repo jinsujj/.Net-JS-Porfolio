@@ -242,12 +242,11 @@ namespace MyApp.Controllers
                 }
             }
             Note note = new Note();
-            note.Name = model.Name;
             note.Email = CommonLibrary.HtmlUtility.Encode(Email);
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
 
-            if (model.Name == null || model.Title == null || model.Content == "")
+            if (model.Title == null || model.Content == "")
             {
                 ModelState.AddModelError("", "내용을 기입해주세요");
                 return View(model);
@@ -481,12 +480,11 @@ namespace MyApp.Controllers
             Note note = new Note();
 
             note.Id = id;
-            note.Name = model.Name;
             note.Email = User.FindFirst("Email").Value;
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
 
-            if (model.Name == null || model.Title == null || model.Content == "")
+            if (model.Title == null || model.Content == "")
             {
                 ModelState.AddModelError("", "내용을 기입해주세요");
                 return View(model);
@@ -527,7 +525,7 @@ namespace MyApp.Controllers
 
             newNote.Title = $"Re: {note.Title}";
             newNote.Content =
-                $"\r\n <----------'{note.Name}',\n'{note.PostDate}'\n----------\n>"
+                $"\r\n <----------'{note.PostDate}'\n----------\n>"
                 + $"{note.Content.Replace("\n", "\n>")}\n----------";
 
             return View(newNote);
@@ -564,18 +562,16 @@ namespace MyApp.Controllers
             Note note = new Note();
 
             note.Id = note.ParentNum = Convert.ToInt32(id);
-            note.Name = model.Name;
             note.Email = User.FindFirst("Email").Value;
             note.HomePage = model.HomePage;
             note.Title = CommonLibrary.HtmlUtility.Encode(model.Title);
 
-            if (model.Name == null || model.Title == null || model.Content == "")
+            if (model.Title == null || model.Content == "")
             {
                 ModelState.AddModelError("", "내용을 기입해주세요");
                 return View(model);
             }
 
-            note.Content = model.Content;
             note.Content = model.Content;
             note.FileName = fileName;
             note.FileSize = fileSize;

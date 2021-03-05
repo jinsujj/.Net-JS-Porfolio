@@ -115,9 +115,6 @@
                                             @*<td style="text-align:center;">
                                             @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
                                         </td>*@
-                                            @*<td style="text-align:center;">
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </td>*@
                                             <td style="text-align:center;">
                                                 @BoardLibrary.FuncShowTime(item.PostDate)
                                             </td>
@@ -298,7 +295,8 @@
         $(".collapsible").collapsible({ accordion: false });
     }
 
-    $("meta[property='og\\:description']").attr("content", @ViewBag.Title );
+    var title = $(".title").val;
+    $("meta[property='og\\:description']").attr("content", title );
 
 </script>
 

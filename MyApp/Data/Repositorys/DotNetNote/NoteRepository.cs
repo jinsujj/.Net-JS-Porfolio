@@ -70,7 +70,6 @@ namespace MyApp.Data.Repositorys.DotNetNote
             int r = 0;
             var p = new DynamicParameters();
 
-            p.Add("@Name", value: n.Name, dbType: DbType.String);
             p.Add("@Email", value: n.Email, dbType: DbType.String);
             p.Add("@HomePage", value: n.HomePage, dbType: DbType.String);
             p.Add("@Title", value: n.Title, dbType: DbType.String);
@@ -91,8 +90,8 @@ namespace MyApp.Data.Repositorys.DotNetNote
                     else
                         p.Add("@maxRef", value: Convert.ToInt32(Ref) + 1, dbType: DbType.Int32);
 
-                    string Write_S001 = @"INSERT INTO notes (Name, Email, Title, PostIp, Content, Password, Encoding, HomePage ,Ref ,FileName , FileSize, Category)
-                                       VALUES(@Name, @Email, @Title, @PostIp, @Content, @Password, @Encoding, @HomePage, @maxRef, @FileName, @FileSize, @Category )";
+                    string Write_S001 = @"INSERT INTO notes (Title, PostIp, Content, Password, Encoding, HomePage ,Ref ,FileName , FileSize, Category)
+                                       VALUES(@Title, @PostIp, @Content, @Password, @Encoding, @HomePage, @maxRef, @FileName, @FileSize, @Category )";
                     r = con.Execute(Write_S001, p, commandType: CommandType.Text);
                     break;
 
@@ -112,7 +111,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                     if (cnt > 0)
                     {
                         string Modify_U001 = @"UPDATE notes
-                                               SET Name = @Name, Email = @Email, Title = @Title, ModifyIp = @ModifyIp, ModifyDate = NOW(), Content = @Content, Encoding = @Encoding
+                                               SET Email = @Email, Title = @Title, ModifyIp = @ModifyIp, ModifyDate = NOW(), Content = @Content, Encoding = @Encoding
                                                    ,HomePage = @HomePage, FileName = @FileName, FileSize = @FileSize
                                                WHERE Id = @Id";
                         con.Execute(Modify_U001, p);
@@ -189,8 +188,8 @@ namespace MyApp.Data.Repositorys.DotNetNote
                     p.Add("@MaxRefAnswerNum", value: maxRefAnswerNum, dbType: DbType.Int32);
                     p.Add("@Category", value: n.Category, dbType: DbType.String);
 
-                    string Reply_I001 = @"INSERT notes (Name, Email, Title, PostIp, Content, Password, Encoding, HomePage, Ref, Step, RefOrder, ParentNum, FileName, FileSize, Category)
-                                          VALUES (@Name, @Email, @Title, @PostIp, @Content, @Password, @Encoding, @HomePage, @ParentRef, @ParentStep +1,
+                    string Reply_I001 = @"INSERT notes (Email, Title, PostIp, Content, Password, Encoding, HomePage, Ref, Step, RefOrder, ParentNum, FileName, FileSize, Category)
+                                          VALUES (@Email, @Title, @PostIp, @Content, @Password, @Encoding, @HomePage, @ParentRef, @ParentStep +1,
                                                   @MaxRefOrder + @MaxRefAnswerNum +1, @ParentNum, @FileName, @FileSize, @Category)";
                     con.Execute(Reply_I001, p);
                     break;
@@ -259,7 +258,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
                 var parameters = new DynamicParameters(new { Page = page , category = category});
                 string sql = @"WITH DotNetNoteOrderedLists 
                                AS(  
-                                    SELECT Id, Name, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder
+                                    SELECT Id, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder
                                         ,AnswerNum, ParentNum, CommentCount, FileName, FileSize, DownCount
                                         , Content
                                         , ROW_NUMBER() OVER (ORDER BY Ref DESC, RefOrder ASC) AS RowNumber
@@ -317,7 +316,6 @@ namespace MyApp.Data.Repositorys.DotNetNote
                 string sql = @"SELECT COUNT(*)
                            FROM notes
                            WHERE ( CASE @searchField
-                                   WHEN 'Name' THEN Name
                                    WHEN 'Title' THEN Title
                                    WHEN 'Content' THEN Content
                                    ELSE @searchQuery END)
@@ -404,7 +402,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         public List<Note> GetNoteSummaryByCategory(string category)
         {
             string sql =
-                @"SELECT Id, Title, Name, PostDate, FileName, 
+                @"SELECT Id, Title, PostDate, FileName, 
                          ReadCount, CommentCount, Step
                   FROM notes
                   WHERE category LIKE @category 
@@ -416,7 +414,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         public List<Note> GetRecentPosts(int numberOfNotes)
         {
             string sql =
-                @"SELECT {numberOfNotes} Id, Title, Name, PostDate
+                @"SELECT {numberOfNotes} Id, Title, PostDate
                    FROM notes 
                    ORDER BY Id DESC";
             return con.Query<Note>(sql).ToList();
@@ -425,16 +423,15 @@ namespace MyApp.Data.Repositorys.DotNetNote
         public List<Note> GetSearchAll(int page, string searchField, string searchQuery)
         {
             var parameters = new DynamicParameters(new { Page = page, SearchFiled = searchField, SearchQuery = searchQuery });
-            string sql = @"SELECT Id, Name, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder, AnswerNum,
+            string sql = @"SELECT Id, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder, AnswerNum,
                                         ParentNum, CommentCount, FileName, FileSize, DownCount, RowNumber
                              FROM (
-                                SELECT Id, Name, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder, AnswerNum,
+                                SELECT Id, Email, Title, PostDate, ReadCount, Ref, Step, RefOrder, AnswerNum,
                                         ParentNum, CommentCount, FileName, FileSize, DownCount,
                                         ROW_NUMBER() OVER (ORDER BY Ref DESC, RefOrder ASC) AS RowNumber
                                 FROM notes
                                 WHERE (
                                         CASE @SearchFiled
-                                            WHEN 'Name' Then Name
                                             WHEN 'Title' Then Title
                                             WHEN 'Content' THEN Content
                                             ELSE @SearchQuery   END
