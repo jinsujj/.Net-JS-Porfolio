@@ -4,13 +4,13 @@
     @foreach (var comment in Model.NoteCommentList)
     {
         <tr style="border-bottom: 1px dotted silver;">
-            <td style="width: 80px;">
-                @comment.Name
+            <td style="width: 80px; height:30px;">
+                @comment.Name 
             </td>
             <td style="width: 350px;">
                 @Html.Raw(comment.Opinion.Replace("\r\n", "<br />"))
             </td>
-            <td style="width: 180px;">
+            <td style="width: 100px;">
                 @comment.PostDate
             </td>
             <td style="width: 10px;text-align:center;">
@@ -59,19 +59,9 @@
                        style="display:inline-block;" />
             </td>
             <td style="width: auto; text-align:right;">
-
-                @if (User.Identity.IsAuthenticated)
-                {
                 <input type="submit" value="댓글"
                        class="form-control btn btn-primary"
                        style=" text-align:center;  inline-block;" />
-                }
-                else
-                {
-                <input type="button" name="btnDisabled"
-                       value="로그인" disabled class="btn btn-default disabled" />
-                }
-
             </td>
         </tr>
         <tr>

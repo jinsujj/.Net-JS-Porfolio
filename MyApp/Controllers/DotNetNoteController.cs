@@ -95,11 +95,15 @@ namespace MyApp.Controllers
        {
             if (category == null) category = "%%";
             _logger.LogInformation("게시판 리스트 페이지 로딩");
-            _repository.Log("IndexGrid", HttpContext.Connection.RemoteIpAddress.ToString());
+
+            // For Log...
+            if(noteId != 0)
+                _repository.Log("IndexGrid:" + noteId, HttpContext.Connection.RemoteIpAddress.ToString());
+            else
+                _repository.Log("IndexGrid", HttpContext.Connection.RemoteIpAddress.ToString());
 
 
-            /* [0] 검색창 로직 
-               검색 모드 결정: ?SearchField=Name&SearchQuery=닷넷코리아 */
+            // [0] 검색창 로직 검색 모드 결정: ?SearchField=Name&SearchQuery=닷넷코리아 */
             SearchMode = (
                 !string.IsNullOrEmpty(Request.Query["SearchField"]) &&
                 !string.IsNullOrEmpty(Request.Query["SearchQuery"])
@@ -120,21 +124,16 @@ namespace MyApp.Controllers
             //[2] 쿠키를 사용한 리스트 페이지 번호 유지 적용(Optional): 
             if (!string.IsNullOrEmpty(Request.Cookies["DotNetNotePageNum"]))
             {
-                if (!String.IsNullOrEmpty(
-                    Request.Cookies["DotNetNotePageNum"]))
-                {
-                    PageIndex =
-                        Convert.ToInt32(Request.Cookies["DotNetNotePageNum"]);
-                }
+                if (!String.IsNullOrEmpty(Request.Cookies["DotNetNotePageNum"]))
+                    PageIndex = Convert.ToInt32(Request.Cookies["DotNetNotePageNum"]);
                 else
-                {
                     PageIndex = 0;
-                }
             }
 
 
             //[3] 게시판 리스트 정보 가져오기 
             List<Note> notes = new List<Note>();
+            NoteCommentViewModel vm = new NoteCommentViewModel();
             bool isSelected = false;
             int LatestId = 0;
 
@@ -146,10 +145,8 @@ namespace MyApp.Controllers
             }
             else
             {
-                TotalRecordCount = _repository.GetCountBySearch(
-                    SearchField, SearchQuery);
-                notes = _repository.GetSearchAll(
-                    PageIndex, SearchField, SearchQuery);
+                TotalRecordCount = _repository.GetCountBySearch(SearchField, SearchQuery);
+                notes = _repository.GetSearchAll(PageIndex, SearchField, SearchQuery);
             }
 
 
@@ -160,24 +157,36 @@ namespace MyApp.Controllers
 
                 if(list.Id == noteId)
                 {
+                    ViewBag.Title = list.Title;
                     list.isMain = true;
                     isSelected = true;
                     break;
                 }
             }
-            if (!isSelected)
-                if(notes.Count !=0)
-                    notes[0].isMain = true;
+
+            //[5] 댓글 창 Get
+            if (isSelected)
+            {
+                vm.NoteCommentList = _commentRepository.GetNoteComments(noteId);
+                vm.BoardId = noteId;
+            }
+            else
+            {
+                if (notes.Count != 0) notes[0].isMain = true;
+                vm.NoteCommentList = _commentRepository.GetNoteComments(LatestId);
+                vm.BoardId = LatestId;
+            }
+            ViewBag.CommentListAndId = vm;
 
 
-            // 주요 정보를 뷰 페이지로 전송
+            //[6] 주요 정보를 뷰 페이지로 전송
             ViewBag.TotalRecord = TotalRecordCount;
             ViewBag.SearchMode = SearchMode;
             ViewBag.SearchField = SearchField;
             ViewBag.SearchQuery = SearchQuery;
             ViewBag.PageIndex = PageIndex;
 
-            // 페이저 컨트롤 적용
+            //[7] 페이저 컨트롤 적용
             ViewBag.PageModel = new PagerBase
             {
                 Url = "DotNetNote/Index",

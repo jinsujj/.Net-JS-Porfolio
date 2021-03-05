@@ -15,7 +15,7 @@ namespace MyApp.Models.DotNetNote
         public string Name { get; set; }
         [Required(ErrorMessage = "내용을 입력하세요")]
         public string Opinion { get; set; }
-        public DateTime PostDate { get; set; }
+        public string PostDate { get; set; }
         [Required(ErrorMessage = "비밀번호를 입력하세요")]
         public string Password { get; set; }
     }

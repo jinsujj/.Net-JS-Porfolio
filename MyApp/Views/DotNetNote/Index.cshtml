@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<Note>
 
 @inject INoteRepository DnnRepo
+@inject Microsoft.Extensions.Options.IOptions<MyApp.Settings.DotNetNoteSetting> option
 
 @{
-    ViewData["Title"] = "Projects Blog";
+    ViewData["Title"] = @ViewBag.Title;
 }
 <div class="DotNetNote">
     <div class="Myheader">
@@ -34,11 +35,11 @@
                                         @Html.DisplayNameFor(model => model.Title)
                                     </th>
                                     @*<th style="width:60px; text-align:center">
-                                            @Html.DisplayNameFor(model => model.FileName)
-                                        </th>*@
+                                    @Html.DisplayNameFor(model => model.FileName)
+                                </th>*@
                                     @*<th style="width:80px; text-align:center;">
-                                            @Html.DisplayNameFor(model => model.Name)
-                                        </th>*@
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>*@
                                     <th style="width:100px; text-align:center;">
                                         @Html.DisplayNameFor(model => model.PostDate)
                                     </th>
@@ -50,7 +51,7 @@
                                 @*<cache expires-after="@TimeSpan.FromMinutes(10)">*@
                                 @*최근 공지 글 2개 출력: 캐싱 적용*@
                                 @foreach (var item in
-                            DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
+                      DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                                 {
                                     <tr>
                                         <td style="text-align:center;">
@@ -74,8 +75,8 @@
                                             @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
                                         </td>
                                         @*<td style="text-align:center;">
-                                                @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                            </td>*@
+                                        @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                    </td>*@
                                         <td style="text-align:center;">
                                             @BoardLibrary.FuncShowTime(item.PostDate)
                                         </td>
@@ -112,11 +113,11 @@
                                                 @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
                                             </td>
                                             @*<td style="text-align:center;">
-                                                    @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                                </td>*@
+                                            @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                        </td>*@
                                             @*<td style="text-align:center;">
-                                                    @Html.DisplayFor(modelItem => item.Name)
-                                                </td>*@
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>*@
                                             <td style="text-align:center;">
                                                 @BoardLibrary.FuncShowTime(item.PostDate)
                                             </td>
@@ -164,10 +165,33 @@
                             <div class="title"><p>&nbsp;Title: @item.Title</p></div>
                             <textarea name="Content" id="Content" asp-for=@data class="form-control" readonly="readonly" ; disabled;></textarea>
                         </div>
+                        <div style="text-align:center; z-index:99;">
+                            @if (User.IsInRole("UsersInfo") && User.FindFirst("Email").Value == option.Value.SiteAdmin)
+                            {
+                                <a asp-action="Pinned" asp-route-id="@item.Id" class="btn btn-danger">
+                                    공지로 올리기
+                                </a>
+                            }
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">
+                                    삭제
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">
+                                    수정
+                                </a>
+                                <a asp-action="Reply" asp-route-id="@item.Id" class="btn btn-primary">
+                                    답변
+                                </a>
+                            }
+                        </div>
                         break;
                     }
                 }
             }
+            <div class="leftcolumn">
+                @await Html.PartialAsync("_BoardCommentControl", (NoteCommentViewModel)ViewBag.CommentListAndId)
+            </div>
         </div>
         <div class="rightcolumn">
             <div class="MyCard">
@@ -273,6 +297,9 @@
         $(".collapsible").collapsible({ accordion: true });
         $(".collapsible").collapsible({ accordion: false });
     }
+
+    $("meta[property='og\\:description']").attr("content", @ViewBag.Title );
+
 </script>
 
 

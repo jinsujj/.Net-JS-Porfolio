@@ -39,7 +39,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         public List<NoteComment> GetNoteComments(int boardId)
         {
             return con.Query<NoteComment>(
-                @"SELECT * FROM notecomments WHERE BoardId = @BoardId"
+                @"SELECT id, boardid, name, opinion, DATE_FORMAT(postdate,'%y/%m/%d') as postdate FROM notecomments WHERE BoardId = @BoardId"
                 , new { BoardId = boardId }
                 , commandType: CommandType.Text).ToList();
         }

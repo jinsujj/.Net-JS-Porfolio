@@ -65,7 +65,7 @@
 <div>
     @await Html.PartialAsync("_BoardCommentControl", (NoteCommentViewModel)ViewBag.CommentListAndId)
 </div>
-<div style="text-align:center;">
+<div style="text-align:center; z-index:99;">
     @if (User.IsInRole("UsersInfo") && User.FindFirst("Email").Value == option.Value.SiteAdmin)
     {
         <a asp-action="Pinned" asp-route-id="@Model.Id" class="btn btn-danger">
@@ -74,13 +74,13 @@
     }
     @if (User.Identity.IsAuthenticated)
     {
-        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary" style="z-index:99">
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">
             삭제
         </a>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary" style="z-index:99">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
             수정
         </a>
-        <a asp-action="Reply" asp-route-id="@Model.Id" class="btn btn-primary" style="z-index:99">
+        <a asp-action="Reply" asp-route-id="@Model.Id" class="btn btn-primary">
             답변
         </a>
     }
