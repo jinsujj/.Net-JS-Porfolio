@@ -296,7 +296,9 @@
     }
 
     var title = $(".title").val;
-    $("meta[property='og\\:description']").attr("content", title );
+    var content = $('#Content').val;
+    $("meta[property='og\\:title']").attr("content", title);
+    $("meta[property='og\\:description']").attr("content", content );
 
 </script>
 
