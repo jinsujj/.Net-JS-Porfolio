@@ -335,6 +335,7 @@ namespace MyApp.Controllers
                     break;
             }
             ViewBag.Content = encodedContent;
+            ViewBag.Title = note.Title;
 
             if (note.FileName.Length > 1)
             {
