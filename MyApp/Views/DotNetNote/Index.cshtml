@@ -16,6 +16,9 @@
     <div class="row">
         <div class="letfcolumn col-lg-9" style="padding-right:0;">
             <div class="MyCard" style="padding-bottom:0;">
+                <div class="col-6">
+                    @if (ViewBag.Category != null){<span class="float-left" style="color: #002c9b;">@ViewBag.Category 의 글입니다.</span>}
+                </div>
                 <div class="d-flex flex-row-reverse">
                     <span style="font-size:20px;" onclick="location.href='@Url.Action("Index", "DotNetNote")'"><i class="fas fa-list-ul"></i></span>&nbsp;&nbsp;
                     <span style="font-size:20px;" onclick="location.href='@Url.Action("IndexCard", "DotNetNote")'"><i class="fas fa-th"></i></span>
@@ -35,11 +38,11 @@
                                         @Html.DisplayNameFor(model => model.Title)
                                     </th>
                                     @*<th style="width:60px; text-align:center">
-                                    @Html.DisplayNameFor(model => model.FileName)
-                                </th>*@
+                                @Html.DisplayNameFor(model => model.FileName)
+                            </th>*@
                                     @*<th style="width:80px; text-align:center;">
-                                    @Html.DisplayNameFor(model => model.Name)
-                                </th>*@
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>*@
                                     <th style="width:100px; text-align:center;">
                                         @Html.DisplayNameFor(model => model.PostDate)
                                     </th>
@@ -51,7 +54,7 @@
                                 @*<cache expires-after="@TimeSpan.FromMinutes(10)">*@
                                 @*최근 공지 글 2개 출력: 캐싱 적용*@
                                 @foreach (var item in
-                      DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
+DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                                 {
                                     <tr>
                                         <td style="text-align:center;">
@@ -75,8 +78,8 @@
                                             @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
                                         </td>
                                         @*<td style="text-align:center;">
-                                        @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                    </td>*@
+                                    @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                </td>*@
                                         <td style="text-align:center;">
                                             @BoardLibrary.FuncShowTime(item.PostDate)
                                         </td>
@@ -113,8 +116,8 @@
                                                 @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
                                             </td>
                                             @*<td style="text-align:center;">
-                                            @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                        </td>*@
+                                        @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                    </td>*@
                                             <td style="text-align:center;">
                                                 @BoardLibrary.FuncShowTime(item.PostDate)
                                             </td>
@@ -202,7 +205,7 @@
                         <div class="collapsible-header"><i class="material-icons">search</i><a asp-action="Index">ALL</a></div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i><a name="987" />Projects</a></div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i><a name="987" />Projects</a> <small class="red-text">(+ @ViewBag.Project)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
@@ -213,7 +216,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Framework</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Framework <small class="red-text">(+ @ViewBag.Framework)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
@@ -222,7 +225,7 @@
                                 </li>
                                 <li>
                                     <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
-                                    <a asp-action="Index" asp-route-category="Web">.Net</a>
+                                    <a asp-action="Index" asp-route-category="Web">.Net Core</a>
                                 </li>
                                 <li>
                                     <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
@@ -236,7 +239,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>DataBase</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>DataBase<small class="red-text"> (+ @ViewBag.Database)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
@@ -247,7 +250,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Algorithm</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Algorithm<small class="red-text"> (+ @ViewBag.Algorithm)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
@@ -258,7 +261,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Anything</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Anything<small class="red-text"> (+ @ViewBag.Anything)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
@@ -274,12 +277,17 @@
     </div>
 </div>
 <script>
+    $(document).ready(function () {
+        expandAll();
+    });
+
     $('#Content').summernote({
         tabsize: 3,
         toolbar: []
     });
     $('#Content').summernote('disable');
     $('#Content').height($(window).height() * 1.0);
+
 
 
     function expandAll() {

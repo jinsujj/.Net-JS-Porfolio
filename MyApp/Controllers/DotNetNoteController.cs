@@ -81,6 +81,15 @@ namespace MyApp.Controllers
             TotalRecordCount = _repository.GetCountAll();
             notes = _repository.GetCardAll(category);
 
+            // 카테고리 Count Get
+            CategoryList categoryList = _repository.GetCategoryCnt();
+            if (category != "%%") ViewBag.Category = category;
+            ViewBag.Project = categoryList.Project;
+            ViewBag.Framework = categoryList.Framework;
+            ViewBag.Database = categoryList.Datbase;
+            ViewBag.Anything = categoryList.Anything;
+            ViewBag.Algorithm = categoryList.Algorithm;
+
             // 주요 정보를 뷰 페이지로 전송
             ViewBag.TotalRecord = TotalRecordCount;
             ViewBag.SearchMode = SearchMode;
@@ -169,6 +178,7 @@ namespace MyApp.Controllers
             {
                 vm.NoteCommentList = _commentRepository.GetNoteComments(noteId);
                 vm.BoardId = noteId;
+                _repository.GetNoteById(noteId, false);
             }
             else
             {
@@ -178,21 +188,32 @@ namespace MyApp.Controllers
             }
             ViewBag.CommentListAndId = vm;
 
+            //[6] 카테고리 Count Get
+            CategoryList categoryList = _repository.GetCategoryCnt();
 
-            //[6] 주요 정보를 뷰 페이지로 전송
+
+            //[7] 주요 정보를 뷰 페이지로 전송
             ViewBag.TotalRecord = TotalRecordCount;
             ViewBag.SearchMode = SearchMode;
             ViewBag.SearchField = SearchField;
             ViewBag.SearchQuery = SearchQuery;
             ViewBag.PageIndex = PageIndex;
 
-            //[7] 페이저 컨트롤 적용
+            if (category != "%%")  ViewBag.Category = category;
+            ViewBag.Project = categoryList.Project;
+            ViewBag.Framework = categoryList.Framework;
+            ViewBag.Database = categoryList.Datbase;
+            ViewBag.Anything = categoryList.Anything;
+            ViewBag.Algorithm = categoryList.Algorithm;
+
+            //[8] 페이저 컨트롤 적용
             ViewBag.PageModel = new PagerBase
             {
                 Url = "DotNetNote/Index",
                 RecordCount = TotalRecordCount,
                 PageSize = 5,
                 PageNumber = PageIndex + 1,
+                Category= category,
 
                 SearchMode = SearchMode,
                 SearchField = SearchField,
@@ -304,7 +325,7 @@ namespace MyApp.Controllers
             _logger.LogInformation("Detail 페이지 로딩");
             _repository.Log("Detail : " + id, HttpContext.Connection.RemoteIpAddress.ToString());
 
-            var note = _repository.GetNoteById(id);
+            var note = _repository.GetNoteById(id, true);
 
             note.PostDates = note.PostDate.ToString();
 
@@ -422,7 +443,7 @@ namespace MyApp.Controllers
             ViewBag.TitleDescription = "글 수정 - 아래 항목을 수정하세요.";
             ViewBag.SaveButtonText = "수정";
 
-            var note = _repository.GetNoteById(id);
+            var note = _repository.GetNoteById(id, true);
 
             if (note.FileName.Length > 1)
             {
@@ -520,7 +541,7 @@ namespace MyApp.Controllers
             ViewBag.TitleDescription = "글 답변 - 다음 필드들을 채워주세요";
             ViewBag.SaveButtonText = "답변";
 
-            var note = _repository.GetNoteById(id);
+            var note = _repository.GetNoteById(id, false);
 
             var newNote = new Note();
 

@@ -380,9 +380,10 @@ namespace MyApp.Data.Repositorys.DotNetNote
             }
         }
 
-        public Note GetNoteById(int id)
+        public Note GetNoteById(int id, bool isDetail)
         {
             var parameters = new DynamicParameters(new { Id = id });
+
             string U001 = @"UPDATE notes
                            SET ReadCount = ReadCount +1 
                            WHERE Id = @id";
@@ -390,8 +391,16 @@ namespace MyApp.Data.Repositorys.DotNetNote
             string S001 = @"SELECT * FROM notes
                             WHERE Id = @id";
 
-            con.Execute(U001, parameters, commandType: CommandType.Text);
-            return con.Query<Note>(S001, parameters, commandType: CommandType.Text).SingleOrDefault();
+            if (isDetail)
+            {
+                con.Execute(U001, parameters, commandType: CommandType.Text);
+                return con.Query<Note>(S001, parameters, commandType: CommandType.Text).SingleOrDefault();
+            }
+            else
+            {
+                con.Execute(U001, parameters, commandType: CommandType.Text);
+                return null;
+            }
         }
 
         /// <summary>
@@ -470,6 +479,23 @@ namespace MyApp.Data.Repositorys.DotNetNote
                 @"UPDATE notes SET DownCount = DownCount +1
                   WHERE Id = @Id"
                 , p);
+        }
+
+        public CategoryList GetCategoryCnt()
+        {
+            string sql = @"WITH cnt as(
+	                            SELECT category, COUNT(category) cnt
+	                            FROM notes
+	                            GROUP BY category
+                            ) 
+                            SELECT DISTINCT (SELECT SUM(cnt) FROM cnt where category ='Project') as 'Project',
+		                            (SELECT SUM(cnt) FROM cnt where category ='Framework') as 'Framework',
+                                    (SELECT SUM(cnt) FROM cnt where category ='Database') as 'Database',
+                                    (SELECT SUM(cnt) FROM cnt where category ='Algorithm') as 'Algorithm',
+                                    (SELECT SUM(cnt) FROM cnt where category ='Anything') as 'Anything'
+                            FROM cnt;";
+
+            return con.Query<CategoryList>(sql).FirstOrDefault();
         }
     }
 }

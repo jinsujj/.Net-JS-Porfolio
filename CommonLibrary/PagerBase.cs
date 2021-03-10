@@ -6,6 +6,7 @@ namespace CommonLibrary
 {
     public class PagerBase
     {
+        public string Category { get; set; }
         public string Url { get; set; }
         public int PageCount { get; set; } = 5;
         public int RecordCount { get; set; } = 50;

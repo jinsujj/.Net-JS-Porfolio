@@ -15,6 +15,9 @@
     <div class="row">
         <div class="letfcolumn col-lg-9" style="padding-right:0;">
             <div class="MyCard">
+                <div class="col-6">
+                    @if (ViewBag.Category != null){<span class="float-left" style="color: #002c9b;">@ViewBag.Category 의 글입니다.</span>}
+                </div>
                 <div class="d-flex flex-row-reverse">
                     <span style="font-size:20px;" onclick="location.href='@Url.Action("Index", "DotNetNote")'"><i class="fas fa-list-ul"></i></span>&nbsp;&nbsp;
                     <span style="font-size:20px;" onclick="location.href='@Url.Action("IndexCard", "DotNetNote")'"><i class="fas fa-th"></i></span>
@@ -62,66 +65,75 @@
             <div class="MyCard">
                 <h4>Category</h4>
                 <br />
-                <a class="btn wave-btn waves-effect waves-green" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expand</a> &nbsp;
-                <a class="btn wave-btn waves-effect waves-green" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>colaps</a>
+                <a class="btn wave-btn waves-effect waves-purple" onClick="expandAll();"><i class="material-icons left">fullscreen</i>Expand</a> &nbsp;
+                <a class="btn wave-btn waves-effect waves-purple" onClick="collapseAll();"><i class="material-icons left">fullscreen_exit</i>colaps</a>
                 <br />
                 <ul class="collapsible" data-collapsible="expandable">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">search</i><a asp-action="Index">ALL</a></div>
+                        <div class="collapsible-header"><i class="material-icons">search</i><a asp-action="IndexCard">ALL</a></div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i><a name="987" />Projects</a></div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i><a name="987" />Projects</a> <small class="red-text">(+ @ViewBag.Project)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <i class="material-icons tiny">fiber_manual_record</i>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
                                     <a asp-action="IndexCard" asp-route-category="Project">ALL</a>
                                 </li>
-                                @*<li>
-                            <i class="material-icons tiny">fiber_manual_record</i>
-                        </li>*@
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Framework</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Framework <small class="red-text">(+ @ViewBag.Framework)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <i class="material-icons tiny">fiber_manual_record</i>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
                                     <a asp-action="IndexCard" asp-route-category="Web">ALL</a>
+                                </li>
+                                <li>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
+                                    <a asp-action="IndexCard" asp-route-category="Web">.Net Core</a>
+                                </li>
+                                <li>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
+                                    <a asp-action="IndexCard" asp-route-category="Web">Spring</a>
+                                </li>
+                                <li>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
+                                    <a asp-action="IndexCard" asp-route-category="Web">Flask</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>DataBase</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>DataBase<small class="red-text"> (+ @ViewBag.Database)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <i class="material-icons tiny">fiber_manual_record</i>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
                                     <a asp-action="IndexCard" asp-route-category="DataBase">ALL</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Algorithm</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Algorithm<small class="red-text"> (+ @ViewBag.Algorithm)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <i class="material-icons tiny">fiber_manual_record</i>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
                                     <a asp-action="IndexCard" asp-route-category="Algorithm">ALL</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Anything</div>
+                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Anything<small class="red-text"> (+ @ViewBag.Anything)</small></div>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
-                                    <i class="material-icons tiny">fiber_manual_record</i>
+                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
                                     <a asp-action="IndexCard" asp-route-category="Anything">ALL</a>
                                 </li>
                             </ul>
@@ -133,6 +145,10 @@
     </div>
 </div>
 <script>
+    $(document).ready(function () {
+        expandAll();
+    });
+
     function expandAll() {
         $(".collapsible-header").addClass("active");
         $(".collapsible").collapsible({ accordion: false });

@@ -13,7 +13,7 @@ namespace MyApp.Data.Repositorys.DotNetNote
         string GetFileNameById(int id);
         List<Note> GetNewPhotos();
         string GetLatestId(int pageindex,string category);
-        Note GetNoteById(int id);
+        Note GetNoteById(int id, bool isDetail);
         List<Note> GetNoteSummaryByCategory(string category);
         List<Note> GetRecentPosts(int numberOfNotes);
         List<Note> GetSearchAll(int page, string searchField, string searchQuery);
@@ -25,5 +25,6 @@ namespace MyApp.Data.Repositorys.DotNetNote
         int UpdateNote(Note model);
         void Add(Note note);
         void Log(string page, string ip);
+        CategoryList GetCategoryCnt();
     }
 }
