@@ -489,7 +489,6 @@ namespace MyApp.Data.Repositorys.DotNetNote
 	                            GROUP BY category
                             ) 
                             SELECT DISTINCT (SELECT SUM(cnt) FROM cnt where category ='Project') as 'Project',
-		                            (SELECT SUM(cnt) FROM cnt where category ='Framework') as 'Framework',
                                     (SELECT SUM(cnt) FROM cnt where category ='Database') as 'Database',
                                     (SELECT SUM(cnt) FROM cnt where category ='Algorithm') as 'Algorithm',
                                     (SELECT SUM(cnt) FROM cnt where category ='Anything') as 'Anything'

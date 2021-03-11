@@ -16,12 +16,17 @@
     <div class="row">
         <div class="letfcolumn col-lg-9" style="padding-right:0;">
             <div class="MyCard" style="padding-bottom:0;">
-                <div class="col-6">
-                    @if (ViewBag.Category != null){<span class="float-left" style="color: #002c9b;">@ViewBag.Category 의 글입니다.</span>}
+                <div>
+                    @if (ViewBag.Category != null)
+                    {<span class="float-left" style="color: #002c9b;">@ViewBag.Category 의 글입니다.</span>}
                 </div>
-                <div class="d-flex flex-row-reverse">
-                    <span style="font-size:20px;" onclick="location.href='@Url.Action("Index", "DotNetNote")'"><i class="fas fa-list-ul"></i></span>&nbsp;&nbsp;
-                    <span style="font-size:20px;" onclick="location.href='@Url.Action("IndexCard", "DotNetNote")'"><i class="fas fa-th"></i></span>
+                <br/>
+                <div class="row">
+                    <span class="col d-block d-sm-none" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+                    <div class="col d-flex flex-row-reverse">
+                        <span style="font-size:20px;" onclick="location.href='@Url.Action("Index", "DotNetNote")'"><i class="fas fa-list-ul"></i></span>&nbsp;&nbsp;
+                        <span style="font-size:20px;" onclick="location.href='@Url.Action("IndexCard", "DotNetNote")'"><i class="fas fa-th"></i></span>
+                    </div>
                 </div>
                 <table style="font-family: 'Open Sans', sans-serif; width: 100%;">
                     <tr>
@@ -212,28 +217,17 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                                     <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
                                     <a asp-action="Index" asp-route-category="Project">ALL</a>
                                 </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">chevron_right</i>Framework <small class="red-text">(+ @ViewBag.Framework)</small></div>
-                        <div class="collapsible-body">
-                            <ul>
                                 <li>
                                     <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
-                                    <a asp-action="Index" asp-route-category="Web">ALL</a>
+                                    <a asp-action="Index" asp-route-category="Project">.Net Core</a>
                                 </li>
                                 <li>
                                     <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
-                                    <a asp-action="Index" asp-route-category="Web">.Net Core</a>
+                                    <a asp-action="Index" asp-route-category="Project">Spring</a>
                                 </li>
                                 <li>
                                     <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
-                                    <a asp-action="Index" asp-route-category="Web">Spring</a>
-                                </li>
-                                <li>
-                                    <i class="material-icons tiny" style="font-size:9px">fiber_manual_record</i>
-                                    <a asp-action="Index" asp-route-category="Web">Flask</a>
+                                    <a asp-action="Index" asp-route-category="Project">Flask</a>
                                 </li>
                             </ul>
                         </div>
@@ -276,6 +270,15 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
         </div>
     </div>
 </div>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a asp-action="Index">All</a>
+    <a asp-action="Index" asp-route-category="Project">Projects</a>
+    <a asp-action="Index" asp-route-category="Database">Database</a>
+    <a asp-action="Index" asp-route-category="Algorithm">Algorithm</a>
+    <a asp-action="Index" asp-route-category="Anything">Anything</a>
+</div>
 <script>
     $(document).ready(function () {
         expandAll();
@@ -288,7 +291,13 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
     $('#Content').summernote('disable');
     $('#Content').height($(window).height() * 1.0);
 
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "100%";
+    }
 
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
 
     function expandAll() {
         $(".collapsible-header").addClass("active");

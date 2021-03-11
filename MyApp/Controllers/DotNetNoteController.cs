@@ -85,7 +85,6 @@ namespace MyApp.Controllers
             CategoryList categoryList = _repository.GetCategoryCnt();
             if (category != "%%") ViewBag.Category = category;
             ViewBag.Project = categoryList.Project;
-            ViewBag.Framework = categoryList.Framework;
             ViewBag.Database = categoryList.Datbase;
             ViewBag.Anything = categoryList.Anything;
             ViewBag.Algorithm = categoryList.Algorithm;
@@ -201,7 +200,6 @@ namespace MyApp.Controllers
 
             if (category != "%%")  ViewBag.Category = category;
             ViewBag.Project = categoryList.Project;
-            ViewBag.Framework = categoryList.Framework;
             ViewBag.Database = categoryList.Datbase;
             ViewBag.Anything = categoryList.Anything;
             ViewBag.Algorithm = categoryList.Algorithm;
