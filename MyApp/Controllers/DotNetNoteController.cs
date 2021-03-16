@@ -99,7 +99,7 @@ namespace MyApp.Controllers
             return View(notes);
         }
 
-        public IActionResult Index(string category , int noteId, int page)
+        public IActionResult Index(string category , int noteId)
        {
             if (category == null) category = "%%";
             _logger.LogInformation("게시판 리스트 페이지 로딩");

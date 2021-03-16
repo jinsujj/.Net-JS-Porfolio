@@ -111,7 +111,7 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                                             </td>
                                             <td>
                                                 <a asp-controller="DotNetNote" asp-action="Index"
-                                                   asp-route-noteId="@item.Id" asp-route-Page="@(ViewBag.PageIndex +1)">
+                                                   asp-route-noteId="@item.Id" asp-route-Page="@(ViewBag.PageIndex +1)" asp-route-Category="@ViewBag.Category">
                                                     @StringLibrary.CutStringUnicode(item.Title, 30)
                                                 </a>
                                                 <small>
