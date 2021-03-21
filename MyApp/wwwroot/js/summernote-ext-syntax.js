@@ -28,7 +28,6 @@
             var lang = options.langInfo;
 
 
-            // add button
 
             context.memo('button.highlight', function () {
                 // create button
@@ -36,6 +35,8 @@
                     contents: '<i class="fas fa-file-code"></i>',
                     tooltip: 'highlight',
                     click: function () {
+                        $editor.focus();
+                        context.invoke('editor.focus');
                         self.show()
                     }
                 });
@@ -299,7 +300,9 @@
                 $code_toolbar.html($pre)
                 $code_toolbar.addClass('code-toolbar');
 
-                console.log("Tested");
+                var $buffer = $('<p></p><br/>');
+                $code_toolbar.append($buffer);
+
                 return $code_toolbar[0];
             };
 
@@ -338,12 +341,11 @@
 
             this.getCodeInfo = function () {
                 var text = context.invoke('editor.getSelectedText');
-                return '';
+                return text;
             };
 
             this.show = function () {
                 var codeInfo = self.getCodeInfo();
-
                 context.invoke('editor.saveRange');
                 this.showHighlightDialog(codeInfo).then(function (codeInfo) {
                     context.invoke('editor.restoreRange');
