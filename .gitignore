@@ -11,3 +11,5 @@ MyApp/bin/Debug/netcoreapp3.1/Settings/DotNetNoteSettings.json
 *.jpg
 MyApp/appsettings.json
 *cshtml.g.cs
+MyApp/.vs/MyApp/v16/.suo
+CommonLibrary/obj/Debug/net5.0/CommonLibrary.csproj.FileListAbsolute.txt
