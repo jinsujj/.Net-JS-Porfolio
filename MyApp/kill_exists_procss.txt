@@ -1,0 +1,3 @@
+sudo lsof -iTCP -sTCP:LISTEN -P | grep :5000
+
+then kill
