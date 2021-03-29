@@ -9,6 +9,7 @@ namespace MyApp.Models.DotNetNote
     public class NoteComment
     {
         public int Id { get; set; }
+        public string ip {get;set;}
         public string BoardName { get; set; }
         public int BoardId { get; set; }
         [Required(ErrorMessage = "이름을 입력하세요")]

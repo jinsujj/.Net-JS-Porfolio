@@ -667,6 +667,7 @@ namespace MyApp.Controllers
             int BoardId, string txtName, string txtPassword, string txtOpinion)
         {
             NoteComment comment = new NoteComment();
+            comment.ip = HttpContext.Connection.RemoteIpAddress.ToString();
             comment.BoardId = BoardId;
             comment.Name = txtName;
             comment.Password = new CommonLibrary.Security().EncryptPassword(txtPassword);

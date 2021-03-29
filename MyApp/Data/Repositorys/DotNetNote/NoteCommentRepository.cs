@@ -25,10 +25,11 @@ namespace MyApp.Data.Repositorys.DotNetNote
             parameters.Add("@Name", value: model.Name, dbType: DbType.String);
             parameters.Add("@Opinion", value: model.Opinion, dbType: DbType.String);
             parameters.Add("@Password", value: model.Password, dbType: DbType.String);
+            parameters.Add("@Ip", value: model.ip, dbType: DbType.String);
 
             string sql =
-                @"INSERT INTO notecomments (BoardId, Name, Opinion, Password)
-                  VALUES (@BoardId, @Name, @Opinion, @Password);
+                @"INSERT INTO notecomments (BoardId, Name, Opinion, Password, Ip)
+                  VALUES (@BoardId, @Name, @Opinion, @Password, @Ip);
                     
                   UPDATE notes SET CommentCount = CommentCount +1 
                   WHERE Id = @BoardId";
