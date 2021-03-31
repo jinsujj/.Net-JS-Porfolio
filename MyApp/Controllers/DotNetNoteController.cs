@@ -433,6 +433,15 @@ namespace MyApp.Controllers
             return View();
         }
 
+
+        // 댓글시 Url 광고 방지 로직
+        public IActionResult CommentDeny()
+        {
+            // 로깅
+            _logger.LogInformation("Comment Deny");
+            return View();
+        }
+
         // 게시판 수정 폼
         [HttpGet]
         public IActionResult Edit(int id)
@@ -670,13 +679,29 @@ namespace MyApp.Controllers
             comment.ip = HttpContext.Connection.RemoteIpAddress.ToString();
             comment.BoardId = BoardId;
             comment.Name = txtName;
-            comment.Password = new CommonLibrary.Security().EncryptPassword(txtPassword);
+            comment.Password = txtPassword;
             comment.Opinion = txtOpinion;
 
+            if (!IsUrlConatain(txtOpinion))
+            {
+                 comment.BoardId = 0;
+                 comment.Password = "Auto";
+                _commentRepository.AddNoteComment(comment);
+                return View("CommentDeny");
+            }
 
             _commentRepository.AddNoteComment(comment);
 
             return RedirectToAction("Details", new { id = BoardId });
+        }
+
+        public bool IsUrlConatain(string url)
+        {
+            if (url.Contains("http")) return false;
+            if (url.Contains("www")) return false;
+            if (url.Contains("<a") || url.Contains("< a")) return false;
+
+            return true;
         }
 
         [HttpGet]
@@ -692,7 +717,7 @@ namespace MyApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CommentDelete(string boardId, string id, string txtPassword)
         {
-            txtPassword = new CommonLibrary.Security().EncryptPassword(txtPassword);
+            //txtPassword = new CommonLibrary.Security().EncryptPassword(txtPassword);
             if (_commentRepository.GetCountBy(Convert.ToInt32(boardId), Convert.ToInt32(id), txtPassword) > 0)
             {
                 _commentRepository.DeleteNoteComment(Convert.ToInt32(boardId), Convert.ToInt32(id), txtPassword);
