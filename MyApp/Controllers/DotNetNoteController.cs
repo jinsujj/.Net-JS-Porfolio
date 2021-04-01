@@ -666,7 +666,7 @@ namespace MyApp.Controllers
                     return File(fileBytes, strContentType, fileName);
                 }
 
-                return Content("http://placehold.it/250x150?text=NoImage");
+                return Content("https://placehold.it/250x150?text=NoImage");
             }
         }
 
