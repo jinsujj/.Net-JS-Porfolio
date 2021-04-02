@@ -14,13 +14,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="letfcolumn col-lg-9" style="padding-right:0;">
+        <div id="leftcolumn" class="letfcolumn col-lg-9" style="padding-right:0;">
             <div class="MyCard" style="padding-bottom:0;">
                 <div>
                     @if (ViewBag.Category != null)
                     {<span class="float-left" style="color: #002c9b;">@ViewBag.Category 의 글입니다.</span>}
+                    <span class="text-right d-none d-lg-block " d-lg style="font-size:20px;" onclick="closeSideBar();"><i id="sidebar" class="fas fa-chevron-right"></i></span>
                 </div>
-                <br/>
+                <br />
                 <div class="row">
                     <span class="col d-block d-sm-none" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; open</span>
                     <div class="col d-flex flex-row-reverse">
@@ -43,11 +44,11 @@
                                         @Html.DisplayNameFor(model => model.Title)
                                     </th>
                                     @*<th style="width:60px; text-align:center">
-                                @Html.DisplayNameFor(model => model.FileName)
-                            </th>*@
+                                            @Html.DisplayNameFor(model => model.FileName)
+                                        </th>*@
                                     @*<th style="width:80px; text-align:center;">
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>*@
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>*@
                                     <th style="width:100px; text-align:center;">
                                         @Html.DisplayNameFor(model => model.PostDate)
                                     </th>
@@ -83,8 +84,8 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                                             @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
                                         </td>
                                         @*<td style="text-align:center;">
-                                    @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                </td>*@
+                                                @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                            </td>*@
                                         <td style="text-align:center;">
                                             @BoardLibrary.FuncShowTime(item.PostDate)
                                         </td>
@@ -121,8 +122,8 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                                                 @Html.Raw(BoardLibrary.FuncNew(item.PostDate))
                                             </td>
                                             @*<td style="text-align:center;">
-                                        @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
-                                    </td>*@
+                                                    @Html.Raw(BoardLibrary.FuncFileDownSingle(item.Id, item.FileName, item.FileSize.ToString(), "DotNetNote", "/BoardDown/"))
+                                                </td>*@
                                             <td style="text-align:center;">
                                                 @BoardLibrary.FuncShowTime(item.PostDate)
                                             </td>
@@ -274,14 +275,19 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a asp-action="Index">All</a>
-    <a asp-action="Index" asp-route-category="Project">Projects</a>
+    <a asp-action="Index" asp-route-category="Pro2ject">Projects</a>
     <a asp-action="Index" asp-route-category="Database">Database</a>
     <a asp-action="Index" asp-route-category="Algorithm">Algorithm</a>
     <a asp-action="Index" asp-route-category="Anything">Anything</a>
 </div>
 <script>
+    let status = true;
+
     $(document).ready(function () {
         //expandAll();
+        $(".note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable").css('padding', '40px !important');
+        //$(".note-editable").addClass('padding-right', '40px;');
+        //$(".note-editable.card-block").css('text-align', 'center');
     });
 
     $('#Content').summernote({
@@ -312,10 +318,31 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
         $(".collapsible").collapsible({ accordion: false });
     }
 
+    function closeSideBar() {
+        if (status) {
+            $("#sidebar").removeClass("fas fa-chevron-right");
+            $("#sidebar").addClass("fas fa-chevron-left");
+
+            document.getElementById('leftcolumn').classList.remove('col-lg-9');
+            document.getElementById('leftcolumn').classList.add('col-lg-12');
+            $(".rightcolumn").hide();
+            status = false;
+        }
+        else {
+            $("#sidebar").removeClass("fas fa-chevron-left");
+            $("#sidebar").addClass("fas fa-chevron-right");
+
+            document.getElementById('leftcolumn').classList.remove('col-lg-12');
+            document.getElementById('leftcolumn').classList.add('col-lg-9');
+            $(".rightcolumn").show();
+            status = true;
+        }
+    }
+
     var title = $(".title").val;
     var content = $('#Content').val;
     $("meta[property='og\\:title']").attr("content", title);
-    $("meta[property='og\\:description']").attr("content", content );
+    $("meta[property='og\\:description']").attr("content", content);
 
 </script>
 
