@@ -685,7 +685,6 @@ namespace MyApp.Controllers
             if (!IsUrlConatain(txtOpinion))
             {
                  comment.BoardId = -1;
-                 comment.Password = "Auto";
                 _commentRepository.AddNoteComment(comment);
                 return View("CommentDeny");
             }
