@@ -282,13 +282,26 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
 </div>
 <script>
     let status = true;
+    let i;
 
-    $(document).ready(function () {
-        //expandAll();
-        $(".note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable").css('padding', '40px !important');
-        //$(".note-editable").addClass('padding-right', '40px;');
-        //$(".note-editable.card-block").css('text-align', 'center');
-    });
+    window.onload = function () {
+        var tag = document.querySelectorAll("img");
+
+        for (i = 0; i < tag.length; i++) {
+            if ($(window).width() > 450) {
+                if (tag[i].width > 100) {
+                    tag[i].style.width = '50%';
+                    tag[i].style.height = 'auto';
+                }
+            }
+            else {
+                if (tag[i].width > 100) {
+                    tag[i].style.width = '100%';
+                    tag[i].style.height = 'auto';
+                }
+            }
+        }
+    }
 
     $('#Content').summernote({
         tabsize: 3,

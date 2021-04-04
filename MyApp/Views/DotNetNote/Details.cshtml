@@ -91,6 +91,25 @@
 </div>
 <br />
 <script>
+    window.onload = function () {
+        var tag = document.querySelectorAll("img");
+
+        for (i = 0; i < tag.length; i++) {
+            if ($(window).width() > 450) {
+                if (tag[i].width > 100) {
+                    tag[i].style.width = '50%';
+                    tag[i].style.height = 'auto';
+                }
+            }
+            else {
+                if (tag[i].width > 100) {
+                    tag[i].style.width = '100%';
+                    tag[i].style.height = 'auto';
+                }
+            }
+        }
+    }
+
     $('#Content').summernote({
         tabsize: 3,
         toolbar: [],
