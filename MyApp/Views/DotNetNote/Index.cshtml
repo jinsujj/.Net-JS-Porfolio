@@ -8,7 +8,7 @@
 }
 <div class="DotNetNote">
     <div class="Myheader">
-        <h1>Full Stack Runner Blog.</h1>
+        <mytitle style="font-size:2.5rem; display:block;">Full Stack Runner Blog.</mytitle>
         <div style="color: #002c9b; text-align:center; font-size:18px;">
             <b>쌓여간 블로그 입니다.</b>
         </div>
@@ -168,7 +168,7 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                     {
                         var data = item.Content;
                         <div class="MyCard" style="padding:0;">
-                            <div class="title"><p>&nbsp;Title: @item.Title</p></div>
+                            <h1 class="title"><p>&nbsp;Title: @item.Title</p></h1>
                             <textarea name="Content" id="Content" asp-for=@data class="form-control" readonly="readonly" ; disabled;></textarea>
                         </div>
                         <div style="text-align:center; z-index:99;">
