@@ -56,6 +56,7 @@
                 var languages = [
                     'c',
                     'csharp',
+                    'java',
                     'cpp',
                     'concurnas',
                     'markup',
@@ -146,7 +147,6 @@
                     'ini',
                     'io',
                     'j',
-                    'java',
                     'javadoc',
                     'javadoclike',
                     'javadoclike',
