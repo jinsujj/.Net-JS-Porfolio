@@ -1,14 +1,11 @@
-﻿@{
-    Layout = null;
-}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>INTJ</title>
+    <title>INFJ</title>
 
-    <link rel="shortcut icon" href="../static/main.ico" />
-    <link rel="icon" href="../static/main.ico" />
+    <link rel="shortcut icon" href="../static/main.ico"/>
+    <link rel="icon" href="../static/main.ico"/>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,6 +17,9 @@
     <!-- 카톡 공유하기 -->
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+    <!-- google ads-->
+    <script data-ad-client="ca-pub-2309486098831986" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -28,12 +28,12 @@
 
     <!-- Bootstrap CSS -->
     <script type="text/javascript" src="../static/bootstrap-4.5.2-dist/js/bootstrap.js"></script>
-    <link type="text/css" rel="stylesheet" href="../static/bootstrap-4.5.2-dist/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="../static/bootstrap-4.5.2-dist/css/bootstrap.css"/>
 
     <!-- 도현 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
-    <!-- google Chart -->
+     <!-- google Chart -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Custom Css -->
@@ -41,54 +41,49 @@
 
 </head>
 <body>
-    <div id="test-list">
-        <div class="font-o">
-            나의 29금 유형은
-        </div>
-        <div class="font-t">
-            음흉한  변태
-        </div>
-        <div class="font-x">
-            헤에에에~~에?
-        </div>
-        <br>
-        <div style="text-align: center;">
-            <img src="../static/INTJ.png" style="max-width: 100%;" alt="heek">
-            <br>
-            <div id="answer-box" style="">
-                <p>
-                    당신은 리액션 변태입니다. <br />
-                    표현하고 실행하는 것보다 보고 듣는걸 좋아하는 당신. <br />
-                    혹시 메모리의 대부분을 그렇고그런 사랑스러운 영상으로 가득 채우고 있진 않은가요? <br />
-                    친구들 사이에서도 리액션이 좋아 인기가 좋을 것 같네요. <br />
-                    애인과의 행복한 밤에도 리더십 있게 상황을 주도하진 않지만 필요한 것이 있으면 표현할 줄도 아는 당신은 사랑스러운 변태입니다.
-                </p>
-            </div>
-        </div>
-        <br>
-        <div class="graph">
-            <div id="myChart"></div>
-        </div>
-        <br>
-        <div class="button">
-            <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3"
-                 data-url="https://Sasim-blog.me/SexualTest/INTJ"
-                 data-color="default" data-size="large" data-count="false" style="display: none;">
-            </div>
-            <a id="kakao-link-btn" href="javascript:sendLink()">
-                <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
-                     width="45px;" height="45px" />
-            </a>
-        </div>
-        <br>
-        <div id="again-box" onclick="go_intro()">
-            테스트 다시해보기
-        </div>
-        <br><br>
+<div id="test-list">
+    <div class="font-o">
+        나의 29금 유형은
     </div>
-    <script>
+    <div class="font-x">
+        히이~~익!!!
+    </div>
+    <br>
+    <div style="text-align: center;">
+        <img src="../static/INFJ.png" style="max-width: 100%;" alt="hiiikkk">
+        <br>
+        <div id="answer-box" style="">
+            <p>놀라움의 연속이라는 단어는 당신을 위한 문장이 아닐까요?
+                어쩜 이렇게 기발한 생각을 할까 궁금해지기까지 하는 당신의 변태력!!
+                변태들의 수장이라는 말 외에 당신을 지칭할 수 있는 단어는 이 세상에
+                존재하지 않는것 같네요.
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="graph">
+        <div id="myChart"></div>
+    </div>
+    <br>
+    <div class="button">
+        <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3"
+             data-url="http://mysexual-29.shop/"
+             data-color="default" data-size="large" data-count="false" style="display: none;">
+        </div>
+        <a id="kakao-link-btn" href="javascript:sendLink()"> <img
+                src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                width="45px;" height="45px"/>
+        </a>
+    </div>
+    <br>
+    <div id="again-box" onclick="go_intro()" >
+        테스트 다시해보기
+    </div>
+    <br><br>
+</div>
+<script>
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('8e5ba8b0aa6b995e4a14bc8bae0041f8');
+    Kakao.init('987990ec1ef64402e5de0b448cd94f08');
     google.charts.load('current', {'packages': ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
 
@@ -97,41 +92,43 @@
             objectType: 'feed',
             content: {
                 title: '29금 나의 응큼도는?',
-                description: '응흄한 변태',
-                imageUrl: 'https://Sasim-blog.me/static/INTJ.png',
+                description: '히익 상변태',
+                imageUrl: 'http://mysexual-29.shop/static/INFJ.png',
                 link: {
-                    mobileWebUrl: 'https://Sasim-blog.me/SexualTest/INTJ',
-                    webUrl: 'https://Sasim-blog.me/SexualTest/INTJ'
+                    mobileWebUrl: 'http://mysexual-29.shop/result/INFJ',
+                    webUrl: 'http://mysexual-29.shop/result/INFJ'
                 }
             },
             buttons: [
                 {
                     title: '29금 나의 응큼도는?',
                     link: {
-                        mobileWebUrl: 'https://Sasim-blog.me/SexualTest/INTJ',
-                        webUrl: 'https://Sasim-blog.me/SexualTest/INTJ'
+                        mobileWebUrl: 'http://mysexual-29.shop/result/INFJ',
+                        webUrl: 'http://mysexual-29.shop/result/INFJ'
                     }
                 },
             ]
         });
     }
-    function go_intro() {
-        location.href = "/SexualTest";
+    function go_intro(){
+        location.href = "/";
     }
 
     let ISTJ=1; let ISFJ=1; let INTJ=1; let INFJ=1; let ESTJ=1; let ENTP=1;
     $(document).ready(function () {
+
         $.ajax({
             type: 'GET',
-            url: '/SexualTest/GetTypeList',
+            url: '/api/list',
             data: {},
             success: function (response) {
-                ISTJ += response["istj"];
-                ISFJ += response["isfj"];
-                INTJ += response["intj"];
-                INFJ += response["infj"];
-                ESTJ += response["estj"];
-                ENTP += response["entp"];
+                ISTJ += response['ISTJ'];
+                ISFJ += response['ISFJ'];
+                INTJ += response['INTJ'];
+                INFJ += response['INFJ'];
+                ESTJ += response['ESTJ'];
+                ENTP += response['ENTP'];
+
             }
         });
     })
@@ -224,7 +221,14 @@
         chart.draw(data, options);
 
     }
-    </script>
-    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+</script>
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "853a7cd974bf68";
+if(window.wcs) {
+wcs_do();
+}
+</script>
 </body>
 </html>
