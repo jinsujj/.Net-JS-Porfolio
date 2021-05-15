@@ -2,6 +2,5 @@
 *.appsettings.json
 *.dll
 *.pdb
-*g.cs
 *.config
 *.txt
