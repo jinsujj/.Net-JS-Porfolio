@@ -27,8 +27,8 @@ namespace MyApp.Data.Repositorys.SexualTest
             _logger.LogInformation("Result Log" + DateTime.Now);
             try
             {
-                 con.Execute(@"INSERT INTO SexualLog (ip, date, age, sex, type, num1, num2, num3, num4, num5, num6, num7 ,num8, num9 ,num10, num11, mum12)
-                            VALUES (@ip, @date, @age, @sex, @num1, @num2, @num3, @num4, @num5, @num6, @num7, @num8, @num9, @num10, @num11, @num12)"
+                 con.Execute(@"INSERT INTO SexualLog (ip, date, age, sex, type, num1, num2, num3, num4, num5, num6, num7 ,num8, num9 ,num10, num11, num12)
+                            VALUES (@ip, @date, @age, @sex, @type, @num1, @num2, @num3, @num4, @num5, @num6, @num7, @num8, @num9, @num10, @num11, @num12)"
                     , new { ip = log.ip, date = log.date, age = log.age, sex = log.sex, type = log.type,
                         num1 = log.num[1], num2 = log.num[2], num3 = log.num[3], num4 = log.num[4],
                         num5 = log.num[5], num6 = log.num[6], num7 = log.num[7], num8 = log.num[8],
