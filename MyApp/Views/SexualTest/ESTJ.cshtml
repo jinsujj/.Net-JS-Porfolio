@@ -1,0 +1,238 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ESTJ</title>
+
+    <link rel="shortcut icon" href="../static/main.ico" />
+    <link rel="icon" href="../static/main.ico" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- 라인 공유하기 -->
+    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async"
+            defer="defer"></script>
+
+    <!-- 카톡 공유하기 -->
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <script type="text/javascript" src="../static/bootstrap-4.5.2-dist/js/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="../static/bootstrap-4.5.2-dist/css/bootstrap.css" />
+
+    <!-- 도현 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="../static/css3/index.css ">
+
+</head>
+<body>
+    <div id="test-list">
+        <div class="font-o">
+            나의 29금 유형은
+        </div>
+        <div class="font-t">
+            욕망변태
+        </div>
+        <div class="font-x">
+            후후.. 낮져밤이 이셨군요
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <img src="../static/ESTJ.png" style="max-width: 100%;" alt="guri_guri">
+            <br>
+            <div id="answer-box" style="text-align: center;">
+                <p>
+                    얌전해 보이는 당신. 하지만 친구들 사이에선 알려진 변태시군요. <br />
+                    아무것도 모르는척 순수해 보이는 모습이지만, 29금 토크가 본격적으로 시작되면 드리퍼 역할을 톡톡히 합니다. <br />
+                    낯을 가릴 뿐이지 누구보다 19금 토크를 즐깁니다. <br />
+                    친구들이 부끄러워하는 줄 알고 대화를 멈추면 누구보다 아쉬워합니다. <br />
+                    하지만 이것도 알고 계실까요? 당신은 내 이미지는 사람들에게 순수하게 비춰진다 생각하지만 모두가 다 알고있는 소문난 변태입니다.
+                </p>
+            </div>
+        </div>
+        <br>
+        <div class="graph">
+            <div id="myChart"></div>
+        </div>
+        <br>
+        <div class="button">
+            <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3"
+                 data-url="https://Sasim-blog.me/"
+                 data-color="default" data-size="large" data-count="false" style="display: none;">
+            </div>
+            <a id="kakao-link-btn" href="javascript:sendLink()">
+                <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                     width="45px;" height="45px" />
+            </a>
+        </div>
+        <br>
+        <div id="again-box" onclick="go_intro()">
+            테스트 다시해보기
+        </div>
+        <br><br>
+    </div>
+    <script>
+        // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('987990ec1ef64402e5de0b448cd94f08');
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function sendLink() {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '29금 나의 응큼도는?',
+                    description: '욕망 변태',
+                    imageUrl: 'https://Sasim-blog.me/static/ESTJ.png',
+                    link: {
+                        mobileWebUrl: 'https://Sasim-blog.me/SexualTest/ESTJ',
+                        webUrl: 'https://Sasim-blog.me/SexualTest/ESTJ'
+                    }
+                },
+                buttons: [
+                    {
+                        title: '29금 나의 응큼도는?',
+                        link: {
+                            mobileWebUrl: 'https://Sasim-blog.me/SexualTest/ESTJ',
+                            webUrl: 'https://Sasim-blog.me/SexualTest/ESTJ'
+                        }
+                    },
+                ]
+            });
+        }
+
+        function go_intro() {
+            location.href = "/";
+        }
+
+        let ISTJ = 1; let ISFJ = 1; let INTJ = 1; let INFJ = 1; let ESTJ = 1; let ENTP = 1;
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/SexualTest/GetTypeList',
+                data: {},
+                success: function (response) {
+                    ISTJ += response["istj"];
+                    ISFJ += response["isfj"];
+                    INTJ += response["intj"];
+                    INFJ += response["infj"];
+                    ESTJ += response["estj"];
+                    ENTP += response["entp"];
+                }
+            });
+        })
+
+
+        function drawChart() {
+            var data = new google.visualization.DataTable({
+                "cols": [{
+                    "label": "Sexualism",
+                    "type": "string"
+                }, {
+                    "label": "Type",
+                    "type": "number"
+                }],
+                "rows": [{
+                    "c": [{
+                        "v": "단순한  변태"
+                    }, {
+                        "v": ENTP
+                    }]
+                }, {
+                    "c": [{
+                        "v": "히익 상변태"
+                    }, {
+                        "v": INFJ
+                    }]
+                }, {
+                    "c": [{
+                        "v": "고(자)라니♥"
+                    }, {
+                        "v": ISTJ
+                    }]
+                }, {
+                    "c": [{
+                        "v": "쫌 아는 변태"
+                    }, {
+                        "v": ISFJ
+                    }]
+                }, {
+                    "c": [{
+                        "v": "욕망 변태"
+                    }, {
+                        "v": ESTJ
+                    }]
+                }, {
+                    "c": [{
+                        "v": "음흉한  변태"
+                    }, {
+                        "v": INTJ
+                    }]
+                }]
+            });
+
+
+            var chart = new google.visualization.PieChart(
+                document.getElementById('myChart'));
+
+            var options = {
+                "title": '변태 성향 분포',
+                titleTextStyle: {
+                    color: '#CC00CC',
+                    fontName: 'Arial',
+                    fontSize: 14,
+                },
+                "colors": ["#E6CDB3", "#B5B5B6", "#4F8389", "#C6DFD7", "#DA957B", "#DDB1AD"],
+                "width": "auto",
+                "height": "100%",
+                "chartArea": {
+                    "width": "80%",
+                    "height": "80%"
+                },
+                //"pieSliceText": "none",
+                "legend": {
+                    "position": "labeled"
+                },
+                "tooltip": {
+                    "trigger": "none",
+                    "showColorCode": true,
+                    "text": "percentage"
+                },
+                "animation": {
+                    "startup": true,
+                    "duration": 1000,
+                    "easing": "inAndOut"
+                },
+                "pieStartAngle": -165,
+                "pieHole": 0.4
+            }
+
+            chart.draw(data, options);
+
+        }
+    </script>
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+        if (!wcs_add) var wcs_add = {};
+        wcs_add["wa"] = "853a7cd974bf68";
+        if (window.wcs) {
+            wcs_do();
+        }
+    </script>
+</body>
+</html>

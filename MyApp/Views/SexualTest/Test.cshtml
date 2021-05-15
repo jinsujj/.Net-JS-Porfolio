@@ -1,0 +1,367 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>변태력 테스트!</title>
+    <link rel="shortcut icon" href="../static/main.ico" />
+    <link rel="icon" href="../static/main.ico" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <script type="text/javascript" src="../static/bootstrap-4.5.2-dist/js/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="../static/bootstrap-4.5.2-dist/css/bootstrap.css" />
+
+
+    <!-- 도현 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="../static/css3/test.css ">
+
+</head>
+<body>
+    <div id="test-list">
+        <div id="Q0">
+            <h1 class="display-7" style="color:#CC00CC">Qestion?</h1>
+            <p1>나이 는?</p1>
+            <select id="age" class="slide-left">
+                <option value="20" selected="selected">열정 가득 뜨거운 20대</option>
+                <option value="30">담백하고 진정성 있는 30대</option>
+                <option value="40">여유 가득 안정적인 40대</option>
+            </select>
+            <p1>성별 은?</p1>
+            <div>
+                <button class="test-box" onclick="check('0a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    남
+                </button>
+                <button2 class="test-box" onclick="check('0b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    여
+                </button2>
+            </div>
+        </div>
+        <div id="Q1" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q1</h1>
+            <p>친구랑 영화보다 </br>야한장면이 나오면 나는?</p>
+            <div>
+                <button class="test-box" onclick="check('1a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    애써 당황함을 감추며, <br>무미건조하게 반응한다
+                </button>
+                <button2 class="test-box" onclick="check('1b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    친구한테 저것보라고 <br>호들갑떨면서 리뷰한다.
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">1/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 8.3%;" aria-valuenow="8.3"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q2" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q2</h1>
+            <p>마음에 드는 사람과의 </br>첫 데이트어떡하지?</p>
+            <div>
+                <button class="test-box" onclick="check('2a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    각종 데이트 시뮬레이션과, 혹시 모를 외박 준비까지 철저하게
+                </button>
+                <button2 class="test-box" onclick="check('2b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    어차피 계획대로 안돼,<br>좀더 자연스런 흐름을 즐긴다!
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">2/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 16.666%;" aria-valuenow="16.666"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q3" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q3</h1>
+            <p>오늘따라 외로운 밤이라고</br>느껴지는 날 나는</p>
+            <div>
+                <button class="test-box" onclick="check('3a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    누군가에게 전화를 걸어 <br> 외로움을 떨쳐낸다
+                </button>
+                <button2 class="test-box" onclick="check('3b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    나홀로 영화와 맥주 한잔으로<br>떨쳐버린다
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">3/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q4" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q4</h1>
+            <p>침대에서 하고싶은</br>플레이가 생겼다면 나는</p>
+            <div>
+                <button class="test-box" onclick="check('4a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    애인에게 은글슬쩍 흘려본다
+                </button>
+                <button2 class="test-box" onclick="check('4b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    능청스럽게 준비해온 수갑과 안대를 꺼낸다.
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">4/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 33.333%;" aria-valuenow="33.333"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q5" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q5</h1>
+            <p>연인과 행복한 시간을 <br>보낸 후 한번 더 <br>하고 싶어진 나</p>
+            <div>
+                <button class="test-box" onclick="check('5a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    먼저 키스와 애무를 하며 분위기를 잡는다
+                </button>
+                <button2 class="test-box" onclick="check('5b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    하고 싶지만 적극적으로 나서진 않는다
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">5/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 41.666%;" aria-valuenow="41.666"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q6" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q6</h1>
+            <p>오랜만의 데이트에</br> 눕자마자 zZZ<br>3초컷한 애인</p>
+            <div>
+                <button class="test-box" onclick="check('6a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    많이 피곤한가ㅜㅜ, 이불을 덮어주며 내일 아침을 노린다
+                </button>
+                <button2 class="test-box" onclick="check('6b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    오랜만에 봤는데!! 잠든 연인을 애무하며 흥분시켜 깨운다
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">6/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 50%;" aria-valuenow="50"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q7" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q7</h1>
+            <p>드디어 연인의 자취방에</br>놀러가게 된 나는</p>
+            <div>
+                <button class="test-box" onclick="check('7a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    향초와 연인의 자취방을 꾸며줄 아이템들을 준비해간다
+                </button>
+                <button2 class="test-box" onclick="check('7b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    우리의 안전한 사랑을 위해 준비했어 '콘돔'♥
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">7/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 58.333%;" aria-valuenow="58.333"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q8" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q8</h1>
+            <p>새로운 취향에 </br>눈뜨게 된 나</p>
+            <div>
+                <button class="test-box" onclick="check('8a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    이건 너무 쎄잖아.. 혼자 영상으로 위로한다
+                </button>
+                <button2 class="test-box" onclick="check('8b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    취향을 공유하여, 연인을 설득 후 실행에 옮긴다
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">8/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 66.666%;" aria-valuenow="66.666"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q9" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q9</h1>
+            <p>나는 포옹과 키스중에</p>
+            <div>
+                <button class="test-box" onclick="check('9a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    포옹♥
+                </button>
+                <button2 class="test-box" onclick="check('9b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    키스♥
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">9/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 75%;" aria-valuenow="75"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q10" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q10</h1>
+            <p>절정에 도달한 연인</br>하지만<br>아직 만족하지 못한 나는</p>
+            <div>
+                <button class="test-box" onclick="check('10a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    연인의 만족은 나의 만족! 도달하진 못했지만 사랑 충전 완료
+                </button>
+                <button2 class="test-box" onclick="check('10b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    잘할 수 있도록 구체적으로 어떻게 해주는 게 좋은지 얘기한다
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">10/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 83.333%;" aria-valuenow="83.333"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q11" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q11</h1>
+            <p>내 잘못으로<br>몹시 화난 연인.</br>나는</p>
+            <div>
+                <button class="test-box" onclick="check('11a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    필살 스킨쉽으로 연인의 마음을 풀어준다
+                </button>
+                <button2 class="test-box" onclick="check('11b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    일단 무조건 잘못했다고 빈다
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">11/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 91.666%;" aria-valuenow="91.666"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="Q12" class="slide-left" style="display:none">
+            <h1 class="display-7" style="color:#CC00CC">Q12</h1>
+            <p>만약 세상이 내일 </br>멸망한다면 오늘밤 나는</p>
+            <div>
+                <button class="test-box" onclick="check('12a')" onmouseover="this.style.color='white';"
+                        onMouseout="this.style.color='black';">
+                    다시는 못해볼 야한 스타일로 밤을 불태운다
+                </button>
+                <button2 class="test-box" onclick="check('12b')" onmouseover="this.style.color='white';"
+                         onMouseout="this.style.color='black';">
+                    서로 좋아하고 친근한 스타일로 밤을 불태운다
+                </button2>
+            </div>
+            <br><br>
+            <div class="page-state">12/12</div>
+            <div class="progress">
+                <div class="progress-bar bg-sexy" role="progressbar" style="width: 100%;" aria-valuenow="100"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let arr = new Array();
+        let typeVal = "";
+
+        function check(val) {
+            let type = val.substr(-1);
+            let num = val.substr(0, val.length - 1);
+            let num2, now_id, next_id, ages;
+
+            //Intro 성별 입력
+            if (num == 0) {
+                if (type == 'a')
+                    arr[num] = 'M';
+                else
+                    arr[num] = 'F';
+
+                num2 = 1;
+            }
+            //문항 입력
+            else {
+                if (type == 'a')
+                    arr[num] = 'A';
+                else
+                    arr[num] = 'B';
+
+                num2 = num * 1 + 1;
+            }
+
+            now_id = 'Q' + num;
+            next_id = 'Q' + num2;
+
+            //마지막 문항
+            if (next_id == 'Q13') {
+                ages = $('#age').val();
+                arr[13] = ages;
+                $.ajax({
+                    type: "POST",
+                    url: "/SexualTest/result",
+                    dataType: "json",
+                    data: { 'res': arr },
+                    success: function (response) {
+                        console.log(response);
+                        typeVal = response;
+                        location.href = "loading?type=" + typeVal
+                    }
+                })
+            }
+
+            if ($('#' + now_id).css("display") == "block") {
+                $('#' + now_id).hide();
+                $('#' + next_id).show();
+            }
+        }
+
+    </script>
+    @*<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+        <script type="text/javascript">
+            if (!wcs_add) var wcs_add = {};
+            wcs_add["wa"] = "853a7cd974bf68";
+            if (window.wcs) {
+                wcs_do();
+            }
+        </script>*@
+</body>

@@ -1,0 +1,112 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="../static/main.ico" />
+    <link rel="icon" href="../static/main.ico" />
+
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- google ads-->
+    <script data-ad-client="ca-pub-2309486098831986" async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!-- 도현 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="../static/css3/index.css ">
+
+    <style type="text/css">
+
+        p {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.5;
+            height: 130px;
+        }
+
+        #test-list {
+            width: auto;
+            margin: 20px 0px;
+            padding: 10px;
+            border: #CC00CC;
+            border-radius: 5px;
+        }
+
+        ul {
+            padding-inline-start: 0px;
+        }
+
+
+        ul.fadeout tt:nth-child(3) {
+            -webkit-animation: fadeOut 1s linear forwards;
+        }
+
+        ul.fadeout tt:nth-child(2) {
+            -webkit-animation: fadeOut 1s linear 2s forwards;
+        }
+
+        ul.fadeout tt:nth-child(1) {
+            -webkit-animation: fadeOut 1s linear 4s forwards;
+        }
+
+        ul.fadeout tt:nth-child(3) {
+            -webkit-animation: fadeOut 1s linear forwards;
+        }
+
+        div.button {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="test-list">
+        <div style="text-align: center;">
+            <img src="../static/loading.gif" style="max-width: 100%;" alt="Loading">
+        </div>
+        <div style="text-align: center;">
+            <ul class="fadeout">
+                <p>29금 능력치 분석중<tt>.</tt><tt>.</tt><tt>.</tt></p>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var Request = function () {
+            this.getParameter = function (name) {
+                var rtnval = '';
+                var nowAddress = unescape(location.href);
+                var parameters = (nowAddress.slice(nowAddress.indexOf('?') + 1,
+                    nowAddress.length)).split('&');
+                for (var i = 0; i < parameters.length; i++) {
+                    var varName = parameters[i].split('=')[0];
+                    if (varName.toUpperCase() == name.toUpperCase()) {
+                        rtnval = parameters[i].split('=')[1];
+                        break;
+                    }
+                }
+                return rtnval;
+            }
+        }
+        var request = new Request();
+        var paramValue = request.getParameter('type');
+
+        setTimeout(function () {
+            location.href = paramValue;
+        }, 6000);
+    </script>
+</body>
+</html>

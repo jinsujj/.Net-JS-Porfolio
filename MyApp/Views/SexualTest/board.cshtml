@@ -1,0 +1,223 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <script type="text/javascript" src="../static/bootstrap-4.5.2-dist/js/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="../static/bootstrap-4.5.2-dist/css/bootstrap.css" />
+
+    <!-- 도현 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+
+    <style type="text/css">
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        p {
+            position: relative;
+            text-align: left;
+            margin-top: 5px;
+            font-size: 15px;
+            line-height: 20px;
+            overflow: hidden;
+            color: rgba(0, 0, 0, 0.6);
+            letter-spacing: -0.8px;
+            word-break: break-all;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        div.graph {
+            display: flex;
+            justify-content: left;
+        }
+    </style>
+
+    <!-- google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div class="graph">
+        <div id="chart_div" style="min-width: 600px;"></div>
+    </div>
+    <hr />
+    <div class="graph">
+        <div id="myChart"></div>
+    </div>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawVisualization);
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        $.ajax({
+            type: 'GET',
+            url: '/api/histogram',
+            data: {},
+            success: function (response) {
+                console.log(response);
+                var week = ['(Sun)', '(Mon)', '(Tue)', '(Wen)', '(Thr)', '(Fri)', '(Sat)'];
+
+                var data = google.visualization.arrayToDataTable([
+                    ['날짜','건수'],
+                    [response['date7'].substring(8,10) + week[new Date([response['date7']]).getDay()] , response['day7']],
+                    [response['date6'].substring(8,10) + week[new Date([response['date6']]).getDay()] , response['day6']],
+                    [response['date5'].substring(8,10) + week[new Date([response['date5']]).getDay()] , response['day5']],
+                    [response['date4'].substring(8,10) + week[new Date([response['date4']]).getDay()] , response['day4']],
+                    [response['date3'].substring(8,10) + week[new Date([response['date3']]).getDay()] , response['day3']],
+                    [response['date2'].substring(8,10) + week[new Date([response['date2']]).getDay()] , response['day2']],
+                    [response['date1'].substring(8,10) + week[new Date([response['date1']]).getDay()] , response['day1']]
+                ]);
+
+                var options = {
+                    title : '사용자 이용 횟수',
+                    vAxis: {title: '이용자 수'},
+                    hAxis: {title: '날짜'},
+                    seriesType: 'bars',
+                    series: {5: {type: 'line'}}
+                };
+
+                var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        });
+    }
+
+
+    let ISTJ = 1;
+    let ISFJ = 1;
+    let INTJ = 1;
+    let INFJ = 1;
+    let ESTJ = 1;
+    let ENTP = 1;
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/api/list',
+            data: {},
+            success: function (response) {
+
+                ISTJ += response['ISTJ'];
+                ISFJ += response['ISFJ'];
+                INTJ += response['INTJ'];
+                INFJ += response['INFJ'];
+                ESTJ += response['ESTJ'];
+                ENTP += response['ENTP'];
+                console.log(ISTJ);
+                console.log(ISFJ);
+                console.log(INTJ);
+                console.log(INFJ);
+                console.log(ESTJ);
+                console.log(ENTP);
+            }
+        });
+    })
+
+    function drawChart() {
+        var data = new google.visualization.DataTable({
+            "cols": [{
+                "label": "Sexualism",
+                "type": "string"
+            }, {
+                "label": "Type",
+                "type": "number"
+            }],
+            "rows": [{
+                "c": [{
+                    "v": "단순한  변태"
+                }, {
+                    "v": ENTP
+                }]
+            }, {
+                "c": [{
+                    "v": "히익 상변태"
+                }, {
+                    "v": INFJ
+                }]
+            }, {
+                "c": [{
+                    "v": "고(자)라니♥"
+                }, {
+                    "v": ISTJ
+                }]
+            }, {
+                "c": [{
+                    "v": "쫌 아는 변태"
+                }, {
+                    "v": ISFJ
+                }]
+            }, {
+                "c": [{
+                    "v": "욕망 변태"
+                }, {
+                    "v": ESTJ
+                }]
+            }, {
+                "c": [{
+                    "v": "음흉한  변태"
+                }, {
+                    "v": INTJ
+                }]
+            }]
+        });
+
+
+        var chart = new google.visualization.PieChart(
+            document.getElementById('myChart'));
+
+        var options = {
+            "title": '변태 성향 분포',
+            titleTextStyle: {
+                color: '#CC00CC',
+                fontName: 'Arial',
+                fontSize: 14,
+            },
+            "colors": ["#E6CDB3", "#B5B5B6", "#4F8389", "#C6DFD7", "#DA957B", "#DDB1AD"],
+            "width": "415",
+            "height": "100%",
+            "chartArea": {
+                "width": "80%",
+                "height": "80%"
+            },
+            //"pieSliceText": "none",
+            "legend": {
+                "position": "labeled"
+            },
+            pieSliceText: 'value',
+            "tooltip": {
+                "trigger": "none",
+                "showColorCode": true,
+                "text": "value"
+            },
+            "animation": {
+                "startup": true,
+                "duration": 1000,
+                "easing": "inAndOut"
+            },
+            "pieStartAngle": -165,
+            "pieHole": 0.4
+        }
+
+        chart.draw(data, options);
+
+    }
+    </script>
+</body>
+</html>

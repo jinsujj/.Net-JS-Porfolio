@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>변태력 테스트!</title>
+
+    <link rel="shortcut icon" href="../static/main.ico" />
+    <link rel="icon" href="../static/main.ico" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="자신의 응큼한 성격을 테스트하는 29금 심리 테스트 사이트 입니다">
+    <meta property="og:title" content="29금 응큼도 테스트" />
+    <meta property="og:description" content="지금까지 이런 심리테스트는 없었따!" />
+    <meta property="og:image" content="{{ url_for('static', filename='Intro.png') }}" />
+
+    <!-- google ads-->
+    <script data-ad-client="ca-pub-2309486098831986" async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!-- naver Auth-->
+    <meta name="naver-site-verification" content="7a4ed9938afb75e4ebb4766546086478b9cd461b" />
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <script type="text/javascript" src="../static/bootstrap-4.5.2-dist/js/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="../static/bootstrap-4.5.2-dist/css/bootstrap.css" />
+
+    <!-- 라인 공유하기 -->
+    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async"
+            defer="defer"></script>
+
+    <!-- 카톡 공유하기 -->
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+    <!-- 도현 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" type="text/css" href="../static/css3/intro.css ">
+
+</head>
+<body>
+    <div id="test-list">
+        <div class="font-o">29금 응큼도 테스트</div>
+        <div class="font-x">
+            나의 29금 性격 유형과 숨겨진 능력은? <br /><br />
+            <img src="../static/Intro2.gif" style="max-width: 100%;" alt="Intro">
+        </div>
+        <br />
+        <div class="button">
+            <button class="test-box" onclick="go()" style="color: white;">
+                29금 능력치 알아보기
+            </button>
+        </div>
+        <br>
+        <div class="button">
+            <div class="line-it-button" data-lang="ko" data-type="share-b" data-ver="3"
+                 data-url="http://54.180.103.20/"
+                 data-color="default" data-size="large" data-count="false" style="display: none;">
+            </div>
+            <a id="kakao-link-btn" href="javascript:sendLink()">
+                <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+                     width="45px;" height="45px" />
+            </a>
+        </div>
+        <br><br>
+    </div>
+    <script>
+        function go() {
+            window.location.href = '/SexualTest/Test';
+        }
+
+        // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('987990ec1ef64402e5de0b448cd94f08');
+
+        function sendLink() {
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '응큼도 테스트',
+                    description: '29금 나의 응큼도는?',
+                    imageUrl: 'https://i.ytimg.com/vi/g-y8cJV-x4k/hqdefault.jpg',
+                    link: {
+                        mobileWebUrl: 'http://54.180.103.20/',
+                        webUrl: 'http://54.180.103.20/'
+                    }
+                },
+                buttons: [
+                    {
+                        title: '29금 나의 응큼도는?',
+                        link: {
+                            mobileWebUrl: 'http://54.180.103.20/',
+                            webUrl: 'http://54.180.103.20/'
+                        }
+                    },
+                ]
+            });
+        }
+    </script>
+    <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+    <script type="text/javascript">
+        if (!wcs_add) var wcs_add = {};
+        wcs_add["wa"] = "853a7cd974bf68";
+        if (window.wcs) {
+            wcs_do();
+        }
+    </script>
+</body>
+</html>

@@ -10,6 +10,7 @@ using MyApp.Data.Repositorys.DotNetNote;
 using System.Security.Claims;
 using MyApp.Settings;
 using MyApp.Data.Repositorys.DashBoard;
+using MyApp.Data.Repositorys.SexualTest;
 
 namespace MyApp
 {
@@ -61,6 +62,7 @@ namespace MyApp
             services.AddScoped<ILoginFailedRepository, LoginFailedRepository>();
             services.AddScoped<INoteRepository, NoteRepository>();
             services.AddScoped<IDashBoardRepository, DashBoardRepository>();
+            services.AddScoped<ISexualTestRepository, SexualTestRepository>();
             services.AddSingleton<INoteCommentRepository>(
                 new NoteCommentRepository(
                     _config["ConnectionStrings:DefaultConnection"]));

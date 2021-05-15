@@ -169,7 +169,7 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
                         var data = item.Content;
                         <div class="MyCard" style="padding:0;">
                             <h1 class="title"><p>&nbsp;Title: @item.Title</p></h1>
-                            <textarea name="Content" id="Content" asp-for=@data class="form-control" readonly="readonly" ; disabled;></textarea>
+                                <textarea name="Content" id="Content" asp-for=@data class="form-control" readonly="readonly" ; disabled;></textarea>
                         </div>
                         <div style="text-align:center; z-index:99;">
                             @if (User.IsInRole("UsersInfo") && User.FindFirst("Email").Value == option.Value.SiteAdmin)
@@ -286,6 +286,13 @@ DnnRepo.GetNoteSummaryByCategory("Notice").Take(2))
 
     window.onload = function () {
         var tag = document.querySelectorAll("img");
+        var boardFrame = document.getElementById('Content');
+
+        if ($(window).width() > 450)
+            boardFrame.style.margin = '0 40px';
+        else
+            boardFrame.style.padding = '0';
+
 
         for (i = 0; i < tag.length; i++) {
             if ($(window).width() > 450) {
