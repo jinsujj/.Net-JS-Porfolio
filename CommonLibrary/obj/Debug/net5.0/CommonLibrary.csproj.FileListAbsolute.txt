@@ -9,3 +9,4 @@ C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonL
 C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.dll
 C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\ref\CommonLibrary.dll
 C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.pdb
+C:\Users\wlstn\Desktop\GitHub\JS-Porfolio\CommonLibrary\obj\Debug\net5.0\CommonLibrary.csproj.AssemblyReference.cache

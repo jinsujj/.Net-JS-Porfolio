@@ -198,11 +198,23 @@ namespace MyApp.Controllers
             ViewBag.SearchQuery = SearchQuery;
             ViewBag.PageIndex = PageIndex;
 
+
             if (category != "%%")  ViewBag.Category = category;
-            ViewBag.Project = categoryList.Project;
-            ViewBag.Database = categoryList.Database;
-            ViewBag.Anything = categoryList.Anything;
-            ViewBag.Algorithm = categoryList.Algorithm;
+
+            if (categoryList == null)
+            {
+                ViewBag.Project = 0;
+                ViewBag.Database = 0;
+                ViewBag.Anything = 0;
+                ViewBag.Algorithm = 0;
+            }
+            else
+            {
+                ViewBag.Project = categoryList.Project;
+                ViewBag.Database = categoryList.Database;
+                ViewBag.Anything = categoryList.Anything;
+                ViewBag.Algorithm = categoryList.Algorithm;
+            }
 
             //[8] 페이저 컨트롤 적용
             ViewBag.PageModel = new PagerBase
